@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Media Buying — Oxygen Media</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0D0D0D;
+    --red: #E8001C;
+    --white: #F8F5F0;
+    --light: #F0EFED;
+    --grey: #888888;
+    --display: 'Bebas Neue', sans-serif;
+    --body: 'Inter', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+  body { background: var(--white); color: var(--black); font-family: var(--body); overflow-x: hidden; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 3rem;
+    background: rgba(13,13,13,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .nav-logo { font-family: var(--display); font-size: 1.5rem; letter-spacing: 0.08em; color: var(--white); text-decoration: none; }
+  .nav-logo span { color: var(--red); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { font-size: 0.78rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(248,245,240,0.65); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--red); }
+  .nav-social { display: flex; gap: 1rem; }
+  .nav-social a { color: rgba(248,245,240,0.5); font-size: 0.78rem; font-weight: 600; text-decoration: none; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-social a:hover { color: var(--red); }
+
+  /* ── PAGE HERO ── */
+  .page-hero {
+    background: var(--black); min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 0 3rem; position: relative; overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 50% 70% at 15% 50%, rgba(232,0,28,0.18) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 85% 30%, rgba(232,0,28,0.08) 0%, transparent 55%),
+      var(--black);
+  }
+
+  /* Animated media channel words */
+  .hero-channels {
+    position: absolute; right: 0; top: 0; bottom: 0; width: 55%;
+    display: flex; flex-direction: column; justify-content: center;
+    gap: 0; overflow: hidden; pointer-events: none; user-select: none;
+  }
+  .hero-channel-word {
+    font-family: var(--display);
+    font-size: clamp(3.5rem, 6vw, 6.5rem);
+    line-height: 1.05;
+    letter-spacing: 0.04em;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(248,245,240,0.07);
+    padding-left: 2rem;
+    transition: -webkit-text-stroke 0.4s, color 0.4s;
+    animation: wordFade 8s ease-in-out infinite;
+  }
+  .hero-channel-word:nth-child(2) { animation-delay: 1s; -webkit-text-stroke-color: rgba(232,0,28,0.2); }
+  .hero-channel-word:nth-child(3) { animation-delay: 2s; }
+  .hero-channel-word:nth-child(4) { animation-delay: 3s; }
+  .hero-channel-word:nth-child(5) { animation-delay: 4s; }
+  .hero-channel-word:nth-child(6) { animation-delay: 5s; }
+  @keyframes wordFade {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+  }
+
+  .hero-content { position: relative; z-index: 2; max-width: 640px; padding-top: 5rem; }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--red); margin-bottom: 1.25rem;
+  }
+  .hero-eyebrow::before { content: ''; display: block; width: 28px; height: 2px; background: var(--red); }
+  .hero-title {
+    font-family: var(--display); font-size: clamp(4rem, 7.5vw, 7.5rem);
+    line-height: 0.93; letter-spacing: -0.01em; color: var(--white); margin-bottom: 1.5rem;
+  }
+  .hero-title em { font-style: normal; color: var(--red); }
+  .hero-sub { font-size: 1.05rem; font-weight: 300; color: rgba(248,245,240,0.55); max-width: 500px; line-height: 1.75; margin-bottom: 2.5rem; }
+  .hero-actions { display: flex; gap: 1rem; align-items: center; }
+  .btn-primary {
+    display: inline-block; padding: 1rem 2.2rem;
+    background: var(--red); color: var(--white);
+    font-size: 0.78rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
+    text-decoration: none; border: 2px solid var(--red); transition: background 0.25s, color 0.25s;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  }
+  .btn-primary:hover { background: transparent; color: var(--red); }
+  .btn-ghost {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-size: 0.78rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+    color: rgba(248,245,240,0.6); text-decoration: none; transition: color 0.2s;
+  }
+  .btn-ghost::after { content: '→'; transition: transform 0.2s; }
+  .btn-ghost:hover { color: var(--white); }
+  .btn-ghost:hover::after { transform: translateX(4px); }
+
+  /* Scroll hint */
+  .scroll-hint {
+    position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 0.4rem; z-index: 2;
+  }
+  .scroll-hint span { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(248,245,240,0.3); writing-mode: vertical-rl; }
+  .scroll-hint::after {
+    content: ''; width: 1px; height: 55px;
+    background: linear-gradient(to bottom, rgba(232,0,28,0.7), transparent);
+    animation: scrollDrop 2s ease-in-out infinite;
+  }
+  @keyframes scrollDrop {
+    0% { opacity: 0; transform: scaleY(0); transform-origin: top; }
+    50% { opacity: 1; transform: scaleY(1); transform-origin: top; }
+    100% { opacity: 0; transform: scaleY(1); transform-origin: bottom; }
+  }
+
+  /* breadcrumb */
+  .breadcrumb-bar {
+    background: var(--red); padding: 0.65rem 3rem;
+    display: flex; align-items: center; gap: 0.5rem;
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(248,245,240,0.8);
+  }
+  .breadcrumb-bar a { color: rgba(248,245,240,0.65); text-decoration: none; }
+  .breadcrumb-bar a:hover { color: var(--white); }
+  .breadcrumb-bar .sep { color: rgba(248,245,240,0.4); }
+
+  /* ── UTILITY ── */
+  .section-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--red); margin-bottom: 1rem; }
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* ── MEDIA BUYING INTRO ── */
+  .mb-intro { background: var(--white); padding: 6rem 3rem; }
+  .mb-intro-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center;
+  }
+  .mb-intro-title {
+    font-family: var(--display); font-size: clamp(2.8rem, 4.5vw, 4.5rem);
+    line-height: 1.0; color: var(--black); margin-bottom: 1.5rem;
+  }
+  .mb-intro-body { font-size: 1rem; color: #444; line-height: 1.85; margin-bottom: 1.25rem; }
+  .mb-intro-body strong { color: var(--red); font-weight: 600; }
+
+  /* Visual block */
+  .mb-visual {
+    background: var(--black); padding: 3rem;
+    display: flex; flex-direction: column; gap: 1.5rem;
+    position: relative; overflow: hidden;
+  }
+  .mb-visual::before {
+    content: 'MEDIA'; font-family: var(--display); font-size: 8rem;
+    color: rgba(232,0,28,0.08); position: absolute; bottom: -0.1em; right: -0.1em;
+    line-height: 1; pointer-events: none;
+  }
+  .mb-visual-title { font-family: var(--display); font-size: 1.5rem; color: var(--red); letter-spacing: 0.04em; }
+  .mb-visual-list { display: flex; flex-direction: column; gap: 0; }
+  .mb-visual-item {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1rem 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+    font-size: 0.875rem; font-weight: 500; color: rgba(248,245,240,0.75);
+    transition: color 0.2s;
+  }
+  .mb-visual-item:last-child { border-bottom: none; }
+  .mb-visual-item:hover { color: var(--white); }
+  .mb-visual-item .vi-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--red); flex-shrink: 0; }
+
+  /* ── OUR APPROACH DARK ── */
+  .approach { background: var(--black); color: var(--white); padding: 6rem 3rem; }
+  .approach-inner { max-width: 1200px; margin: 0 auto; }
+  .approach-header {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: end; margin-bottom: 4rem;
+  }
+  .approach-title { font-family: var(--display); font-size: clamp(2.5rem, 4vw, 4rem); line-height: 1.0; color: var(--white); }
+  .approach-intro { font-size: 0.95rem; color: var(--grey); line-height: 1.85; }
+
+  .approach-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; background: #1a1a1a; }
+  .approach-card {
+    background: #111; padding: 3rem 2.5rem;
+    display: flex; flex-direction: column; gap: 1rem;
+    position: relative; overflow: hidden; transition: background 0.3s;
+  }
+  .approach-card:hover { background: #161616; }
+  .approach-card::after {
+    content: ''; position: absolute; left: 0; top: 0;
+    width: 3px; height: 100%; background: var(--red);
+    transform: scaleY(0); transform-origin: bottom; transition: transform 0.3s;
+  }
+  .approach-card:hover::after { transform: scaleY(1); }
+  .approach-icon { font-size: 2rem; }
+  .approach-card-title { font-family: var(--display); font-size: 1.6rem; letter-spacing: 0.04em; color: var(--white); }
+  .approach-card-desc { font-size: 0.875rem; color: var(--grey); line-height: 1.8; }
+
+  /* ── MEDIA PLATFORMS ── */
+  .platforms { background: var(--light); padding: 6rem 3rem; }
+  .platforms-inner { max-width: 1200px; margin: 0 auto; }
+  .platforms-header { margin-bottom: 4rem; }
+  .platforms-title { font-family: var(--display); font-size: clamp(2.5rem, 4.5vw, 4.5rem); line-height: 1.0; color: var(--black); }
+  .platforms-sub { font-size: 0.95rem; color: #666; margin-top: 1rem; max-width: 560px; line-height: 1.75; }
+
+  .platforms-grid {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px; background: #d8d8d8;
+  }
+  .platform-card {
+    background: var(--white); padding: 2.5rem 1.75rem;
+    display: flex; flex-direction: column; gap: 0.75rem;
+    cursor: default; position: relative; overflow: hidden;
+    transition: background 0.3s;
+  }
+  .platform-card:hover { background: var(--black); }
+  .platform-card:hover .platform-name { color: var(--white); }
+  .platform-card:hover .platform-desc { color: rgba(248,245,240,0.55); }
+  .platform-card:hover .platform-emoji-wrap { background: var(--red); }
+
+  .platform-emoji-wrap {
+    width: 52px; height: 52px; border-radius: 50%;
+    background: var(--light); display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; flex-shrink: 0; transition: background 0.3s; margin-bottom: 0.25rem;
+  }
+  .platform-name { font-family: var(--display); font-size: 1.4rem; letter-spacing: 0.04em; color: var(--red); transition: color 0.3s; }
+  .platform-desc { font-size: 0.8rem; color: #555; line-height: 1.7; transition: color 0.3s; }
+
+  /* ── BENEFITS ── */
+  .benefits { background: var(--black); padding: 6rem 3rem; }
+  .benefits-inner { max-width: 1200px; margin: 0 auto; }
+  .benefits-header { margin-bottom: 4rem; }
+  .benefits-title { font-family: var(--display); font-size: clamp(2.5rem, 4.5vw, 4.5rem); line-height: 1.0; color: var(--white); }
+  .benefits-sub { font-size: 0.95rem; color: var(--grey); margin-top: 1rem; max-width: 560px; line-height: 1.75; }
+
+  .benefits-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; background: #1a1a1a; }
+  .benefit-card {
+    background: #111; padding: 2.5rem 2rem;
+    display: flex; flex-direction: column; gap: 1rem;
+    position: relative; overflow: hidden; transition: background 0.3s;
+  }
+  .benefit-card:hover { background: var(--red); }
+  .benefit-card:hover .benefit-title, .benefit-card:hover .benefit-desc { color: var(--white); }
+  .benefit-card:hover .benefit-icon-wrap { background: rgba(255,255,255,0.2); }
+
+  .benefit-icon-wrap {
+    width: 52px; height: 52px; border-radius: 50%;
+    background: rgba(232,0,28,0.15); display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; flex-shrink: 0; transition: background 0.3s;
+  }
+  .benefit-title { font-family: var(--display); font-size: 1.4rem; letter-spacing: 0.03em; color: var(--white); line-height: 1.1; transition: color 0.3s; }
+  .benefit-desc { font-size: 0.85rem; color: var(--grey); line-height: 1.75; transition: color 0.3s; }
+
+  /* ── DEAL STRIP ── */
+  .deal-strip { background: var(--red); padding: 3.5rem 3rem; }
+  .deal-strip-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
+    divide: var(--white); border: 1px solid rgba(255,255,255,0.15);
+  }
+  .deal-item {
+    padding: 2.5rem 2rem; text-align: center;
+    border-right: 1px solid rgba(255,255,255,0.15);
+  }
+  .deal-item:last-child { border-right: none; }
+  .deal-num { font-family: var(--display); font-size: 3.5rem; color: var(--white); line-height: 1; }
+  .deal-label { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.7); margin-top: 0.35rem; }
+
+  /* ── CTA ── */
+  .cta-banner { background: var(--white); padding: 6rem 3rem; border-top: 1px solid #e0e0e0; }
+  .cta-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 3rem; }
+  .cta-text { font-family: var(--display); font-size: clamp(2.5rem, 5vw, 5rem); color: var(--black); line-height: 1.0; }
+  .cta-text em { font-style: normal; color: var(--red); }
+  .btn-cta-dark {
+    flex-shrink: 0; display: inline-block; padding: 1.2rem 2.8rem;
+    background: var(--red); color: var(--white);
+    font-size: 0.78rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+    text-decoration: none; border: 2px solid var(--red); transition: background 0.25s, color 0.25s;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  }
+  .btn-cta-dark:hover { background: transparent; color: var(--red); }
+
+  /* ── FOOTER ── */
+  footer { background: #080808; padding: 3.5rem 3rem; border-top: 1px solid rgba(255,255,255,0.05); }
+  .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 2rem; }
+  .footer-logo { font-family: var(--display); font-size: 1.4rem; letter-spacing: 0.08em; color: var(--white); text-decoration: none; }
+  .footer-logo span { color: var(--red); }
+  .footer-copy { font-size: 0.75rem; color: rgba(248,245,240,0.3); letter-spacing: 0.06em; }
+  .footer-social { display: flex; gap: 1.25rem; }
+  .footer-social a { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(248,245,240,0.35); text-decoration: none; transition: color 0.2s; }
+  .footer-social a:hover { color: var(--red); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 960px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .page-hero, .mb-intro, .approach, .platforms, .benefits, .deal-strip, .cta-banner { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .breadcrumb-bar { padding: 0.65rem 1.5rem; }
+    .mb-intro-inner, .approach-header, .cta-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    .approach-grid { grid-template-columns: 1fr; }
+    .platforms-grid { grid-template-columns: repeat(2, 1fr); }
+    .benefits-grid { grid-template-columns: repeat(2, 1fr); }
+    .deal-strip-inner { grid-template-columns: 1fr; }
+    .deal-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.15); }
+    .deal-item:last-child { border-bottom: none; }
+    .hero-channels { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="oxygenmedia-homepage.html" class="nav-logo"><span>O</span>XYGEN<span>M</span>EDIA</a>
+  <ul class="nav-links">
+    <li><a href="oxygenmedia-homepage.html">Home</a></li>
+    <li><a href="oxygenmedia-about.html">Who We Are</a></li>
+    <li><a href="oxygenmedia-services.html">Our Services</a></li>
+    <li><a href="#" class="active">Media Buying</a></li>
+    <li><a href="#">Brand Portfolio</a></li>
+    <li><a href="#">PR &amp; Films</a></li>
+    <li><a href="#">Contact Us</a></li>
+  </ul>
+  <div class="nav-social">
+    <a href="#">FB</a>
+    <a href="#">IG</a>
+    <a href="#">TW</a>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="hero-bg"></div>
+
+  <!-- Animated channel words right side -->
+  <div class="hero-channels" aria-hidden="true">
+    <div class="hero-channel-word">TELEVISION</div>
+    <div class="hero-channel-word">RADIO</div>
+    <div class="hero-channel-word">NEWSPAPERS</div>
+    <div class="hero-channel-word">MAGAZINES</div>
+    <div class="hero-channel-word">INTERNET</div>
+    <div class="hero-channel-word">CINEMA</div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">Media Buying Division</div>
+    <h1 class="hero-title">
+      Maximise Your<br/><em>Reach</em> With<br/>Our Media<br/>Buying Solutions
+    </h1>
+    <p class="hero-sub">
+      A data-driven, strategic approach to media buying — combining cutting-edge technology with expert insights to deliver unparalleled results for your brand.
+    </p>
+    <div class="hero-actions">
+      <a href="#" class="btn-primary">Get a Media Plan</a>
+      <a href="#platforms" class="btn-ghost">View Platforms</a>
+    </div>
+  </div>
+
+  <div class="scroll-hint"><span>Scroll</span></div>
+</section>
+
+<div class="breadcrumb-bar">
+  <a href="oxygenmedia-homepage.html">Home</a>
+  <span class="sep">›</span>
+  <span style="color:rgba(248,245,240,0.9)">Media Buying</span>
+</div>
+
+<!-- MEDIA BUYING INTRO -->
+<section class="mb-intro">
+  <div class="mb-intro-inner">
+    <div class="reveal">
+      <div class="section-label">Our Approach to Media Buying</div>
+      <h2 class="mb-intro-title">South Africa's Leading Strategic Media Planning &amp; Buying Division</h2>
+      <p class="mb-intro-body">
+        Oxygen Media's Media Buying division is a <strong>leading expert in strategic media planning and buying</strong>. Our team of seasoned media professionals leverages their extensive knowledge and expertise to deliver unparalleled media buying services that drive real results for our clients.
+      </p>
+      <p class="mb-intro-body">
+        We take a <strong>data-driven, strategic approach</strong> to media buying — combining cutting-edge technology with expert insights to deliver comprehensive analysis, precise planning, and continuous optimisation.
+      </p>
+    </div>
+
+    <div class="mb-visual reveal" style="transition-delay:0.15s">
+      <div class="mb-visual-title">What We Deliver</div>
+      <div class="mb-visual-list">
+        <div class="mb-visual-item"><div class="vi-dot"></div>In-depth media analysis of your target audience, market trends, and competitor activity</div>
+        <div class="mb-visual-item"><div class="vi-dot"></div>Strategic media planning tailored to your business objectives</div>
+        <div class="mb-visual-item"><div class="vi-dot"></div>Expert negotiation and buying of media inventory across all platforms</div>
+        <div class="mb-visual-item"><div class="vi-dot"></div>Continuous monitoring and optimisation of campaigns</div>
+        <div class="mb-visual-item"><div class="vi-dot"></div>Regular reporting and performance analysis with clear insights</div>
+        <div class="mb-visual-item"><div class="vi-dot"></div>Access to 6,000+ media listings with lightning-fast booking</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OUR APPROACH -->
+<section class="approach">
+  <div class="approach-inner">
+    <div class="approach-header reveal">
+      <div>
+        <div class="section-label" style="color:var(--red)">How We Work</div>
+        <h2 class="approach-title">A Four-Pillar Media Buying Methodology</h2>
+      </div>
+      <p class="approach-intro">
+        Every rand you spend on media should work as hard as possible. Our approach is built on four core pillars that ensure precision, efficiency, and measurable impact at every stage of the campaign.
+      </p>
+    </div>
+
+    <div class="approach-grid">
+      <div class="approach-card reveal">
+        <div class="approach-icon">🔍</div>
+        <div class="approach-card-title">In-Depth Media Analysis</div>
+        <p class="approach-card-desc">Comprehensive analysis of your target audience, market trends, and competitor media activity — giving us the intelligence to outplace the competition before we spend a single rand.</p>
+      </div>
+      <div class="approach-card reveal" style="transition-delay:0.1s">
+        <div class="approach-icon">🗺️</div>
+        <div class="approach-card-title">Strategic Media Planning</div>
+        <p class="approach-card-desc">Development of tailored media plans that align with your business objectives and target audience — mapping channels, timing, frequency, and budget allocation with precision.</p>
+      </div>
+      <div class="approach-card reveal" style="transition-delay:0.05s">
+        <div class="approach-icon">🤝</div>
+        <div class="approach-card-title">Negotiation &amp; Buying</div>
+        <p class="approach-card-desc">Expert negotiation and buying of media inventory across all platforms, leveraging our industry relationships and volume buying power to ensure maximum ROI on every placement.</p>
+      </div>
+      <div class="approach-card reveal" style="transition-delay:0.15s">
+        <div class="approach-icon">📈</div>
+        <div class="approach-card-title">Continuous Optimisation</div>
+        <p class="approach-card-desc">Real-time monitoring and continuous optimisation of campaigns to ensure optimal performance and delivery — adjusting placements, frequency, and spend as results come in.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MEDIA PLATFORMS -->
+<section class="platforms" id="platforms">
+  <div class="platforms-inner">
+    <div class="platforms-header reveal">
+      <div class="section-label">Media Platforms</div>
+      <h2 class="platforms-title">Our Buying Expertise Spans Every Platform</h2>
+      <p class="platforms-sub">From terrestrial TV to streaming digital — we have established relationships and buying power across all major South African media channels.</p>
+    </div>
+
+    <div class="platforms-grid">
+      <div class="platform-card reveal">
+        <div class="platform-emoji-wrap">📺</div>
+        <div class="platform-name">Television</div>
+        <p class="platform-desc">Terrestrial, satellite, and digital TV channels — from SABC to DStv and streaming platforms.</p>
+      </div>
+      <div class="platform-card reveal" style="transition-delay:0.08s">
+        <div class="platform-emoji-wrap">📻</div>
+        <div class="platform-name">Radio</div>
+        <p class="platform-desc">Commercial and community radio stations reaching every corner of South Africa.</p>
+      </div>
+      <div class="platform-card reveal" style="transition-delay:0.16s">
+        <div class="platform-emoji-wrap">🖨️</div>
+        <div class="platform-name">Print</div>
+        <p class="platform-desc">Newspapers, magazines, and trade publications — both national and regional titles.</p>
+      </div>
+      <div class="platform-card reveal" style="transition-delay:0.24s">
+        <div class="platform-emoji-wrap">🌐</div>
+        <div class="platform-name">Digital</div>
+        <p class="platform-desc">Online display, search, social media, and mobile advertising across all major platforms.</p>
+      </div>
+      <div class="platform-card reveal" style="transition-delay:0.32s">
+        <div class="platform-emoji-wrap">🎬</div>
+        <div class="platform-name">Cinema</div>
+        <p class="platform-desc">Movie theatre advertising that captures audiences in a highly engaged, distraction-free environment.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="benefits">
+  <div class="benefits-inner">
+    <div class="benefits-header reveal">
+      <div class="section-label" style="color:var(--red)">Benefits</div>
+      <h2 class="benefits-title">What You Can Expect When You Partner With Us</h2>
+      <p class="benefits-sub">By partnering with Oxygen Media's Media Buying division, you gain access to industry-leading expertise that delivers measurable, repeatable results.</p>
+    </div>
+
+    <div class="benefits-grid">
+      <div class="benefit-card reveal">
+        <div class="benefit-icon-wrap">💰</div>
+        <div class="benefit-title">Maximum ROI</div>
+        <p class="benefit-desc">Expert negotiation and buying ensure optimal media pricing — so every rand works harder for your brand.</p>
+      </div>
+      <div class="benefit-card reveal" style="transition-delay:0.1s">
+        <div class="benefit-icon-wrap">👁️</div>
+        <div class="benefit-title">Increased Brand Visibility</div>
+        <p class="benefit-desc">Strategic media planning and buying drive maximum reach and frequency across your target audience.</p>
+      </div>
+      <div class="benefit-card reveal" style="transition-delay:0.2s">
+        <div class="benefit-icon-wrap">🎯</div>
+        <div class="benefit-title">Improved Campaign Effectiveness</div>
+        <p class="benefit-desc">Continuous optimisation ensures campaigns hit their marks — with adjustments made in real time as data comes in.</p>
+      </div>
+      <div class="benefit-card reveal" style="transition-delay:0.3s">
+        <div class="benefit-icon-wrap">📋</div>
+        <div class="benefit-title">Transparency &amp; Accountability</div>
+        <p class="benefit-desc">Regular reporting and detailed analysis provide clear insights into campaign performance at every stage.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS STRIP -->
+<div class="deal-strip">
+  <div class="deal-strip-inner">
+    <div class="deal-item">
+      <div class="deal-num">6,000+</div>
+      <div class="deal-label">Media Listings</div>
+    </div>
+    <div class="deal-item">
+      <div class="deal-num">5</div>
+      <div class="deal-label">Core Media Channels</div>
+    </div>
+    <div class="deal-item">
+      <div class="deal-num">200+</div>
+      <div class="deal-label">Brands Placed</div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<section class="cta-banner">
+  <div class="cta-inner">
+    <div class="cta-text reveal">Let's Maximise<br/>Your <em>Media Reach</em></div>
+    <a href="#" class="btn-cta-dark">Get a Media Plan</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <a href="oxygenmedia-homepage.html" class="footer-logo"><span>O</span>XYGEN<span>M</span>EDIA</a>
+    <div class="footer-copy">© Copyright 2025 Oxygen Media. All rights reserved.</div>
+    <div class="footer-social">
+      <a href="#">Facebook</a>
+      <a href="#">Instagram</a>
+      <a href="#">Twitter</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  revealEls.forEach(el => io.observe(el));
+</script>
+</body>
+</html>

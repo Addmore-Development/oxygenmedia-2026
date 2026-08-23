@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Who We Are — Oxygen Media</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0D0D0D;
+    --red: #E8001C;
+    --white: #F8F5F0;
+    --light: #F0EFED;
+    --grey: #888888;
+    --display: 'Bebas Neue', sans-serif;
+    --body: 'Inter', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+  body { background: var(--white); color: var(--black); font-family: var(--body); overflow-x: hidden; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 3rem;
+    background: rgba(13,13,13,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .nav-logo { font-family: var(--display); font-size: 1.5rem; letter-spacing: 0.08em; color: var(--white); text-decoration: none; }
+  .nav-logo span { color: var(--red); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { font-size: 0.78rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(248,245,240,0.65); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--red); }
+  .nav-social { display: flex; gap: 1rem; }
+  .nav-social a { color: rgba(248,245,240,0.5); font-size: 0.78rem; font-weight: 600; text-decoration: none; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-social a:hover { color: var(--red); }
+
+  /* ── PAGE HERO ── */
+  .page-hero {
+    background: var(--black);
+    min-height: 68vh;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 0 3rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .page-hero-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 80% 40%, rgba(232,0,28,0.15) 0%, transparent 65%), var(--black);
+  }
+  .page-hero-wordmark {
+    position: absolute; bottom: -0.1em; right: -0.03em;
+    font-family: var(--display); font-size: clamp(10rem, 18vw, 18rem);
+    color: transparent; -webkit-text-stroke: 1px rgba(232,0,28,0.15);
+    user-select: none; pointer-events: none; line-height: 1; white-space: nowrap;
+  }
+  .page-hero-content { position: relative; z-index: 2; max-width: 900px; padding-top: 8rem; }
+  .page-hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--red); margin-bottom: 1.25rem;
+  }
+  .page-hero-eyebrow::before { content: ''; display: block; width: 28px; height: 2px; background: var(--red); }
+  .page-hero-title {
+    font-family: var(--display); font-size: clamp(4rem, 8vw, 8rem);
+    line-height: 0.93; letter-spacing: -0.01em; color: var(--white); margin-bottom: 1.5rem;
+  }
+  .page-hero-title em { font-style: normal; color: var(--red); }
+  .page-hero-sub { font-size: 1.05rem; font-weight: 300; color: rgba(248,245,240,0.55); max-width: 560px; line-height: 1.75; }
+
+  /* Breadcrumb bar */
+  .breadcrumb-bar {
+    background: var(--red); padding: 0.65rem 3rem;
+    display: flex; align-items: center; gap: 0.5rem;
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+    color: rgba(248,245,240,0.8);
+  }
+  .breadcrumb-bar a { color: rgba(248,245,240,0.65); text-decoration: none; }
+  .breadcrumb-bar a:hover { color: var(--white); }
+  .breadcrumb-bar span { color: rgba(248,245,240,0.4); }
+
+  /* ── WHO WE ARE ── */
+  .who {
+    background: var(--white); padding: 6rem 3rem;
+  }
+  .who-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 5fr 4fr; gap: 6rem; align-items: start;
+  }
+  .section-label {
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--red); margin-bottom: 1rem;
+  }
+  .who-title {
+    font-family: var(--display); font-size: clamp(2.8rem, 4.5vw, 4.5rem);
+    line-height: 1.0; color: var(--black); margin-bottom: 1.75rem;
+  }
+  .who-body { font-size: 1rem; color: #444; line-height: 1.85; margin-bottom: 1.25rem; }
+  .who-body strong { color: var(--red); font-weight: 600; }
+
+  .channel-list { margin-top: 2rem; display: flex; flex-direction: column; gap: 0; border-top: 1px solid #e0e0e0; }
+  .channel-item {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1rem 0; border-bottom: 1px solid #e0e0e0;
+    font-size: 0.9rem; font-weight: 500; color: var(--black);
+    transition: color 0.2s;
+  }
+  .channel-item:hover { color: var(--red); }
+  .channel-item .ch-icon {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--light); display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; flex-shrink: 0; transition: background 0.2s;
+  }
+  .channel-item:hover .ch-icon { background: var(--red); }
+
+  /* Stat stack */
+  .stat-stack { display: flex; flex-direction: column; gap: 0; }
+  .stat-block {
+    padding: 2.5rem 2rem; border-bottom: 1px solid #e0e0e0;
+    display: flex; flex-direction: column; gap: 0.4rem;
+  }
+  .stat-block:first-child { border-top: 1px solid #e0e0e0; }
+  .stat-big { font-family: var(--display); font-size: 4.5rem; color: var(--red); line-height: 1; }
+  .stat-desc { font-size: 0.82rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #666; }
+
+  /* ── MEDIA BUYING DARK ── */
+  .media-buying {
+    background: var(--black); color: var(--white); padding: 6rem 3rem;
+  }
+  .media-buying-inner { max-width: 1200px; margin: 0 auto; }
+  .media-buying-header {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; margin-bottom: 4rem; align-items: end;
+  }
+  .media-buying-title {
+    font-family: var(--display); font-size: clamp(2.5rem, 4.5vw, 4.5rem);
+    line-height: 1.0; color: var(--white);
+  }
+  .media-buying-intro { font-size: 0.95rem; color: var(--grey); line-height: 1.8; }
+
+  .pillars-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: #1a1a1a; }
+  .pillar-card {
+    background: #111; padding: 2.5rem 2rem;
+    position: relative; overflow: hidden;
+    transition: background 0.3s;
+  }
+  .pillar-card::after {
+    content: ''; position: absolute; top: 0; left: 0;
+    width: 3px; height: 100%; background: var(--red);
+    transform: scaleY(0); transform-origin: bottom; transition: transform 0.3s;
+  }
+  .pillar-card:hover { background: #161616; }
+  .pillar-card:hover::after { transform: scaleY(1); }
+  .pillar-icon { font-size: 2rem; margin-bottom: 1rem; }
+  .pillar-name { font-family: var(--display); font-size: 1.6rem; letter-spacing: 0.04em; color: var(--white); margin-bottom: 0.75rem; }
+  .pillar-desc { font-size: 0.85rem; color: var(--grey); line-height: 1.75; }
+
+  /* ── CAMPAIGNS ── */
+  .campaigns { background: var(--light); padding: 6rem 3rem; }
+  .campaigns-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center;
+  }
+  .campaigns-title {
+    font-family: var(--display); font-size: clamp(2.5rem, 4vw, 4rem);
+    line-height: 1.0; color: var(--black); margin-bottom: 1.25rem;
+  }
+  .campaigns-body { font-size: 0.95rem; color: #555; line-height: 1.85; margin-bottom: 2rem; }
+  .outcome-list { display: flex; flex-direction: column; gap: 1rem; }
+  .outcome-item {
+    display: flex; align-items: flex-start; gap: 1rem;
+    padding: 1.25rem 1.5rem; background: var(--white);
+    border-left: 3px solid var(--red);
+  }
+  .outcome-item .oi-label { font-size: 0.9rem; font-weight: 600; color: var(--black); }
+  .outcome-item .oi-sub { font-size: 0.8rem; color: #777; margin-top: 0.2rem; }
+
+  /* Visual impact cards */
+  .channels-visual { display: flex; flex-direction: column; gap: 2px; }
+  .ch-visual-row { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+  .ch-visual-card {
+    background: var(--black); padding: 2rem 1.75rem;
+    display: flex; flex-direction: column; gap: 0.5rem;
+    cursor: default; transition: background 0.25s;
+    min-height: 130px; justify-content: flex-end;
+    position: relative; overflow: hidden;
+  }
+  .ch-visual-card.full { grid-column: 1 / -1; }
+  .ch-visual-card:hover { background: var(--red); }
+  .ch-visual-emoji { font-size: 2rem; position: absolute; top: 1.25rem; left: 1.75rem; }
+  .ch-visual-name {
+    font-family: var(--display); font-size: 1.5rem; letter-spacing: 0.04em;
+    color: var(--white); line-height: 1;
+  }
+
+  /* ── REACH ── */
+  .reach { background: var(--white); padding: 6rem 3rem; }
+  .reach-inner { max-width: 1200px; margin: 0 auto; }
+  .reach-header { margin-bottom: 4rem; }
+  .reach-title {
+    font-family: var(--display); font-size: clamp(2.5rem, 4.5vw, 4.5rem);
+    line-height: 1.0; color: var(--black); max-width: 700px;
+  }
+  .reach-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; background: #e0e0e0; }
+  .reach-card {
+    background: var(--white); padding: 2.5rem 2rem;
+    text-align: center; transition: background 0.25s;
+  }
+  .reach-card:hover { background: var(--red); }
+  .reach-card:hover .reach-num, .reach-card:hover .reach-label { color: var(--white); }
+  .reach-num { font-family: var(--display); font-size: 3.2rem; color: var(--red); transition: color 0.25s; }
+  .reach-label { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #666; margin-top: 0.4rem; transition: color 0.25s; }
+
+  /* ── SERVICES ORBIT (redesigned as card grid) ── */
+  .services-section { background: var(--black); padding: 6rem 3rem; }
+  .services-inner { max-width: 1200px; margin: 0 auto; }
+  .services-header-row {
+    display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem;
+    margin-bottom: 4rem;
+  }
+  .services-title {
+    font-family: var(--display); font-size: clamp(2.5rem, 4.5vw, 4.5rem);
+    line-height: 1.0; color: var(--white);
+  }
+  .services-intro-text { font-size: 0.9rem; color: var(--grey); max-width: 340px; line-height: 1.75; }
+
+  .orbit-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; background: #222; }
+  .orbit-card {
+    background: #111; padding: 2.5rem 2rem;
+    display: flex; flex-direction: column; gap: 0.75rem;
+    cursor: default; transition: background 0.25s; position: relative;
+  }
+  .orbit-card.featured { background: var(--red); }
+  .orbit-card:not(.featured):hover { background: #1c1c1c; }
+  .orbit-card::before {
+    content: ''; position: absolute; bottom: 0; left: 0;
+    width: 100%; height: 2px; background: var(--red);
+    transform: scaleX(0); transform-origin: left; transition: transform 0.3s;
+  }
+  .orbit-card:not(.featured):hover::before { transform: scaleX(1); }
+  .orbit-icon { font-size: 1.6rem; }
+  .orbit-name { font-family: var(--display); font-size: 1.25rem; letter-spacing: 0.04em; color: var(--white); }
+  .orbit-card.featured .orbit-name { color: var(--white); }
+
+  /* ── CLIENTS ── */
+  .clients { background: var(--light); padding: 6rem 3rem; }
+  .clients-inner { max-width: 1200px; margin: 0 auto; }
+  .clients-header { margin-bottom: 3rem; }
+  .clients-tagline {
+    font-family: var(--display); font-size: clamp(2rem, 3.5vw, 3.5rem);
+    line-height: 1.05; color: var(--black); max-width: 800px; margin-bottom: 0.75rem;
+  }
+  .clients-sub { font-size: 0.9rem; color: #666; max-width: 520px; line-height: 1.75; }
+
+  .clients-strip {
+    display: grid; grid-template-columns: repeat(5, 1fr);
+    gap: 2px; background: #d8d8d8;
+  }
+  .client-cell {
+    background: var(--white); padding: 2rem 1.5rem;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 0.5rem; text-align: center; transition: background 0.2s;
+    min-height: 110px;
+  }
+  .client-cell:hover { background: var(--black); }
+  .client-cell:hover .client-name { color: var(--white); }
+  .client-name {
+    font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    color: #444; transition: color 0.2s;
+  }
+  .client-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--red); }
+
+  /* ── CTA BANNER ── */
+  .cta-banner {
+    background: var(--red); padding: 6rem 3rem; overflow: hidden; position: relative;
+  }
+  .cta-banner::before {
+    content: 'UNMISSABLE';
+    font-family: var(--display); font-size: 16rem; color: rgba(0,0,0,0.12);
+    position: absolute; right: -1rem; top: 50%; transform: translateY(-50%);
+    white-space: nowrap; pointer-events: none; line-height: 1;
+  }
+  .cta-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 3rem; position: relative; z-index: 1; }
+  .cta-text { font-family: var(--display); font-size: clamp(2.5rem, 5vw, 5rem); color: var(--white); line-height: 1.0; }
+  .btn-cta {
+    flex-shrink: 0; display: inline-block; padding: 1.2rem 2.8rem;
+    background: var(--black); color: var(--white);
+    font-size: 0.78rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+    text-decoration: none; border: 2px solid var(--black);
+    transition: background 0.25s, color 0.25s;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  }
+  .btn-cta:hover { background: transparent; color: var(--black); border-color: rgba(0,0,0,0.4); }
+
+  /* ── FOOTER ── */
+  footer { background: #080808; padding: 3.5rem 3rem; border-top: 1px solid rgba(255,255,255,0.05); }
+  .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 2rem; }
+  .footer-logo { font-family: var(--display); font-size: 1.4rem; letter-spacing: 0.08em; color: var(--white); text-decoration: none; }
+  .footer-logo span { color: var(--red); }
+  .footer-copy { font-size: 0.75rem; color: rgba(248,245,240,0.3); letter-spacing: 0.06em; }
+  .footer-social { display: flex; gap: 1.25rem; }
+  .footer-social a { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(248,245,240,0.35); text-decoration: none; transition: color 0.2s; }
+  .footer-social a:hover { color: var(--red); }
+
+  /* ── REVEAL ── */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 960px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .page-hero, .who, .media-buying, .campaigns, .reach, .services-section, .clients, .cta-banner { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .breadcrumb-bar { padding: 0.65rem 1.5rem; }
+    .who-inner, .media-buying-header, .campaigns-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .pillars-grid { grid-template-columns: 1fr; }
+    .reach-grid { grid-template-columns: repeat(2, 1fr); }
+    .orbit-grid { grid-template-columns: repeat(2, 1fr); }
+    .clients-strip { grid-template-columns: repeat(3, 1fr); }
+    .cta-inner { flex-direction: column; align-items: flex-start; }
+    .footer-inner { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="oxygenmedia-homepage.html" class="nav-logo"><span>O</span>XYGEN<span>M</span>EDIA</a>
+  <ul class="nav-links">
+    <li><a href="oxygenmedia-homepage.html">Home</a></li>
+    <li><a href="#" class="active">Who We Are</a></li>
+    <li><a href="#">Our Services</a></li>
+    <li><a href="#">Media Buying</a></li>
+    <li><a href="#">Brand Portfolio</a></li>
+    <li><a href="#">PR &amp; Films</a></li>
+    <li><a href="#">Contact Us</a></li>
+  </ul>
+  <div class="nav-social">
+    <a href="#">FB</a>
+    <a href="#">IG</a>
+    <a href="#">TW</a>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-wordmark">MEDIA</div>
+  <div class="page-hero-content">
+    <div class="page-hero-eyebrow">About Oxygen Media</div>
+    <h1 class="page-hero-title">
+      Selecting the<br/><em>Right Platform</em><br/>For Your Goals
+    </h1>
+    <p class="page-hero-sub">
+      South Africa's premier media buying and advertising agency — crafting innovative, high-impact solutions across every platform that matters.
+    </p>
+  </div>
+</section>
+<div class="breadcrumb-bar">
+  <a href="oxygenmedia-homepage.html">Home</a>
+  <span>›</span>
+  <span style="color:rgba(248,245,240,0.9)">Who We Are</span>
+</div>
+
+<!-- WHO WE ARE -->
+<section class="who">
+  <div class="who-inner">
+    <div class="reveal">
+      <div class="section-label">Our Identity</div>
+      <h2 class="who-title">South Africa's Premier Media Agency</h2>
+      <p class="who-body">
+        <strong>Oxygen Media</strong> is South Africa's premier media buying and advertising agency, known for crafting <strong>innovative, high-impact media solutions</strong> across every platform that matters.
+      </p>
+      <p class="who-body">
+        We breathe life into brands with our creativity and stellar range of intellectual capital — bringing together a wide variety of top-notch industry expertise to offer clients a comprehensive package of communications solutions.
+      </p>
+
+      <div class="channel-list">
+        <div class="channel-item"><div class="ch-icon">📻</div> All commercial &amp; community radio stations</div>
+        <div class="channel-item"><div class="ch-icon">📰</div> Print media that still packs a punch</div>
+        <div class="channel-item"><div class="ch-icon">🏙️</div> Outdoor billboards that grab attention</div>
+        <div class="channel-item"><div class="ch-icon">📺</div> Television advertising that tells your story</div>
+        <div class="channel-item"><div class="ch-icon">🌐</div> Digital platforms for the modern audience</div>
+      </div>
+    </div>
+
+    <div class="reveal" style="transition-delay:0.15s">
+      <div class="stat-stack">
+        <div class="stat-block">
+          <div class="stat-big">15+</div>
+          <div class="stat-desc">Years in the industry</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-big">200+</div>
+          <div class="stat-desc">Brands served</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-big">6,000+</div>
+          <div class="stat-desc">Media listings &amp; placements</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-big">5</div>
+          <div class="stat-desc">Core media channels</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MEDIA BUYING DARK SECTION -->
+<section class="media-buying">
+  <div class="media-buying-inner">
+    <div class="media-buying-header reveal">
+      <div>
+        <div class="section-label" style="color:var(--red)">Expert Media Buying</div>
+        <h2 class="media-buying-title">Custom-Built Campaigns That Move Markets</h2>
+      </div>
+      <p class="media-buying-intro">
+        Our strategists don't just place ads — we build campaigns that laser-focus on your core audience, maximise ROI across multiple channels, and blend traditional and digital for unified impact.
+      </p>
+    </div>
+
+    <div class="pillars-grid">
+      <div class="pillar-card reveal">
+        <div class="pillar-icon">🎯</div>
+        <div class="pillar-name">Audience Focus</div>
+        <p class="pillar-desc">Laser-targeted placements that reach the right people, at the right time, on the right platform.</p>
+      </div>
+      <div class="pillar-card reveal" style="transition-delay:0.1s">
+        <div class="pillar-icon">📈</div>
+        <div class="pillar-name">Maximum ROI</div>
+        <p class="pillar-desc">We negotiate the best deals across radio, TV, print, outdoor, and digital to stretch every rand further.</p>
+      </div>
+      <div class="pillar-card reveal" style="transition-delay:0.2s">
+        <div class="pillar-icon">🔗</div>
+        <div class="pillar-name">Unified Impact</div>
+        <p class="pillar-desc">Blending traditional and digital channels for campaigns that work together, not in isolation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAMPAIGNS THAT DELIVER -->
+<section class="campaigns">
+  <div class="campaigns-inner">
+    <div class="reveal">
+      <div class="section-label">Campaigns That Deliver</div>
+      <h2 class="campaigns-title">We're Not Placing Ads — We're Moving Markets</h2>
+      <p class="campaigns-body">
+        Every campaign we build has one of three strategic objectives. We don't start creative until we're clear on which one — and how we'll measure it.
+      </p>
+      <div class="outcome-list">
+        <div class="outcome-item">
+          <div>
+            <div class="oi-label">Sell Products</div>
+            <div class="oi-sub">Drive direct sales and conversion through precision placements</div>
+          </div>
+        </div>
+        <div class="outcome-item">
+          <div>
+            <div class="oi-label">Build Brand Love</div>
+            <div class="oi-sub">Create emotional connections that turn customers into advocates</div>
+          </div>
+        </div>
+        <div class="outcome-item">
+          <div>
+            <div class="oi-label">Drive Behavioural Change</div>
+            <div class="oi-sub">Shift attitudes and actions at scale across South African audiences</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="channels-visual reveal" style="transition-delay:0.15s">
+      <div class="ch-visual-row">
+        <div class="ch-visual-card">
+          <div class="ch-visual-emoji">📻</div>
+          <div class="ch-visual-name">Radio</div>
+        </div>
+        <div class="ch-visual-card">
+          <div class="ch-visual-emoji">📰</div>
+          <div class="ch-visual-name">Newspaper</div>
+        </div>
+      </div>
+      <div class="ch-visual-row">
+        <div class="ch-visual-card">
+          <div class="ch-visual-emoji">📺</div>
+          <div class="ch-visual-name">TV</div>
+        </div>
+        <div class="ch-visual-card">
+          <div class="ch-visual-emoji">🏙️</div>
+          <div class="ch-visual-name">Billboards</div>
+        </div>
+      </div>
+      <div class="ch-visual-row">
+        <div class="ch-visual-card full">
+          <div class="ch-visual-emoji">📖</div>
+          <div class="ch-visual-name">Magazine &amp; Digital</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NATIONAL REACH -->
+<section class="reach">
+  <div class="reach-inner">
+    <div class="reach-header reveal">
+      <div class="section-label">National Reach &amp; Local Expertise</div>
+      <h2 class="reach-title">Access to Every Major Media Platform in South Africa</h2>
+    </div>
+    <div class="reach-grid reveal" style="transition-delay:0.1s">
+      <div class="reach-card">
+        <div class="reach-num">6,000+</div>
+        <div class="reach-label">Media Listings</div>
+      </div>
+      <div class="reach-card">
+        <div class="reach-num">Fast</div>
+        <div class="reach-label">Lightning Booking</div>
+      </div>
+      <div class="reach-card">
+        <div class="reach-num">Best</div>
+        <div class="reach-label">Negotiated Rates</div>
+      </div>
+      <div class="reach-card">
+        <div class="reach-num">All</div>
+        <div class="reach-label">Major Platforms</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FULL SERVICE OFFERINGS -->
+<section class="services-section">
+  <div class="services-inner">
+    <div class="services-header-row reveal">
+      <div>
+        <div class="section-label" style="color:var(--red)">Full Range of Services</div>
+        <h2 class="services-title">Digital &amp; Traditional<br/>Marketing Services</h2>
+      </div>
+      <p class="services-intro-text">
+        Our offering includes: brand campaigns, media strategy, web design, event management, content production, and media buying.
+      </p>
+    </div>
+
+    <div class="orbit-grid">
+      <div class="orbit-card featured">
+        <div class="orbit-icon">📡</div>
+        <div class="orbit-name">Media Buying</div>
+      </div>
+      <div class="orbit-card reveal">
+        <div class="orbit-icon">🎨</div>
+        <div class="orbit-name">Full-Service Design</div>
+      </div>
+      <div class="orbit-card reveal" style="transition-delay:0.05s">
+        <div class="orbit-icon">🎤</div>
+        <div class="orbit-name">Events Management</div>
+      </div>
+      <div class="orbit-card reveal" style="transition-delay:0.1s">
+        <div class="orbit-icon">💡</div>
+        <div class="orbit-name">Thought Leadership</div>
+      </div>
+      <div class="orbit-card reveal" style="transition-delay:0.05s">
+        <div class="orbit-icon">📊</div>
+        <div class="orbit-name">Digital Strategy</div>
+      </div>
+      <div class="orbit-card reveal" style="transition-delay:0.1s">
+        <div class="orbit-icon">🛡️</div>
+        <div class="orbit-name">PR &amp; Reputation</div>
+      </div>
+      <div class="orbit-card reveal" style="transition-delay:0.15s">
+        <div class="orbit-icon">🏷️</div>
+        <div class="orbit-name">Brand Positioning</div>
+      </div>
+      <div class="orbit-card reveal" style="transition-delay:0.2s">
+        <div class="orbit-icon">📝</div>
+        <div class="orbit-name">Content Development</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLIENTS -->
+<section class="clients">
+  <div class="clients-inner">
+    <div class="clients-header reveal">
+      <div class="section-label">Brand Portfolio</div>
+      <h2 class="clients-tagline">Our services are designed to support clients achieve their strategic goals</h2>
+      <p class="clients-sub" style="margin-top:1rem">
+        We are proud to have worked with leading organisations across Africa — from media groups and financial institutions to sports bodies and development agencies.
+      </p>
+    </div>
+    <div class="clients-strip reveal" style="transition-delay:0.1s">
+      <div class="client-cell"><div class="client-dot"></div><div class="client-name">Africa Investment Forum</div></div>
+      <div class="client-cell"><div class="client-dot"></div><div class="client-name">Independent Media</div></div>
+      <div class="client-cell"><div class="client-dot"></div><div class="client-name">African Development Bank</div></div>
+      <div class="client-cell"><div class="client-dot"></div><div class="client-name">Distell</div></div>
+      <div class="client-cell"><div class="client-dot"></div><div class="client-name">PLUS Network</div></div>
+      <div class="client-cell"><div class="client-dot"></div><div class="client-name">The Other Foundation</div></div>
+      <div class="client-cell"><div class="client-dot"></div><div class="client-name">IAJ Journalism</div></div>
+      <div class="client-cell"><div class="client-dot"></div><div class="client-name">Tiso Blackstar Group</div></div>
+      <div class="client-cell"><div class="client-dot"></div><div class="client-name">SANEF</div></div>
+      <div class="client-cell"><div class="client-dot"></div><div class="client-name">The Perfect Hair</div></div>
+      <div class="client-cell"><div class="client-dot"></div><div class="client-name">AUDA-NEPAD</div></div>
+      <div class="client-cell"><div class="client-dot"></div><div class="client-name">Brand Report</div></div>
+      <div class="client-cell"><div class="client-dot"></div><div class="client-name">Cricket South Africa</div></div>
+      <div class="client-cell"><div class="client-dot"></div><div class="client-name">Arena Holdings</div></div>
+      <div class="client-cell"><div class="client-dot"></div><div class="client-name">Richards Bay Minerals</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-banner">
+  <div class="cta-inner">
+    <div class="cta-text reveal">Let's Make Your<br/>Brand Unmissable</div>
+    <a href="#" class="btn-cta">Start a Project</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <a href="oxygenmedia-homepage.html" class="footer-logo"><span>O</span>XYGEN<span>M</span>EDIA</a>
+    <div class="footer-copy">© Copyright 2025 Oxygen Media. All rights reserved.</div>
+    <div class="footer-social">
+      <a href="#">Facebook</a>
+      <a href="#">Instagram</a>
+      <a href="#">Twitter</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+</script>
+</body>
+</html>

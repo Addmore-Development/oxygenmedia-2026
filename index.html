@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Oxygen Media — Breathing Life Into Your Brand</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0D0D0D;
+    --red: #E8001C;
+    --coral: #FF4D4D;
+    --white: #F8F5F0;
+    --grey: #888888;
+    --light: #F0EFED;
+    --display: 'Bebas Neue', sans-serif;
+    --body: 'Inter', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--body);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 3rem;
+    background: rgba(13,13,13,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    transition: background 0.3s;
+  }
+
+  .nav-logo {
+    font-family: var(--display);
+    font-size: 1.5rem;
+    letter-spacing: 0.08em;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--red); }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(248,245,240,0.65);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--red); }
+
+  .nav-social { display: flex; gap: 1rem; }
+  .nav-social a {
+    color: rgba(248,245,240,0.5);
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-social a:hover { color: var(--red); }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    padding: 0 3rem;
+  }
+
+  /* Animated gradient background */
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 60% 50%, rgba(232,0,28,0.18) 0%, transparent 65%),
+                radial-gradient(ellipse 50% 50% at 10% 80%, rgba(255,77,77,0.1) 0%, transparent 60%),
+                var(--black);
+    animation: bgPulse 6s ease-in-out infinite;
+  }
+  @keyframes bgPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+
+  /* Giant background OXYGEN text */
+  .hero-wordmark {
+    position: absolute;
+    bottom: -0.15em;
+    left: -0.04em;
+    font-family: var(--display);
+    font-size: clamp(12rem, 22vw, 22rem);
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(232,0,28,0.2);
+    user-select: none;
+    pointer-events: none;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 820px;
+    padding-top: 7rem;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 1.5rem;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 28px; height: 2px;
+    background: var(--red);
+  }
+
+  .hero-title {
+    font-family: var(--display);
+    font-size: clamp(4.5rem, 9vw, 9rem);
+    line-height: 0.93;
+    letter-spacing: -0.01em;
+    color: var(--white);
+    margin-bottom: 2rem;
+  }
+  .hero-title em {
+    font-style: normal;
+    color: var(--red);
+  }
+
+  .hero-sub {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: rgba(248,245,240,0.6);
+    max-width: 520px;
+    line-height: 1.7;
+    margin-bottom: 3rem;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    padding: 1rem 2.2rem;
+    background: var(--red);
+    color: var(--white);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 2px solid var(--red);
+    transition: background 0.25s, color 0.25s;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  }
+  .btn-primary:hover {
+    background: transparent;
+    color: var(--red);
+  }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(248,245,240,0.65);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .btn-ghost::after {
+    content: '→';
+    transition: transform 0.2s;
+  }
+  .btn-ghost:hover { color: var(--white); }
+  .btn-ghost:hover::after { transform: translateX(4px); }
+
+  /* Scroll indicator */
+  .scroll-line {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    z-index: 2;
+  }
+  .scroll-line span {
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(248,245,240,0.35);
+    writing-mode: vertical-rl;
+  }
+  .scroll-line::after {
+    content: '';
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(to bottom, rgba(232,0,28,0.6), transparent);
+    animation: scrollAnim 2s ease-in-out infinite;
+  }
+  @keyframes scrollAnim {
+    0% { opacity: 0; transform: scaleY(0); transform-origin: top; }
+    50% { opacity: 1; transform: scaleY(1); transform-origin: top; }
+    100% { opacity: 0; transform: scaleY(1); transform-origin: bottom; }
+  }
+
+  /* ── MARQUEE STRIP ── */
+  .marquee-strip {
+    background: var(--red);
+    padding: 0.75rem 0;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+  }
+  .marquee-track {
+    display: inline-flex;
+    animation: marquee 18s linear infinite;
+  }
+  .marquee-track span {
+    font-family: var(--display);
+    font-size: 0.95rem;
+    letter-spacing: 0.18em;
+    color: rgba(248,245,240,0.85);
+    padding: 0 2.5rem;
+  }
+  .marquee-track .dot {
+    color: rgba(248,245,240,0.4);
+    padding: 0;
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ── SECTION COMMON ── */
+  section { position: relative; }
+
+  .section-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  /* ── WHO WE ARE ── */
+  .about {
+    background: var(--white);
+    color: var(--black);
+    padding: 7rem 3rem;
+  }
+
+  .about-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .about .section-label { color: var(--red); }
+
+  .about-title {
+    font-family: var(--display);
+    font-size: clamp(2.8rem, 5vw, 5rem);
+    line-height: 1.0;
+    letter-spacing: 0.01em;
+    color: var(--black);
+    margin-bottom: 1.5rem;
+  }
+
+  .about-body {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #444;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+  }
+  .about-body strong { color: var(--red); font-weight: 600; }
+
+  .about-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--black);
+    text-decoration: none;
+    border-bottom: 2px solid var(--red);
+    padding-bottom: 2px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .about-link:hover { color: var(--red); }
+
+  /* Values grid */
+  .values-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: var(--black);
+  }
+  .value-card {
+    background: var(--light);
+    padding: 2.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    transition: background 0.25s;
+    cursor: default;
+  }
+  .value-card:hover { background: var(--red); }
+  .value-card:hover .value-name,
+  .value-card:hover .value-icon { color: var(--white); }
+
+  .value-icon {
+    font-size: 1.8rem;
+    color: var(--red);
+    transition: color 0.25s;
+  }
+  .value-name {
+    font-family: var(--display);
+    font-size: 1.3rem;
+    letter-spacing: 0.06em;
+    color: var(--black);
+    transition: color 0.25s;
+  }
+
+  /* ── SERVICES ── */
+  .services {
+    background: var(--black);
+    padding: 7rem 3rem;
+  }
+
+  .services-header {
+    max-width: 1200px;
+    margin: 0 auto 4rem;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+
+  .services .section-label { color: var(--red); }
+
+  .services-title {
+    font-family: var(--display);
+    font-size: clamp(2.5rem, 4.5vw, 4.5rem);
+    line-height: 1.0;
+    color: var(--white);
+  }
+
+  .services-intro {
+    font-size: 0.95rem;
+    color: var(--grey);
+    max-width: 340px;
+    line-height: 1.7;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background: #222;
+  }
+
+  .service-card {
+    background: #111;
+    padding: 3rem 2.2rem;
+    position: relative;
+    overflow: hidden;
+    cursor: default;
+    transition: background 0.3s;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 100%; height: 3px;
+    background: var(--red);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .service-card:hover { background: #1a1a1a; }
+  .service-card:hover::before { transform: scaleX(1); }
+
+  .service-num {
+    font-family: var(--display);
+    font-size: 5rem;
+    color: rgba(232,0,28,0.1);
+    line-height: 1;
+    margin-bottom: 1rem;
+    transition: color 0.3s;
+  }
+  .service-card:hover .service-num { color: rgba(232,0,28,0.25); }
+
+  .service-name {
+    font-family: var(--display);
+    font-size: 1.6rem;
+    letter-spacing: 0.04em;
+    color: var(--white);
+    margin-bottom: 0.75rem;
+  }
+
+  .service-desc {
+    font-size: 0.88rem;
+    color: var(--grey);
+    line-height: 1.7;
+  }
+
+  /* ── SPLIT / CREATIVITY ── */
+  .creativity {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 520px;
+  }
+
+  .creativity-visual {
+    background: linear-gradient(135deg, #1a0000 0%, var(--red) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .creativity-visual .bg-o {
+    font-family: var(--display);
+    font-size: 30rem;
+    color: rgba(0,0,0,0.25);
+    line-height: 1;
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    animation: oSpin 20s linear infinite;
+    user-select: none;
+  }
+  @keyframes oSpin {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+
+  .creativity-visual-text {
+    position: relative;
+    z-index: 1;
+    font-family: var(--display);
+    font-size: clamp(3rem, 5vw, 5rem);
+    color: var(--white);
+    text-align: center;
+    line-height: 1.1;
+  }
+
+  .creativity-content {
+    background: var(--light);
+    color: var(--black);
+    padding: 5rem 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+
+  .creativity-content .section-label { color: var(--red); }
+
+  .creativity-content h2 {
+    font-family: var(--display);
+    font-size: clamp(2.2rem, 3.5vw, 3.5rem);
+    line-height: 1.05;
+    color: var(--black);
+  }
+
+  .creativity-content p {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.8;
+  }
+
+  /* ── MEDIA INNOVATION ── */
+  .innovation {
+    background: var(--black);
+    padding: 7rem 3rem;
+  }
+
+  .innovation-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .innovation .section-label { color: var(--red); }
+
+  .innovation-title {
+    font-family: var(--display);
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    color: var(--white);
+    line-height: 1.05;
+    margin-bottom: 1.5rem;
+  }
+
+  .innovation-body {
+    font-size: 0.95rem;
+    color: var(--grey);
+    line-height: 1.8;
+    margin-bottom: 2rem;
+  }
+
+  .stats-row {
+    display: flex;
+    gap: 3rem;
+    margin-top: 3rem;
+  }
+  .stat-item {}
+  .stat-num {
+    font-family: var(--display);
+    font-size: 3.5rem;
+    color: var(--red);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--grey);
+    margin-top: 0.3rem;
+  }
+
+  /* Glowing card */
+  .innovation-card {
+    background: #111;
+    border: 1px solid rgba(232,0,28,0.2);
+    padding: 3.5rem 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .innovation-card::after {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(circle at center, rgba(232,0,28,0.08) 0%, transparent 60%);
+    animation: glowPulse 4s ease-in-out infinite;
+  }
+  @keyframes glowPulse {
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.1); }
+  }
+
+  .innovation-card-title {
+    font-family: var(--display);
+    font-size: 2.2rem;
+    color: var(--white);
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
+  }
+  .innovation-card p {
+    font-size: 0.9rem;
+    color: var(--grey);
+    line-height: 1.8;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── CTA BANNER ── */
+  .cta-banner {
+    background: var(--red);
+    padding: 6rem 3rem;
+    overflow: hidden;
+    position: relative;
+  }
+  .cta-banner::before {
+    content: 'RE-ENERGISE';
+    font-family: var(--display);
+    font-size: 18rem;
+    color: rgba(0,0,0,0.12);
+    position: absolute;
+    right: -2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    white-space: nowrap;
+    pointer-events: none;
+    line-height: 1;
+  }
+
+  .cta-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cta-text {
+    font-family: var(--display);
+    font-size: clamp(2.5rem, 5vw, 5rem);
+    color: var(--white);
+    line-height: 1.0;
+  }
+
+  .btn-cta {
+    flex-shrink: 0;
+    display: inline-block;
+    padding: 1.2rem 2.8rem;
+    background: var(--black);
+    color: var(--white);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 2px solid var(--black);
+    transition: background 0.25s, color 0.25s, border-color 0.25s;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  }
+  .btn-cta:hover {
+    background: transparent;
+    color: var(--black);
+    border-color: var(--white);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #080808;
+    padding: 3.5rem 3rem;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+
+  .footer-logo {
+    font-family: var(--display);
+    font-size: 1.4rem;
+    letter-spacing: 0.08em;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .footer-logo span { color: var(--red); }
+
+  .footer-copy {
+    font-size: 0.75rem;
+    color: rgba(248,245,240,0.3);
+    letter-spacing: 0.06em;
+  }
+
+  .footer-social { display: flex; gap: 1.25rem; }
+  .footer-social a {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(248,245,240,0.35);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-social a:hover { color: var(--red); }
+
+  /* ── SCROLL-REVEAL ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { padding: 0 1.5rem; }
+    .about { padding: 5rem 1.5rem; }
+    .about-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .services { padding: 5rem 1.5rem; }
+    .services-header { flex-direction: column; align-items: flex-start; }
+    .services-grid { grid-template-columns: 1fr; }
+    .creativity { grid-template-columns: 1fr; }
+    .creativity-visual { min-height: 320px; }
+    .creativity-content { padding: 3rem 1.5rem; }
+    .innovation { padding: 5rem 1.5rem; }
+    .innovation-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .cta-banner { padding: 4rem 1.5rem; }
+    .cta-inner { flex-direction: column; align-items: flex-start; }
+    footer { padding: 2.5rem 1.5rem; }
+    .footer-inner { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo"><span>O</span>XYGEN<span>M</span>EDIA</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">Who We Are</a></li>
+    <li><a href="services.html">Our Services</a></li>
+    <li><a href="media-buying.html">Media Buying</a></li>
+    <li><a href="brand-portfolio.html">Brand Portfolio</a></li>
+    <li><a href="pr-films.html">PR &amp; Films</a></li>
+    <li><a href="contact.html">Contact Us</a></li>
+  </ul>
+  <div class="nav-social">
+    <a href="#" title="Facebook">FB</a>
+    <a href="#" title="Instagram">IG</a>
+    <a href="#" title="Twitter">TW</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-wordmark">OXYGEN</div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">Communications &amp; Brand Agency</div>
+    <h1 class="hero-title">
+      Breathing<br/><em>Life</em> Into<br/>Your Brand
+    </h1>
+    <p class="hero-sub">
+      We bring together top-notch industry expertise and intellectual capital to deliver a comprehensive package of communications solutions.
+    </p>
+    <div class="hero-actions">
+      <a href="#" class="btn-primary">View Our Profile</a>
+      <a href="#" class="btn-ghost">Start a Project</a>
+    </div>
+  </div>
+
+  <div class="scroll-line"><span>Scroll</span></div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip" aria-hidden="true">
+  <div class="marquee-track" id="marquee-track">
+    <span>EXPERIENCED</span><span class="dot">✦</span>
+    <span>CREATIVE</span><span class="dot">✦</span>
+    <span>INNOVATIVE</span><span class="dot">✦</span>
+    <span>QUALITY</span><span class="dot">✦</span>
+    <span>BRAND SPECIALISTS</span><span class="dot">✦</span>
+    <span>MEDIA BUYING</span><span class="dot">✦</span>
+    <span>PR &amp; FILMS</span><span class="dot">✦</span>
+    <span>EXPERIENCED</span><span class="dot">✦</span>
+    <span>CREATIVE</span><span class="dot">✦</span>
+    <span>INNOVATIVE</span><span class="dot">✦</span>
+    <span>QUALITY</span><span class="dot">✦</span>
+    <span>BRAND SPECIALISTS</span><span class="dot">✦</span>
+    <span>MEDIA BUYING</span><span class="dot">✦</span>
+    <span>PR &amp; FILMS</span><span class="dot">✦</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about">
+  <div class="about-inner">
+    <div class="reveal">
+      <div class="section-label">Who We Are</div>
+      <h2 class="about-title">Where Bold Ideas Meet Brilliant Execution</h2>
+      <p class="about-body">
+        As our name suggests, we breathe <strong>life into brands</strong> with our creativity and stellar range of intellectual capital. Oxygen Media brings together a wide variety of top-notch industry expertise, offering clients a comprehensive package of communications solutions.
+      </p>
+      <a href="#" class="about-link">Learn More About Us</a>
+    </div>
+
+    <div class="reveal" style="transition-delay:0.15s">
+      <div class="values-grid">
+        <div class="value-card">
+          <div class="value-icon">⭐</div>
+          <div class="value-name">Experienced</div>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">✏️</div>
+          <div class="value-name">Creative</div>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">💡</div>
+          <div class="value-name">Innovative</div>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">🏆</div>
+          <div class="value-name">Quality</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services">
+  <div class="services-header reveal">
+    <div>
+      <div class="section-label">What We Do</div>
+      <h2 class="services-title">Our Core<br/>Services</h2>
+    </div>
+    <p class="services-intro">
+      From print to digital, media buying to PR — we cover every touchpoint of your brand's communication ecosystem.
+    </p>
+  </div>
+
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-num">01</div>
+      <div class="service-name">Print Media</div>
+      <p class="service-desc">From billboards to brochures, we craft print campaigns that demand attention and leave a lasting impression.</p>
+    </div>
+    <div class="service-card reveal" style="transition-delay:0.1s">
+      <div class="service-num">02</div>
+      <div class="service-name">Media Buying</div>
+      <p class="service-desc">Strategic placement across broadcast, digital, and outdoor channels to maximise your reach and ROI.</p>
+    </div>
+    <div class="service-card reveal" style="transition-delay:0.2s">
+      <div class="service-num">03</div>
+      <div class="service-name">PR &amp; Films</div>
+      <p class="service-desc">Compelling stories and cinematic productions that build brand reputation and engage your audience.</p>
+    </div>
+    <div class="service-card reveal" style="transition-delay:0.05s">
+      <div class="service-num">04</div>
+      <div class="service-name">Brand Strategy</div>
+      <p class="service-desc">Deep-dive brand workshops and identity systems that align your vision with what your audience needs.</p>
+    </div>
+    <div class="service-card reveal" style="transition-delay:0.15s">
+      <div class="service-num">05</div>
+      <div class="service-name">Digital Media</div>
+      <p class="service-desc">Social, search, and content ecosystems that grow brand presence and drive measurable conversions.</p>
+    </div>
+    <div class="service-card reveal" style="transition-delay:0.25s">
+      <div class="service-num">06</div>
+      <div class="service-name">Events &amp; Activations</div>
+      <p class="service-desc">Experiential campaigns that bring your brand into the real world and create unforgettable connections.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CREATIVITY SPLIT -->
+<div class="creativity">
+  <div class="creativity-visual">
+    <div class="bg-o">O</div>
+    <div class="creativity-visual-text">Creative<br/>Ideas<br/>Ignite<br/>Brands</div>
+  </div>
+  <div class="creativity-content reveal">
+    <div class="section-label">Our Approach</div>
+    <h2>Creativity Is the Lifeblood of Progress</h2>
+    <p>
+      Creative ideas have the potential to revolutionise industries, solve complex problems, and bring about positive change. We channel that energy into every brand we work with — turning strategy into stories people remember.
+    </p>
+    <a href="#" class="about-link">See Our Portfolio</a>
+  </div>
+</div>
+
+<!-- INNOVATION -->
+<section class="innovation">
+  <div class="innovation-inner">
+    <div class="reveal">
+      <div class="section-label">Media Innovation</div>
+      <h2 class="innovation-title">Where Technology &amp; Creativity Converge</h2>
+      <p class="innovation-body">
+        We redefine communication and shape the future of information sharing. Our team combines cutting-edge media technology with imaginative storytelling to deliver campaigns that resonate across every platform.
+      </p>
+      <a href="#" class="btn-primary">Explore Our Work</a>
+
+      <div class="stats-row">
+        <div class="stat-item">
+          <div class="stat-num">15+</div>
+          <div class="stat-label">Years Active</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">200+</div>
+          <div class="stat-label">Brands Served</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">50+</div>
+          <div class="stat-label">Awards Won</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="innovation-card reveal" style="transition-delay:0.2s">
+      <div class="innovation-card-title">Broadcast to Digital — We Do It All</div>
+      <p>
+        From SABC broadcast campaigns to viral digital content, our team navigates every media landscape with expertise. We understand how South African audiences consume media and we use that knowledge to drive results for your brand.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section class="cta-banner">
+  <div class="cta-inner">
+    <div class="cta-text reveal">Let Us Help You<br/>Re-Energise<br/>Your Brand</div>
+    <a href="#" class="btn-cta">Start a Project</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <a href="#" class="footer-logo"><span>O</span>XYGEN<span>M</span>EDIA</a>
+    <div class="footer-copy">© Copyright 2025 Oxygen Media. All rights reserved.</div>
+    <div class="footer-social">
+      <a href="#">Facebook</a>
+      <a href="#">Instagram</a>
+      <a href="#">Twitter</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => io.observe(el));
+
+  // Nav colour on scroll
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 60) {
+      nav.style.background = 'rgba(13,13,13,0.97)';
+      nav.style.borderBottomColor = 'rgba(255,255,255,0.08)';
+    } else {
+      nav.style.background = 'rgba(13,13,13,0.85)';
+      nav.style.borderBottomColor = 'rgba(255,255,255,0.06)';
+    }
+  });
+
+  // Duplicate marquee for seamless loop
+  const track = document.getElementById('marquee-track');
+  track.innerHTML += track.innerHTML;
+</script>
+</body>
+</html>
