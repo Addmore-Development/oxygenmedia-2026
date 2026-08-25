@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oxygen Films — Production &amp; Videography | Oxygen Media</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#14100F; --ink-soft:#1F1A18;
+  --red:#E8283B; --red-deep:#B4152A;
+  --cyan:#00E6C3; --amber:#FFB238;
+  --paper:#FBF7F1; --mute:#8A8378;
+  --line: rgba(20,16,15,0.1); --line-light: rgba(251,247,241,0.16);
+  --display:'Archivo Black',sans-serif; --body:'Inter',sans-serif; --mono:'Space Mono',monospace;
+  --container:1180px; --radius:16px;
+}
+*,*::before,*::after{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);-webkit-font-smoothing:antialiased;}
+img{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+ul{margin:0;padding:0;list-style:none;}
+h1,h2,h3{margin:0;font-family:var(--display);line-height:1.05;letter-spacing:-0.01em;}
+p{margin:0;}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important;}}
+::selection{background:var(--red);color:var(--paper);}
+a:focus-visible,button:focus-visible{outline:3px solid var(--cyan);outline-offset:3px;border-radius:4px;}
+
+/* header */
+.site-header{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:18px clamp(20px,4vw,56px);background:rgba(251,247,241,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+.logo{font-family:var(--display);font-size:1.1rem;letter-spacing:.02em;color:var(--ink);}
+.logo span{color:var(--red);}
+.main-nav{display:flex;gap:clamp(14px,2vw,28px);font-size:.92rem;font-weight:600;}
+.main-nav a{position:relative;padding:6px 2px;color:var(--ink);opacity:.75;transition:opacity .2s;}
+.main-nav a:hover,.main-nav a.active{opacity:1;}
+.main-nav a.active::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--red);}
+.socials{display:flex;gap:14px;font-family:var(--mono);font-size:.72rem;font-weight:700;}
+.socials a{width:30px;height:30px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.socials a:hover{background:var(--ink);color:var(--paper);border-color:var(--ink);}
+.nav-toggle{display:none;background:none;border:none;cursor:pointer;width:32px;height:22px;flex-direction:column;justify-content:space-between;padding:0;}
+.nav-toggle span{display:block;height:2px;background:var(--ink);border-radius:2px;}
+
+/* hero */
+.hero{position:relative;min-height:80vh;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;padding:0 clamp(20px,4vw,56px) 80px;}
+.hero-media{position:absolute;inset:0;z-index:0;}
+.hero-media img{width:100%;height:100%;object-fit:cover;filter:saturate(1.05) contrast(1.05);}
+.hero-scrim{position:absolute;inset:0;background:linear-gradient(0deg,rgba(20,16,15,.94) 0%,rgba(20,16,15,.72) 42%,rgba(20,16,15,.4) 70%,rgba(232,40,59,.28) 100%);}
+.rec-badge{position:absolute;top:28px;right:clamp(20px,4vw,56px);z-index:2;display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.72rem;font-weight:700;letter-spacing:.14em;color:var(--paper);border:1px solid var(--line-light);padding:7px 14px;border-radius:999px;}
+.rec-dot{width:8px;height:8px;border-radius:50%;background:var(--red);box-shadow:0 0 0 0 rgba(232,40,59,.7);animation:pulse 1.4s infinite;}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(232,40,59,.55);}70%{box-shadow:0 0 0 10px rgba(232,40,59,0);}100%{box-shadow:0 0 0 0 rgba(232,40,59,0);}}
+.hero-body{position:relative;z-index:2;max-width:800px;}
+.eyebrow{display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:.78rem;letter-spacing:.22em;color:var(--cyan);margin-bottom:20px;font-weight:700;}
+.eyebrow-rule{width:38px;height:2px;background:var(--cyan);display:inline-block;}
+.hero-title{color:var(--paper);font-size:clamp(2.2rem,5.6vw,4.2rem);text-transform:uppercase;}
+.hero-title .hl{color:var(--red);}
+.hero-sub{margin-top:24px;max-width:50ch;color:rgba(251,247,241,.82);font-size:1.05rem;line-height:1.6;}
+
+/* filmstrip signature element */
+.filmstrip{position:absolute;left:0;right:0;bottom:0;z-index:2;display:flex;height:34px;overflow:hidden;}
+.filmstrip span{
+  flex:0 0 34px; height:34px; margin-right:16px; border-radius:4px;
+  background:repeating-linear-gradient(90deg, rgba(251,247,241,.9) 0 6px, transparent 6px 34px);
+  opacity:.5;
+}
+.filmstrip-track{display:flex; animation:scrollstrip 14s linear infinite;}
+@keyframes scrollstrip{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+/* generic section head */
+.section-head{max-width:var(--container);margin:0 auto 40px;padding:0 clamp(20px,4vw,56px);text-align:center;}
+.tag{font-family:var(--mono);font-size:.78rem;letter-spacing:.12em;color:var(--red);font-weight:700;display:block;margin-bottom:14px;}
+.section-head h2{font-size:clamp(1.8rem,3.4vw,2.6rem);text-transform:uppercase;}
+.section-lede{max-width:720px;margin:20px auto 0;color:var(--mute);font-size:1.02rem;line-height:1.65;}
+
+/* intro */
+.intro{padding:100px 0 30px;}
+
+/* watch our work */
+.reel{padding:50px 0 100px;}
+.reel-grid{max-width:var(--container);margin:0 auto;padding:0 clamp(20px,4vw,56px);display:grid;grid-template-columns:repeat(4,1fr);gap:22px;}
+.reel-card{opacity:0;transform:translateY(24px);transition:opacity .55s ease, transform .55s ease;}
+.reel-card.is-visible{opacity:1;transform:translateY(0);}
+.reel-frame{
+  position:relative; aspect-ratio:4/5; border-radius:14px; overflow:hidden;
+  background:linear-gradient(155deg,var(--ink),#000);
+}
+.reel-frame img{width:100%;height:100%;object-fit:cover;opacity:.75;transition:transform .5s, opacity .3s;}
+.reel-card:hover .reel-frame img{transform:scale(1.05);opacity:.55;}
+.play-btn{
+  position:absolute; inset:0; margin:auto; width:56px; height:56px; border-radius:50%;
+  background:var(--red); display:flex; align-items:center; justify-content:center;
+  color:var(--paper); font-size:0; border:none; cursor:pointer; transition:transform .25s, background .25s;
+}
+.play-btn::after{content:"";border-style:solid;border-width:9px 0 9px 15px;border-color:transparent transparent transparent var(--paper);margin-left:4px;}
+.reel-card:hover .play-btn{transform:scale(1.1); background:var(--amber);}
+.reel-timecode{
+  position:absolute; left:12px; bottom:12px; font-family:var(--mono); font-size:.7rem; font-weight:700;
+  color:var(--paper); background:rgba(0,0,0,.5); padding:4px 8px; border-radius:6px;
+}
+.reel-label{margin-top:14px; font-weight:700; font-size:.95rem; text-align:center;}
+
+/* red band section headers reused across sections */
+.band{background:linear-gradient(155deg,var(--red),var(--red-deep));border-radius:var(--radius);max-width:var(--container);margin:0 auto 44px;padding:26px clamp(20px,4vw,56px);text-align:center;}
+.band h2{color:var(--paper);font-size:clamp(1.5rem,2.6vw,2rem);text-transform:uppercase;}
+
+.card-section{padding:20px 0 90px;}
+.card-grid{max-width:var(--container);margin:0 auto;padding:0 clamp(20px,4vw,56px);display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.info-card{
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;
+  opacity:0;transform:translateY(24px);transition:opacity .55s ease, transform .55s ease, box-shadow .3s ease;
+}
+.info-card.is-visible{opacity:1;transform:translateY(0);}
+.info-card:hover{box-shadow:0 20px 44px -22px rgba(20,16,15,.28);}
+.info-card .card-media{aspect-ratio:16/10;overflow:hidden;}
+.info-card .card-media img{width:100%;height:100%;object-fit:cover;transition:transform .5s;}
+.info-card:hover .card-media img{transform:scale(1.06);}
+.info-card .card-body{padding:26px 24px 30px;}
+.info-card h3{color:var(--red);font-family:var(--body);font-weight:700;font-size:1.08rem;text-transform:none;margin-bottom:14px;}
+.info-card li{position:relative;padding-left:16px;margin-bottom:8px;font-size:.92rem;line-height:1.5;color:var(--ink);opacity:.82;}
+.info-card li::before{content:"›";position:absolute;left:0;color:var(--red);font-weight:700;}
+
+/* closing */
+.closing{max-width:900px;margin:0 auto;padding:20px clamp(20px,4vw,56px) 110px;text-align:center;}
+.closing-kicker{font-family:var(--mono);color:var(--red);font-weight:700;letter-spacing:.14em;font-size:.82rem;margin-bottom:18px;}
+.closing-statement{font-size:clamp(1.1rem,2vw,1.4rem);line-height:1.6;font-weight:500;color:var(--ink);}
+.closing-cta{margin-top:32px;display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-weight:700;font-size:.85rem;letter-spacing:.06em;color:var(--paper);background:var(--ink);padding:15px 26px;border-radius:999px;transition:transform .25s,background .25s;}
+.closing-cta:hover{background:var(--red);transform:translateY(-2px);}
+.closing-cta span{transition:transform .25s;}
+.closing-cta:hover span{transform:translateX(4px);}
+
+/* footer */
+.site-footer{background:var(--ink);color:var(--paper);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;padding:36px clamp(20px,4vw,56px);}
+.site-footer .logo{color:var(--paper);}
+.site-footer p{font-size:.85rem;opacity:.7;}
+.site-footer p span{color:var(--red);}
+.site-footer .socials a{border-color:var(--line-light);color:var(--paper);}
+
+.back-to-top{position:fixed;right:22px;bottom:22px;z-index:60;width:48px;height:48px;border-radius:50%;background:var(--red);color:var(--paper);border:none;cursor:pointer;font-size:1.2rem;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 26px -8px rgba(232,40,59,.6);opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .3s,transform .3s,visibility .3s,background .2s;}
+.back-to-top.is-visible{opacity:1;visibility:visible;transform:translateY(0);}
+.back-to-top:hover{background:#000;}
+
+@media (max-width:980px){.reel-grid{grid-template-columns:repeat(2,1fr);} .card-grid{grid-template-columns:1fr;}}
+@media (max-width:760px){
+  .main-nav,.socials{display:none;}
+  .nav-toggle{display:flex;}
+  .reel-grid{grid-template-columns:1fr;}
+  .main-nav.is-open{position:absolute;top:100%;left:0;right:0;background:var(--paper);border-bottom:1px solid var(--line);flex-direction:column;padding:18px clamp(20px,4vw,56px);gap:16px;}
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="/" class="logo">OXYGEN<span>MEDIA</span></a>
+  <nav class="main-nav">
+    <a href="/">Home</a>
+    <a href="/who-we-are.html">Who We Are</a>
+    <a href="/our-services.html">Our Services</a>
+    <a href="/media-buying.html">Media Buying</a>
+    <a href="/us-onboard.html">Us Onboard</a>
+    <a href="/brand-portfolio.html">Brand Portfolio</a>
+    <a href="/pr_films.html" class="active">Pr and Films</a>
+    <a href="/contact-us.html">Contact Us</a>
+  </nav>
+  <div class="socials">
+    <a href="#" aria-label="Facebook">FB</a>
+    <a href="#" aria-label="Instagram">IG</a>
+    <a href="#" aria-label="Twitter">X</a>
+  </div>
+  <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-media">
+    <img src="https://images.unsplash.com/photo-1500354178147-83c3d2c1c94e?w=1600&q=80" alt="">
+    <div class="hero-scrim"></div>
+  </div>
+  <div class="rec-badge" aria-hidden="true"><span class="rec-dot"></span> REC</div>
+
+  <div class="hero-body">
+    <p class="eyebrow"><span class="eyebrow-rule"></span>OXYGEN FILMS</p>
+    <h1 class="hero-title">Production &amp;<br>videography<br><span class="hl">division.</span></h1>
+    <p class="hero-sub">We shoot, cut, and score the stories behind the media strategy — corporate, commercial, and documentary work built to hold an audience.</p>
+  </div>
+
+  <div class="filmstrip" aria-hidden="true">
+    <div class="filmstrip-track">
+      <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+    </div>
+  </div>
+</section>
+
+<!-- INTRO -->
+<section class="intro">
+  <div class="section-head">
+    <span class="tag">// oxygen films</span>
+    <h2>High‑quality video, on brief</h2>
+    <p class="section-lede">Our film production and videography team specializes in creating visual content for a range of industries and applications — focused on producing work that engages, informs, and inspires audiences.</p>
+  </div>
+</section>
+
+<!-- WATCH OUR WORK -->
+<section class="reel">
+  <div class="section-head">
+    <span class="tag">// showreel</span>
+    <h2>Watch our work</h2>
+  </div>
+  <div class="reel-grid">
+
+    <article class="reel-card" data-reveal>
+      <div class="reel-frame">
+        <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=600&q=80" alt="">
+        <button class="play-btn" aria-label="Play Corporate Showreel"></button>
+        <span class="reel-timecode">2:14</span>
+      </div>
+      <p class="reel-label">Corporate Showreel</p>
+    </article>
+
+    <article class="reel-card" data-reveal>
+      <div class="reel-frame">
+        <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&q=80" alt="">
+        <button class="play-btn" aria-label="Play Event Highlights"></button>
+        <span class="reel-timecode">0:39</span>
+      </div>
+      <p class="reel-label">Event Highlights</p>
+    </article>
+
+    <article class="reel-card" data-reveal>
+      <div class="reel-frame">
+        <img src="https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=600&q=80" alt="">
+        <button class="play-btn" aria-label="Play Behind The Scenes"></button>
+        <span class="reel-timecode">0:14</span>
+      </div>
+      <p class="reel-label">Behind The Scenes</p>
+    </article>
+
+    <article class="reel-card" data-reveal>
+      <div class="reel-frame">
+        <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&q=80" alt="">
+        <button class="play-btn" aria-label="Play Brand Campaign"></button>
+        <span class="reel-timecode">1:02</span>
+      </div>
+      <p class="reel-label">Brand Campaign</p>
+    </article>
+
+  </div>
+</section>
+
+<!-- SERVICE OFFERING -->
+<section class="card-section">
+  <div class="band"><h2>Service Offering</h2></div>
+  <div class="card-grid">
+
+    <article class="info-card" data-reveal>
+      <div class="card-media"><img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=700&q=80" alt="Film and video production planning session"></div>
+      <div class="card-body">
+        <h3>Film and Video Production</h3>
+        <ul>
+          <li>Concept development and scriptwriting</li>
+          <li>Pre‑production planning and coordination</li>
+          <li>Filming and video production</li>
+          <li>Post‑production editing and visual effects</li>
+          <li>Sound design and music composition</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="info-card" data-reveal>
+      <div class="card-media"><img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=700&q=80" alt="Videography workspace"></div>
+      <div class="card-body">
+        <h3>Videography Services</h3>
+        <ul>
+          <li>Corporate video production</li>
+          <li>Event videography (weddings, conferences, etc.)</li>
+          <li>Commercial video production</li>
+          <li>Music video production</li>
+          <li>Documentary filmmaking</li>
+          <li>Live streaming and online video content creation</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="info-card" data-reveal>
+      <div class="card-media"><img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=700&q=80" alt="Brand positioning strategy"></div>
+      <div class="card-body">
+        <h3>Brand Positioning</h3>
+        <ul>
+          <li>Strategic identity that stands out and drives loyalty</li>
+        </ul>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- INDUSTRIES WE SERVE -->
+<section class="card-section">
+  <div class="band"><h2>Industries We Serve</h2></div>
+  <div class="card-grid">
+
+    <article class="info-card" data-reveal>
+      <div class="card-media"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=700&q=80" alt="Corporate marketing planning"></div>
+      <div class="card-body">
+        <h3>Corporate Sector</h3>
+        <ul>
+          <li>Company profiles and promotional videos</li>
+          <li>Training and educational videos</li>
+          <li>Marketing and advertising campaigns</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="info-card" data-reveal>
+      <div class="card-media"><img src="https://images.unsplash.com/photo-1519671482749-fd09be6ccebf?w=700&q=80" alt="Entertainment industry event"></div>
+      <div class="card-body">
+        <h3>Entertainment Industry</h3>
+        <ul>
+          <li>Film and television production</li>
+          <li>Music videos and live performances</li>
+          <li>Commercials and advertising campaigns</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="info-card" data-reveal>
+      <div class="card-media"><img src="https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=700&q=80" alt="Film reels and camera equipment"></div>
+      <div class="card-body">
+        <h3>Non‑Profit and Education Sector</h3>
+        <ul>
+          <li>Documentary filmmaking and social impact projects</li>
+          <li>Educational videos and online courses</li>
+          <li>Fundraising and awareness campaigns</li>
+        </ul>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- WHY WORK WITH US -->
+<section class="card-section">
+  <div class="band"><h2>Why Work With Oxygen Films?</h2></div>
+  <div class="card-grid">
+
+    <article class="info-card" data-reveal>
+      <div class="card-media"><img src="https://images.unsplash.com/photo-1502920917128-1aa500764cbd?w=700&q=80" alt="Photographer with camera"></div>
+      <div class="card-body">
+        <h3>High‑Quality Content</h3>
+        <ul>
+          <li>Professional equipment and expertise</li>
+          <li>Attention to detail and creative vision</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="info-card" data-reveal>
+      <div class="card-media"><img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=700&q=80" alt="Editor working on footage"></div>
+      <div class="card-body">
+        <h3>Engaging Storytelling</h3>
+        <ul>
+          <li>Compelling narratives and storytelling techniques</li>
+          <li>Emotional connection with audiences</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="info-card" data-reveal>
+      <div class="card-media"><img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=700&q=80" alt="Creative team working on brand campaign"></div>
+      <div class="card-body">
+        <h3>Increased Brand Awareness</h3>
+        <ul>
+          <li>Effective marketing and advertising campaigns</li>
+          <li>Enhanced brand reputation and credibility</li>
+        </ul>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="closing">
+  <p class="closing-kicker">Ready to shoot?</p>
+  <p class="closing-statement">Tell us what the story needs to do — build trust, launch a product, capture a moment — and we'll bring the crew.</p>
+  <a href="/contact-us.html" class="closing-cta">Book a consultation <span>→</span></a>
+</section>
+
+<footer class="site-footer">
+  <a href="/" class="logo">OXYGEN<span>MEDIA</span></a>
+  <p>© Copyright 2026 <span>Oxygen Media.</span></p>
+  <div class="socials">
+    <a href="#" aria-label="Facebook">FB</a>
+    <a href="#" aria-label="Twitter">X</a>
+    <a href="#" aria-label="Instagram">IG</a>
+  </div>
+</footer>
+
+<button id="backToTop" class="back-to-top" aria-label="Back to top">↑</button>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+  const revealEls = document.querySelectorAll('[data-reveal]');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const siblings = Array.from(entry.target.parentElement.children);
+          const idx = siblings.indexOf(entry.target);
+          entry.target.style.transitionDelay = `${idx * 90}ms`;
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.16 });
+    revealEls.forEach(el => io.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('is-visible'));
+  }
+
+  const backToTop = document.getElementById('backToTop');
+  const toggleBackToTop = () => backToTop.classList.toggle('is-visible', window.scrollY > 480);
+  toggleBackToTop();
+  window.addEventListener('scroll', toggleBackToTop, { passive: true });
+  backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  const navToggle = document.querySelector('.nav-toggle');
+  const mainNav = document.querySelector('.main-nav');
+  if (navToggle && mainNav) {
+    navToggle.addEventListener('click', () => {
+      const isOpen = mainNav.classList.toggle('is-open');
+      navToggle.setAttribute('aria-expanded', String(isOpen));
+      mainNav.style.display = isOpen ? 'flex' : '';
+    });
+    mainNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mainNav.classList.remove('is-open');
+        mainNav.style.display = '';
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
+  /* play button: simple visual feedback (no real video source wired up) */
+  document.querySelectorAll('.play-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      btn.style.transform = 'scale(0.9)';
+      setTimeout(() => { btn.style.transform = ''; }, 150);
+    });
+  });
+});
+</script>
+</body>
+</html>
