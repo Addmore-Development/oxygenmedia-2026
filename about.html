@@ -25,12 +25,10 @@
 
   /* ── NAV ── */
   nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    position: absolute; top: 0; left: 0; right: 0; z-index: 5;
     display: flex; align-items: center; justify-content: space-between;
     padding: 1.25rem 3rem;
-    background: rgba(13,13,13,0.95);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(255,255,255,0.06);
+    background: transparent;
   }
   .nav-logo { font-family: var(--display); font-size: 1.5rem; letter-spacing: 0.08em; color: var(--white); text-decoration: none; }
   .nav-logo span { color: var(--red); }
@@ -280,8 +278,7 @@
     background: var(--red); padding: 6rem 3rem; overflow: hidden; position: relative;
   }
   .cta-banner::before {
-    content: 'UNMISSABLE';
-    font-family: var(--display); font-size: 16rem; color: rgba(0,0,0,0.12);
+    content: 'UNMISSABLE'; font-family: var(--display); font-size: 16rem; color: rgba(0,0,0,0.12);
     position: absolute; right: -1rem; top: 50%; transform: translateY(-50%);
     white-space: nowrap; pointer-events: none; line-height: 1;
   }
@@ -297,15 +294,20 @@
   }
   .btn-cta:hover { background: transparent; color: var(--black); border-color: rgba(0,0,0,0.4); }
 
-  /* ── FOOTER ── */
-  footer { background: #080808; padding: 3.5rem 3rem; border-top: 1px solid rgba(255,255,255,0.05); }
-  .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 2rem; }
-  .footer-logo { font-family: var(--display); font-size: 1.4rem; letter-spacing: 0.08em; color: var(--white); text-decoration: none; }
+  /* ── FOOTER (cream) ── */
+  footer { background: var(--white); padding: 3.5rem 3rem 2rem; border-top: 1px solid rgba(13,13,13,0.08); text-align: center; }
+  .footer-inner { max-width: 1200px; margin: 0 auto; }
+  .footer-logo { display: inline-block; font-family: var(--display); font-size: 1.4rem; letter-spacing: 0.08em; color: var(--black); text-decoration: none; margin-bottom: 1.75rem; }
   .footer-logo span { color: var(--red); }
-  .footer-copy { font-size: 0.75rem; color: rgba(248,245,240,0.3); letter-spacing: 0.06em; }
-  .footer-social { display: flex; gap: 1.25rem; }
-  .footer-social a { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(248,245,240,0.35); text-decoration: none; transition: color 0.2s; }
-  .footer-social a:hover { color: var(--red); }
+  .footer-meta { display: flex; align-items: center; justify-content: center; gap: 1.6rem; flex-wrap: wrap; font-size: 0.85rem; font-weight: 600; color: var(--black); margin-bottom: 1.5rem; }
+  .footer-meta .hours { color: var(--red); }
+  .footer-nav { display: flex; justify-content: center; gap: clamp(14px,2.4vw,26px); flex-wrap: wrap; margin-bottom: 2rem; }
+  .footer-nav a { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--black); opacity: 0.72; text-decoration: none; transition: opacity 0.2s, color 0.2s; }
+  .footer-nav a:hover { opacity: 1; color: var(--red); }
+  .footer-copy { font-size: 0.75rem; color: var(--grey); letter-spacing: 0.06em; margin-bottom: 1.5rem; }
+  .footer-social { display: flex; gap: 1rem; justify-content: center; }
+  .footer-social a { width: 32px; height: 32px; border-radius: 50%; border: 1px solid rgba(13,13,13,0.15); display: flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; color: var(--black); text-decoration: none; transition: all 0.2s; }
+  .footer-social a:hover { background: var(--red); border-color: var(--red); color: var(--white); }
 
   /* ── REVEAL ── */
   .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
@@ -332,27 +334,27 @@
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <a href="oxygenmedia-homepage.html" class="nav-logo"><span>O</span>XYGEN<span>M</span>EDIA</a>
-  <ul class="nav-links">
-    <li><a href="oxygenmedia-homepage.html">Home</a></li>
-    <li><a href="#" class="active">Who We Are</a></li>
-    <li><a href="#">Our Services</a></li>
-    <li><a href="#">Media Buying</a></li>
-    <li><a href="#">Brand Portfolio</a></li>
-    <li><a href="#">PR &amp; Films</a></li>
-    <li><a href="#">Contact Us</a></li>
-  </ul>
-  <div class="nav-social">
-    <a href="#">FB</a>
-    <a href="#">IG</a>
-    <a href="#">TW</a>
-  </div>
-</nav>
-
 <!-- PAGE HERO -->
 <section class="page-hero">
+  <!-- NAV -->
+  <nav>
+    <a href="oxygenmedia-homepage.html" class="nav-logo"><span>O</span>XYGEN<span>M</span>EDIA</a>
+    <ul class="nav-links">
+      <li><a href="oxygenmedia-homepage.html">Home</a></li>
+      <li><a href="#" class="active">Who We Are</a></li>
+      <li><a href="#">Our Services</a></li>
+      <li><a href="#">Media Buying</a></li>
+      <li><a href="#">Brand Portfolio</a></li>
+      <li><a href="#">PR &amp; Films</a></li>
+      <li><a href="#">Contact Us</a></li>
+    </ul>
+    <div class="nav-social">
+      <a href="#">FB</a>
+      <a href="#">IG</a>
+      <a href="#">TW</a>
+    </div>
+  </nav>
+
   <div class="page-hero-bg"></div>
   <div class="page-hero-wordmark">MEDIA</div>
   <div class="page-hero-content">
@@ -631,11 +633,24 @@
 <footer>
   <div class="footer-inner">
     <a href="oxygenmedia-homepage.html" class="footer-logo"><span>O</span>XYGEN<span>M</span>EDIA</a>
-    <div class="footer-copy">© Copyright 2025 Oxygen Media. All rights reserved.</div>
+    <div class="footer-meta">
+      <span class="phone">+27 82 371 7340</span>
+      <span class="hours">Melville, Johannesburg</span>
+    </div>
+    <nav class="footer-nav">
+      <a href="oxygenmedia-homepage.html">Home</a>
+      <a href="#">Who We Are</a>
+      <a href="#">Our Services</a>
+      <a href="#">Media Buying</a>
+      <a href="#">Brand Portfolio</a>
+      <a href="#">PR &amp; Films</a>
+      <a href="#">Contact Us</a>
+    </nav>
+    <div class="footer-copy">© Copyright 2026 Oxygen Media. All rights reserved.</div>
     <div class="footer-social">
-      <a href="#">Facebook</a>
-      <a href="#">Instagram</a>
-      <a href="#">Twitter</a>
+      <a href="#" aria-label="Facebook">FB</a>
+      <a href="#" aria-label="Instagram">IG</a>
+      <a href="#" aria-label="Twitter">TW</a>
     </div>
   </div>
 </footer>
