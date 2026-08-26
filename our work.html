@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Work — Oxygen Media</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#14100F; --ink-soft:#1F1A18;
+  --red:#E8283B; --red-deep:#B4152A;
+  --cyan:#00E6C3; --amber:#FFB238;
+  --paper:#FBF7F1; --mute:#8A8378;
+  --line: rgba(20,16,15,0.1); --line-light: rgba(251,247,241,0.16);
+  --display:'Archivo Black',sans-serif; --body:'Inter',sans-serif; --mono:'Space Mono',monospace;
+  --container:1180px; --radius:16px;
+}
+*,*::before,*::after{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);-webkit-font-smoothing:antialiased;}
+img{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+ul{margin:0;padding:0;list-style:none;}
+h1,h2,h3{margin:0;font-family:var(--display);line-height:1.05;letter-spacing:-0.01em;}
+p{margin:0;}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important;}}
+::selection{background:var(--red);color:var(--paper);}
+a:focus-visible,button:focus-visible{outline:3px solid var(--cyan);outline-offset:3px;border-radius:4px;}
+
+/* header */
+.site-header{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:18px clamp(20px,4vw,56px);background:rgba(251,247,241,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+.logo{font-family:var(--display);font-size:1.1rem;letter-spacing:.02em;color:var(--ink);}
+.logo span{color:var(--red);}
+.main-nav{display:flex;gap:clamp(14px,2vw,28px);font-size:.92rem;font-weight:600;}
+.main-nav a{position:relative;padding:6px 2px;color:var(--ink);opacity:.75;transition:opacity .2s;}
+.main-nav a:hover,.main-nav a.active{opacity:1;}
+.main-nav a.active::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--red);}
+.socials{display:flex;gap:14px;font-family:var(--mono);font-size:.72rem;font-weight:700;}
+.socials a{width:30px;height:30px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.socials a:hover{background:var(--ink);color:var(--paper);border-color:var(--ink);}
+.nav-toggle{display:none;background:none;border:none;cursor:pointer;width:32px;height:22px;flex-direction:column;justify-content:space-between;padding:0;}
+.nav-toggle span{display:block;height:2px;background:var(--ink);border-radius:2px;}
+
+/* hero */
+.hero{position:relative;min-height:64vh;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;padding:0 clamp(20px,4vw,56px) 64px;}
+.hero-media{position:absolute;inset:0;z-index:0;}
+.hero-media img{width:100%;height:100%;object-fit:cover;filter:saturate(1.05);}
+.hero-scrim{position:absolute;inset:0;background:linear-gradient(0deg,rgba(20,16,15,.94) 0%,rgba(20,16,15,.7) 45%,rgba(20,16,15,.35) 75%,rgba(232,40,59,.25) 100%);}
+.onair-badge{position:absolute;top:28px;right:clamp(20px,4vw,56px);z-index:2;display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.72rem;font-weight:700;letter-spacing:.14em;color:var(--paper);border:1px solid var(--line-light);padding:7px 14px;border-radius:999px;}
+.onair-dot{width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 0 0 rgba(0,230,195,.7);animation:pulse 1.6s infinite;}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(0,230,195,.55);}70%{box-shadow:0 0 0 10px rgba(0,230,195,0);}100%{box-shadow:0 0 0 0 rgba(0,230,195,0);}}
+.hero-body{position:relative;z-index:2;max-width:760px;}
+.eyebrow{display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:.78rem;letter-spacing:.22em;color:var(--cyan);margin-bottom:20px;font-weight:700;}
+.eyebrow-rule{width:38px;height:2px;background:var(--cyan);display:inline-block;}
+.hero-title{color:var(--paper);font-size:clamp(2.2rem,5.6vw,4rem);text-transform:uppercase;}
+.hero-title .hl{color:var(--red);}
+.hero-sub{margin-top:22px;max-width:52ch;color:rgba(251,247,241,.82);font-size:1.02rem;line-height:1.6;}
+.hero-counter{position:absolute;right:clamp(20px,4vw,56px);bottom:64px;z-index:2;text-align:right;}
+.hero-counter .num{font-family:var(--mono);font-size:clamp(2.6rem,6vw,4.2rem);font-weight:700;color:var(--paper);line-height:1;}
+.hero-counter .lbl{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;color:var(--cyan);margin-top:6px;}
+@media (max-width:720px){.hero-counter{display:none;}}
+
+/* filter bar */
+.filters{max-width:var(--container);margin:0 auto;padding:54px clamp(20px,4vw,56px) 0;}
+.filters-head{display:flex;align-items:baseline;gap:22px;margin-bottom:26px;flex-wrap:wrap;}
+.tag{font-family:var(--mono);font-size:.78rem;letter-spacing:.12em;color:var(--red);font-weight:700;white-space:nowrap;}
+.filters-head h2{font-size:clamp(1.6rem,3vw,2.2rem);text-transform:uppercase;}
+.filter-chips{display:flex;flex-wrap:wrap;gap:10px;}
+.chip{font-family:var(--mono);font-size:.78rem;font-weight:700;letter-spacing:.04em;padding:9px 18px;border-radius:999px;border:1px solid var(--line);background:#fff;cursor:pointer;transition:all .2s;color:var(--ink);}
+.chip:hover{border-color:var(--red);}
+.chip.is-active{background:var(--ink);color:var(--paper);border-color:var(--ink);}
+
+/* portfolio grid */
+.portfolio{max-width:var(--container);margin:0 auto;padding:34px clamp(20px,4vw,56px) 110px;}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
+.case{
+  position:relative;border-radius:var(--radius);overflow:hidden;aspect-ratio:4/5;
+  border:1px solid var(--line);background:#fff;
+  opacity:0;transform:translateY(24px);
+  transition:opacity .55s ease, transform .55s ease, box-shadow .3s ease;
+}
+.case.is-visible{opacity:1;transform:translateY(0);}
+.case:hover{box-shadow:0 20px 44px -20px rgba(20,16,15,.3);}
+.case[hidden]{display:none;}
+.case-media{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:26px;text-align:center;}
+.case-media img{width:100%;height:100%;object-fit:cover;}
+.case-mark{font-family:var(--display);font-size:1.05rem;letter-spacing:.02em;line-height:1.2;color:var(--paper);text-transform:uppercase;}
+.case-cat{
+  position:absolute;top:14px;left:14px;z-index:2;
+  font-family:var(--mono);font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--paper);background:rgba(20,16,15,.55);backdrop-filter:blur(4px);
+  padding:5px 10px;border-radius:999px;
+}
+.case-info{
+  position:absolute;left:14px;right:14px;bottom:14px;z-index:2;
+  background:var(--paper);border-radius:12px;padding:16px 18px;
+  box-shadow:0 12px 28px -14px rgba(20,16,15,.35);
+}
+.case-client{font-family:var(--mono);font-size:.72rem;font-weight:700;letter-spacing:.05em;color:#1d4ed8;text-transform:uppercase;margin-bottom:6px;}
+.case-project{font-size:1.02rem;font-weight:700;line-height:1.3;}
+
+/* color families for placeholder brand panels (stand-ins for client logos) */
+.bg-forest{background:linear-gradient(155deg,#0F3D33,#0A2620);}
+.bg-blue{background:linear-gradient(155deg,#1B3A6B,#0F1F3C);}
+.bg-editorial{background:#F4EFE6;}
+.bg-editorial .case-mark{color:var(--ink);}
+.bg-navy{background:linear-gradient(155deg,#123C63,#0B2036);}
+.bg-black{background:linear-gradient(155deg,#1a1a1a,#000);}
+.bg-cricket{background:linear-gradient(155deg,#0B3D2E,#062018);}
+.bg-white{background:#fff;border-bottom:1px solid var(--line);}
+.bg-white .case-mark{color:var(--ink);}
+.bg-shield{background:linear-gradient(155deg,var(--red),var(--red-deep));}
+.bg-aids{background:#fff;}
+.bg-aids .case-mark{color:var(--red);}
+.bg-clean{background:#fff;}
+.bg-clean .case-mark{color:var(--ink);}
+.bg-plus{background:#fff;}
+.bg-plus .case-mark{color:#111;}
+.bg-hair{background:linear-gradient(180deg,#DCEFE3,#B9DCC7);}
+.bg-earth{background:linear-gradient(155deg,#6B4A32,#3E2A1C);}
+
+/* closing CTA */
+.closing{max-width:900px;margin:0 auto;padding:20px clamp(20px,4vw,56px) 110px;text-align:center;}
+.closing-kicker{font-family:var(--mono);color:var(--red);font-weight:700;letter-spacing:.14em;font-size:.82rem;margin-bottom:18px;}
+.closing-statement{font-size:clamp(1.1rem,2vw,1.4rem);line-height:1.6;font-weight:500;color:var(--ink);}
+.closing-cta{margin-top:32px;display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-weight:700;font-size:.85rem;letter-spacing:.06em;color:var(--paper);background:var(--ink);padding:15px 26px;border-radius:999px;transition:transform .25s,background .25s;}
+.closing-cta:hover{background:var(--red);transform:translateY(-2px);}
+.closing-cta span{transition:transform .25s;}
+.closing-cta:hover span{transform:translateX(4px);}
+
+/* footer */
+.site-footer{background:var(--ink);color:var(--paper);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;padding:36px clamp(20px,4vw,56px);}
+.site-footer .logo{color:var(--paper);}
+.site-footer p{font-size:.85rem;opacity:.7;}
+.site-footer p span{color:var(--red);}
+.site-footer .socials a{border-color:var(--line-light);color:var(--paper);}
+
+.back-to-top{position:fixed;right:22px;bottom:22px;z-index:60;width:48px;height:48px;border-radius:50%;background:var(--red);color:var(--paper);border:none;cursor:pointer;font-size:1.2rem;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 26px -8px rgba(232,40,59,.6);opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .3s,transform .3s,visibility .3s,background .2s;}
+.back-to-top.is-visible{opacity:1;visibility:visible;transform:translateY(0);}
+.back-to-top:hover{background:#000;}
+
+@media (max-width:980px){.grid{grid-template-columns:repeat(2,1fr);}}
+@media (max-width:760px){
+  .main-nav,.socials{display:none;}
+  .nav-toggle{display:flex;}
+  .grid{grid-template-columns:1fr;}
+  .filters-head{flex-direction:column;gap:8px;}
+  .main-nav.is-open{position:absolute;top:100%;left:0;right:0;background:var(--paper);border-bottom:1px solid var(--line);flex-direction:column;padding:18px clamp(20px,4vw,56px);gap:16px;}
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="/" class="logo">OXYGEN<span>MEDIA</span></a>
+  <nav class="main-nav">
+    <a href="/">Home</a>
+    <a href="/who-we-are.html">Who We Are</a>
+    <a href="/our-services.html">Our Services</a>
+    <a href="/media-buying.html">Media Buying</a>
+    <a href="/us-onboard.html">Us Onboard</a>
+    <a href="/brand-portfolio.html">Brand Portfolio</a>
+    <a href="/pr-and-films.html">Pr and Films</a>
+    <a href="/contact-us.html">Contact Us</a>
+  </nav>
+  <div class="socials">
+    <a href="#" aria-label="Facebook">FB</a>
+    <a href="#" aria-label="Instagram">IG</a>
+    <a href="#" aria-label="Twitter">X</a>
+  </div>
+  <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-media">
+    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=1600&q=80" alt="">
+    <div class="hero-scrim"></div>
+  </div>
+  <div class="onair-badge" aria-hidden="true"><span class="onair-dot"></span> CASE FILES</div>
+
+  <div class="hero-body">
+    <p class="eyebrow"><span class="eyebrow-rule"></span>OUR WORK</p>
+    <h1 class="hero-title">Some of our<br>recent <span class="hl">work.</span></h1>
+    <p class="hero-sub">Thirteen briefs, thirteen very different problems — media strategy, events, editorial, and brand campaigns run across South Africa's biggest platforms.</p>
+  </div>
+
+  <div class="hero-counter">
+    <div class="num">13+</div>
+    <div class="lbl">CLIENT PARTNERSHIPS</div>
+  </div>
+</section>
+
+<!-- FILTERS -->
+<section class="filters">
+  <div class="filters-head">
+    <p class="tag">// index</p>
+    <h2>Browse by discipline</h2>
+  </div>
+  <div class="filter-chips" id="filterChips">
+    <button class="chip is-active" data-filter="all">All Work</button>
+    <button class="chip" data-filter="media">Media Buying</button>
+    <button class="chip" data-filter="events">Events</button>
+    <button class="chip" data-filter="content">Content &amp; Editorial</button>
+    <button class="chip" data-filter="brand">Brand &amp; Identity</button>
+  </div>
+</section>
+
+<!-- PORTFOLIO GRID -->
+<section class="portfolio">
+  <div class="grid" id="caseGrid">
+
+    <article class="case bg-forest" data-cat="content" data-reveal>
+      <div class="case-cat">Content</div>
+      <div class="case-media"><span class="case-mark">AUDA‑NEPAD</span></div>
+      <div class="case-info"><p class="case-client">AUDA‑NEPAD</p><p class="case-project">Content Production</p></div>
+    </article>
+
+    <article class="case bg-navy" data-cat="brand" data-reveal>
+      <div class="case-cat">Brand</div>
+      <div class="case-media"><span class="case-mark">DISTELL</span></div>
+      <div class="case-info"><p class="case-client">Distell</p><p class="case-project">QR Code Competition</p></div>
+    </article>
+
+    <article class="case bg-editorial" data-cat="content" data-reveal>
+      <div class="case-cat">Editorial</div>
+      <div class="case-media"><span class="case-mark">BR — BUSINESS REPORT</span></div>
+      <div class="case-info"><p class="case-client">Business Report</p><p class="case-project">Events Management</p></div>
+    </article>
+
+    <article class="case bg-navy" data-cat="media" data-reveal>
+      <div class="case-cat">Media Buying</div>
+      <div class="case-media"><span class="case-mark">AfDB / FAD</span></div>
+      <div class="case-info"><p class="case-client">The African Development Bank</p><p class="case-project">Media Buying Strategy</p></div>
+    </article>
+
+    <article class="case bg-cricket" data-cat="media" data-reveal>
+      <div class="case-cat">Media Buying</div>
+      <div class="case-media"><span class="case-mark">CRICKET · MZANSI SUPER LEAGUE</span></div>
+      <div class="case-info"><p class="case-client">Cricket SA – Mzansi Super League</p><p class="case-project">Print Media Execution</p></div>
+    </article>
+
+    <article class="case bg-white" data-cat="events" data-reveal>
+      <div class="case-cat">Events</div>
+      <div class="case-media"><span class="case-mark">SANEF</span></div>
+      <div class="case-info"><p class="case-client">SA National Editors' Forum</p><p class="case-project">2018 Nat Nakasa Awards</p></div>
+    </article>
+
+    <article class="case bg-shield" data-cat="brand" data-reveal>
+      <div class="case-cat">Brand</div>
+      <div class="case-media"><span class="case-mark">IAJ</span></div>
+      <div class="case-info"><p class="case-client">Institute for the Advancement of Journalism</p><p class="case-project">Re‑design Corporate ID</p></div>
+    </article>
+
+    <article class="case bg-aids" data-cat="media" data-reveal>
+      <div class="case-cat">Media Buying</div>
+      <div class="case-media"><span class="case-mark">SANAC</span></div>
+      <div class="case-info"><p class="case-client">The South African National AIDS Council</p><p class="case-project">Media Buying Strategy</p></div>
+    </article>
+
+    <article class="case bg-clean" data-cat="media" data-reveal>
+      <div class="case-cat">Media Buying</div>
+      <div class="case-media"><span class="case-mark">INDEPENDENT</span></div>
+      <div class="case-info"><p class="case-client">Independent Media</p><p class="case-project">Advertising &amp; Sponsorship Sales</p></div>
+    </article>
+
+    <article class="case bg-black" data-cat="content" data-reveal>
+      <div class="case-cat">Editorial</div>
+      <div class="case-media"><span class="case-mark">ARENA HOLDINGS</span></div>
+      <div class="case-info"><p class="case-client">Tiso Blackstar (currently Arena Holdings)</p><p class="case-project">Editorial Concepts</p></div>
+    </article>
+
+    <article class="case bg-plus" data-cat="events" data-reveal>
+      <div class="case-cat">Events</div>
+      <div class="case-media"><span class="case-mark">PLUS · LGBTI+ Business Network</span></div>
+      <div class="case-info"><p class="case-client">The Other Foundation</p><p class="case-project">Event Management</p></div>
+    </article>
+
+    <article class="case bg-hair" data-cat="brand" data-reveal>
+      <div class="case-cat">Brand</div>
+      <div class="case-media"><span class="case-mark">THE PERFECT HAIR</span></div>
+      <div class="case-info"><p class="case-client">The Perfect Hair</p><p class="case-project">Brand Activation</p></div>
+    </article>
+
+    <article class="case bg-earth" data-cat="media" data-reveal>
+      <div class="case-cat">Media Buying</div>
+      <div class="case-media"><span class="case-mark">RICHARDS BAY MINERALS</span></div>
+      <div class="case-info"><p class="case-client">Richards Bay Minerals</p><p class="case-project">Media Campaign</p></div>
+    </article>
+
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="closing">
+  <p class="closing-kicker">Your brief could be next</p>
+  <p class="closing-statement">Every one of these started as a single conversation about a goal — an awareness target, a launch date, a reputation to protect. Let's talk about yours.</p>
+  <a href="/contact-us.html" class="closing-cta">Start a conversation <span>→</span></a>
+</section>
+
+<footer class="site-footer">
+  <a href="/" class="logo">OXYGEN<span>MEDIA</span></a>
+  <p>© Copyright 2026 <span>Oxygen Media.</span></p>
+  <div class="socials">
+    <a href="#" aria-label="Facebook">FB</a>
+    <a href="#" aria-label="Twitter">X</a>
+    <a href="#" aria-label="Instagram">IG</a>
+  </div>
+</footer>
+
+<button id="backToTop" class="back-to-top" aria-label="Back to top">↑</button>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+  /* scroll reveal */
+  const revealEls = document.querySelectorAll('[data-reveal]');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const siblings = Array.from(entry.target.parentElement.children).filter(el => !el.hasAttribute('hidden'));
+          const idx = siblings.indexOf(entry.target);
+          entry.target.style.transitionDelay = `${(idx % 4) * 80}ms`;
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.14 });
+    revealEls.forEach(el => io.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('is-visible'));
+  }
+
+  /* filter chips */
+  const chips = document.querySelectorAll('.chip');
+  const cases = document.querySelectorAll('.case');
+  chips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      chips.forEach(c => c.classList.remove('is-active'));
+      chip.classList.add('is-active');
+      const filter = chip.dataset.filter;
+      cases.forEach(c => {
+        const match = filter === 'all' || c.dataset.cat === filter;
+        c.hidden = !match;
+        if (match && !c.classList.contains('is-visible')) c.classList.add('is-visible');
+      });
+    });
+  });
+
+  /* back to top */
+  const backToTop = document.getElementById('backToTop');
+  const toggleBackToTop = () => backToTop.classList.toggle('is-visible', window.scrollY > 480);
+  toggleBackToTop();
+  window.addEventListener('scroll', toggleBackToTop, { passive: true });
+  backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  /* mobile nav */
+  const navToggle = document.querySelector('.nav-toggle');
+  const mainNav = document.querySelector('.main-nav');
+  if (navToggle && mainNav) {
+    navToggle.addEventListener('click', () => {
+      const isOpen = mainNav.classList.toggle('is-open');
+      navToggle.setAttribute('aria-expanded', String(isOpen));
+      mainNav.style.display = isOpen ? 'flex' : '';
+    });
+    mainNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mainNav.classList.remove('is-open');
+        mainNav.style.display = '';
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+});
+</script>
+</body>
+</html>

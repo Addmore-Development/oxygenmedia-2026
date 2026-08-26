@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Us Onboard — Oxygen Media</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ==========================================================
+   OXYGEN MEDIA — "ON AIR" DESIGN SYSTEM
+   ink #14100F · oxygen red #E8283B · signal cyan #00E6C3
+   amber #FFB238 · paper #FBF7F1 · mute #8A8378
+   ========================================================== */
+
+:root{
+  --ink:#14100F;
+  --ink-soft:#1F1A18;
+  --red:#E8283B;
+  --red-deep:#B4152A;
+  --cyan:#00E6C3;
+  --amber:#FFB238;
+  --paper:#FBF7F1;
+  --mute:#8A8378;
+  --line: rgba(20,16,15,0.1);
+  --line-light: rgba(251,247,241,0.16);
+
+  --display: 'Archivo Black', sans-serif;
+  --body: 'Inter', sans-serif;
+  --mono: 'Space Mono', monospace;
+
+  --container: 1180px;
+  --radius: 18px;
+}
+
+*,*::before,*::after{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--body);
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+ul{margin:0;padding:0;list-style:none;}
+h1,h2,h3{margin:0;font-family:var(--display);line-height:1.05;letter-spacing:-0.01em;}
+p{margin:0;}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important;}
+}
+
+::selection{background:var(--red);color:var(--paper);}
+
+/* ---------- focus ---------- */
+a:focus-visible, button:focus-visible{
+  outline:3px solid var(--cyan);
+  outline-offset:3px;
+  border-radius:4px;
+}
+
+/* ---------- header ---------- */
+.site-header{
+  position:sticky; top:0; z-index:50;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:18px clamp(20px,4vw,56px);
+  background:rgba(251,247,241,0.86);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.logo{
+  font-family:var(--display);
+  font-size:1.1rem;
+  letter-spacing:0.02em;
+  color:var(--ink);
+}
+.logo span{color:var(--red);}
+.main-nav{display:flex; gap:clamp(14px,2vw,28px); font-size:0.92rem; font-weight:600;}
+.main-nav a{position:relative; padding:6px 2px; color:var(--ink); opacity:0.75; transition:opacity .2s;}
+.main-nav a:hover, .main-nav a.active{opacity:1;}
+.main-nav a.active::after{
+  content:""; position:absolute; left:0; right:0; bottom:0; height:2px; background:var(--red);
+}
+.socials{display:flex; gap:14px; font-family:var(--mono); font-size:0.72rem; font-weight:700;}
+.socials a{
+  width:30px;height:30px;border-radius:50%;
+  border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;
+  transition:all .2s;
+}
+.socials a:hover{background:var(--ink); color:var(--paper); border-color:var(--ink);}
+.nav-toggle{display:none; background:none; border:none; cursor:pointer; width:32px; height:22px; flex-direction:column; justify-content:space-between; padding:0;}
+.nav-toggle span{display:block; height:2px; background:var(--ink); border-radius:2px;}
+
+/* ---------- hero ---------- */
+.hero{
+  position:relative;
+  min-height:88vh;
+  display:flex; flex-direction:column; justify-content:flex-end;
+  overflow:hidden;
+  padding:0 clamp(20px,4vw,56px) clamp(64px,10vh,110px);
+}
+.hero-media{position:absolute; inset:0; z-index:0;}
+.hero-media img{width:100%; height:100%; object-fit:cover; filter:saturate(1.05);}
+.hero-scrim{
+  position:absolute; inset:0;
+  background:
+    linear-gradient(0deg, rgba(20,16,15,0.94) 0%, rgba(20,16,15,0.72) 42%, rgba(20,16,15,0.4) 70%, rgba(232,40,59,0.28) 100%);
+}
+
+.onair-badge{
+  position:absolute; top:28px; right:clamp(20px,4vw,56px); z-index:2;
+  display:flex; align-items:center; gap:8px;
+  font-family:var(--mono); font-size:0.72rem; font-weight:700; letter-spacing:0.14em;
+  color:var(--paper);
+  border:1px solid var(--line-light);
+  padding:7px 14px; border-radius:999px;
+}
+.onair-dot{width:8px;height:8px;border-radius:50%;background:var(--red); box-shadow:0 0 0 0 rgba(232,40,59,.7); animation:pulse 1.6s infinite;}
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 rgba(232,40,59,.55);}
+  70%{box-shadow:0 0 0 10px rgba(232,40,59,0);}
+  100%{box-shadow:0 0 0 0 rgba(232,40,59,0);}
+}
+
+.hero-body{position:relative; z-index:2; max-width:760px;}
+.eyebrow{
+  display:flex; align-items:center; gap:12px;
+  font-family:var(--mono); font-size:0.78rem; letter-spacing:0.22em;
+  color:var(--cyan); margin-bottom:22px; font-weight:700;
+}
+.eyebrow-rule{width:38px; height:2px; background:var(--cyan); display:inline-block;}
+.hero-title{
+  color:var(--paper);
+  font-size:clamp(2.4rem, 6vw, 4.6rem);
+  text-transform:uppercase;
+}
+.hero-title .hl{color:var(--red); -webkit-text-stroke:1px rgba(255,255,255,0.15);}
+.hero-sub{
+  margin-top:24px; max-width:46ch;
+  color:rgba(251,247,241,0.82);
+  font-size:1.05rem; line-height:1.6;
+}
+.hero-cta{
+  margin-top:34px; display:inline-flex; align-items:center; gap:10px;
+  font-family:var(--mono); font-weight:700; font-size:0.85rem; letter-spacing:0.08em;
+  color:var(--ink); background:var(--cyan);
+  padding:14px 22px; border-radius:999px;
+  transition:transform .25s, background .25s;
+}
+.hero-cta span{transition:transform .25s;}
+.hero-cta:hover{background:var(--amber); transform:translateY(-2px);}
+.hero-cta:hover span{transform:translateX(4px);}
+
+/* frequency meter — signature element */
+.freq-meter{
+  position:absolute; right:clamp(20px,4vw,56px); bottom:clamp(64px,10vh,110px);
+  z-index:2; display:flex; align-items:flex-end; gap:6px; height:120px;
+}
+.freq-meter .bar{
+  width:7px; border-radius:3px;
+  background:linear-gradient(180deg, var(--cyan), var(--red));
+  animation:eq 1.1s ease-in-out infinite;
+  animation-delay:calc(var(--i) * 0.09s);
+  transform-origin:bottom;
+}
+@keyframes eq{
+  0%,100%{height:18%;}
+  50%{height:100%;}
+}
+@media (max-width:720px){ .freq-meter{display:none;} }
+
+/* ---------- section heads ---------- */
+.section-head{
+  max-width:var(--container); margin:0 auto; padding:0 clamp(20px,4vw,56px);
+  display:flex; align-items:baseline; gap:22px; margin-bottom:44px;
+}
+.tag{font-family:var(--mono); font-size:0.78rem; letter-spacing:0.12em; color:var(--red); font-weight:700; white-space:nowrap;}
+.section-head h2{font-size:clamp(1.8rem, 3.4vw, 2.6rem); text-transform:uppercase;}
+.section-head.light .tag{color:var(--cyan);}
+.section-head.light h2{color:var(--paper);}
+
+/* ---------- why work ---------- */
+.why-work{padding:110px 0 100px; background:var(--paper);}
+.dial-grid{
+  max-width:var(--container); margin:0 auto; padding:0 clamp(20px,4vw,56px);
+  display:grid; grid-template-columns:repeat(4,1fr); gap:26px;
+}
+.dial-card{
+  background:#fff; border:1px solid var(--line); border-radius:var(--radius);
+  padding:22px; opacity:0; transform:translateY(24px);
+  transition:opacity .6s ease, transform .6s ease, box-shadow .3s ease, border-color .3s ease;
+}
+.dial-card.is-visible{opacity:1; transform:translateY(0);}
+.dial-card:hover{box-shadow:0 18px 40px -20px rgba(20,16,15,0.25); border-color:var(--red);}
+.dial-photo{border-radius:12px; overflow:hidden; aspect-ratio:4/3; margin-bottom:18px;}
+.dial-photo img{width:100%; height:100%; object-fit:cover; transition:transform .5s;}
+.dial-card:hover .dial-photo img{transform:scale(1.06);}
+.dial-card h3{font-size:1.15rem; color:var(--red); text-transform:uppercase; margin-bottom:10px;}
+.dial-card p{color:var(--ink); opacity:0.78; font-size:0.94rem; line-height:1.55;}
+
+.dial-rate{display:flex; flex-direction:column; align-items:center; text-align:center;}
+.rate-gauge{position:relative; width:120px; margin-bottom:6px;}
+.rate-gauge svg{width:100%; height:auto;}
+.gauge-track{fill:none; stroke:var(--line); stroke-width:9; stroke-linecap:round;}
+.gauge-fill{
+  fill:none; stroke:var(--red); stroke-width:9; stroke-linecap:round;
+  stroke-dasharray:173; stroke-dashoffset:173;
+  transition:stroke-dashoffset 1.2s cubic-bezier(.4,0,.2,1);
+}
+.dial-card.is-visible .gauge-fill{stroke-dashoffset:130;}
+.gauge-label{
+  position:absolute; bottom:2px; left:50%; transform:translateX(-50%);
+  font-family:var(--mono); font-weight:700; font-size:0.7rem; letter-spacing:0.1em; color:var(--red);
+}
+
+/* ---------- ROI ---------- */
+.roi{background:var(--ink); padding:110px 0 100px; position:relative;}
+.roi-grid{
+  max-width:var(--container); margin:0 auto; padding:0 clamp(20px,4vw,56px);
+  display:grid; grid-template-columns:repeat(3,1fr); gap:24px;
+}
+.roi-card{
+  background:var(--ink-soft); border:1px solid var(--line-light); border-radius:var(--radius);
+  padding:34px 28px;
+  opacity:0; transform:translateY(24px);
+  transition:opacity .6s ease, transform .6s ease, border-color .3s;
+}
+.roi-card.is-visible{opacity:1; transform:translateY(0);}
+.roi-card:hover{border-color:var(--cyan);}
+.roi-icon{font-size:1.8rem; margin-bottom:16px;}
+.roi-card h3{
+  color:var(--paper); font-family:var(--body); font-weight:700; font-size:1.08rem;
+  text-transform:none; margin-bottom:14px; line-height:1.4;
+}
+.roi-card p, .roi-card ul{color:rgba(251,247,241,0.72); font-size:0.94rem; line-height:1.6;}
+.roi-card p + p{margin-top:12px;}
+.roi-card ul{margin-top:6px;}
+.roi-card li{padding-left:18px; position:relative; margin-bottom:8px;}
+.roi-card li::before{content:"—"; position:absolute; left:0; color:var(--cyan);}
+.roi-card strong{color:var(--amber); font-family:var(--mono);}
+
+/* ---------- PR pillars ---------- */
+.pillars{padding:100px 0 60px; background:var(--paper);}
+.pillars-grid{
+  max-width:var(--container); margin:0 auto; padding:0 clamp(20px,4vw,56px);
+  display:grid; grid-template-columns:repeat(3,1fr); gap:24px;
+}
+.pillar-card{
+  background:linear-gradient(155deg, var(--red) 0%, var(--red-deep) 100%);
+  border-radius:var(--radius);
+  padding:38px 30px 34px;
+  color:var(--paper);
+  opacity:0; transform:translateY(24px);
+  transition:opacity .6s ease, transform .6s ease;
+  position:relative; overflow:hidden;
+}
+.pillar-card.is-visible{opacity:1; transform:translateY(0);}
+.pillar-card::after{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background:radial-gradient(circle at 100% 0%, rgba(255,255,255,0.14), transparent 55%);
+}
+.pillar-num{
+  font-family:var(--mono); font-weight:700; font-size:0.8rem; letter-spacing:0.1em;
+  color:rgba(251,247,241,0.55); display:block; margin-bottom:14px;
+}
+.pillar-card h3{font-size:1.4rem; margin-bottom:16px; text-transform:uppercase;}
+.pillar-card p{font-size:0.94rem; line-height:1.6; opacity:0.92; margin-bottom:16px;}
+.pillar-card li{
+  font-size:0.88rem; line-height:1.5; padding-left:16px; position:relative; margin-bottom:8px; opacity:0.92;
+}
+.pillar-card li::before{content:"›"; position:absolute; left:0; color:var(--amber); font-weight:700;}
+
+/* ---------- closing ---------- */
+.closing{
+  max-width:900px; margin:0 auto; padding:100px clamp(20px,4vw,56px) 60px;
+  text-align:center;
+}
+.closing-kicker{font-family:var(--mono); color:var(--red); font-weight:700; letter-spacing:0.14em; font-size:0.82rem; margin-bottom:18px;}
+.closing-statement{font-size:clamp(1.1rem,2vw,1.4rem); line-height:1.6; font-weight:500; color:var(--ink);}
+.closing-cta{
+  margin-top:34px; display:inline-flex; align-items:center; gap:10px;
+  font-family:var(--mono); font-weight:700; font-size:0.85rem; letter-spacing:0.06em;
+  color:var(--paper); background:var(--ink); padding:15px 26px; border-radius:999px;
+  transition:transform .25s, background .25s;
+}
+.closing-cta:hover{background:var(--red); transform:translateY(-2px);}
+
+/* ---------- footer ---------- */
+.site-footer{
+  background:var(--ink); color:var(--paper);
+  display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px;
+  padding:36px clamp(20px,4vw,56px);
+}
+.site-footer .logo{color:var(--paper);}
+.site-footer p{font-size:0.85rem; opacity:0.7;}
+.site-footer p span{color:var(--red);}
+.site-footer .socials a{border-color:var(--line-light); color:var(--paper);}
+
+/* ---------- back to top ---------- */
+.back-to-top{
+  position:fixed; right:22px; bottom:22px; z-index:60;
+  width:48px; height:48px; border-radius:50%;
+  background:var(--red); color:var(--paper); border:none; cursor:pointer;
+  font-size:1.2rem; display:flex; align-items:center; justify-content:center;
+  box-shadow:0 10px 26px -8px rgba(232,40,59,0.6);
+  opacity:0; visibility:hidden; transform:translateY(10px);
+  transition:opacity .3s, transform .3s, visibility .3s, background .2s;
+}
+.back-to-top.is-visible{opacity:1; visibility:visible; transform:translateY(0);}
+.back-to-top:hover{background:var(--ink);}
+
+/* ---------- responsive ---------- */
+@media (max-width:980px){
+  .dial-grid{grid-template-columns:repeat(2,1fr);}
+  .roi-grid, .pillars-grid{grid-template-columns:1fr;}
+}
+@media (max-width:760px){
+  .main-nav, .socials{display:none;}
+  .nav-toggle{display:flex;}
+  .dial-grid{grid-template-columns:1fr;}
+  .section-head{flex-direction:column; gap:8px;}
+
+  .main-nav.is-open{
+    position:absolute; top:100%; left:0; right:0;
+    background:var(--paper); border-bottom:1px solid var(--line);
+    flex-direction:column; padding:18px clamp(20px,4vw,56px); gap:16px;
+  }
+}
+
+</style>
+<style>
+
+/* ==== UNIFIED SITE NAV + FOOTER (oxnav / oxfoot) ==== */
+.oxnav{position:sticky;top:0;z-index:999;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:13px clamp(20px,4vw,56px);background:rgba(251,247,241,.95);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid rgba(20,16,15,.1);font-family:'Inter',sans-serif;box-shadow:0 2px 18px rgba(20,16,15,.05);}
+.oxnav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;flex:0 0 auto;}
+.oxnav-mark{position:relative;width:36px;height:36px;border-radius:50%;border:2px solid #14100F;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.68rem;letter-spacing:.02em;color:#E8283B;background:#fff;flex:0 0 auto;font-family:'Inter',sans-serif;}
+.oxnav-dot{position:absolute;top:-2px;right:-2px;width:8px;height:8px;border-radius:50%;background:#00E6C3;box-shadow:0 0 0 2px #FBF7F1;animation:oxpulse 1.8s infinite;}
+@keyframes oxpulse{0%{box-shadow:0 0 0 0 rgba(0,230,195,.6),0 0 0 2px #FBF7F1;}70%{box-shadow:0 0 0 6px rgba(0,230,195,0),0 0 0 2px #FBF7F1;}100%{box-shadow:0 0 0 0 rgba(0,230,195,0),0 0 0 2px #FBF7F1;}}
+.oxnav-word{font-weight:800;font-size:1rem;letter-spacing:.02em;color:#14100F;text-transform:uppercase;white-space:nowrap;font-family:'Inter',sans-serif;}
+.oxnav-word em{font-style:normal;color:#E8283B;}
+.oxnav-links{display:flex;align-items:center;gap:clamp(10px,1.6vw,22px);flex-wrap:nowrap;}
+.oxnav-links a{position:relative;font-size:.79rem;font-weight:600;letter-spacing:.01em;color:#14100F;text-decoration:none;opacity:.7;padding:6px 1px;transition:opacity .2s;white-space:nowrap;font-family:'Inter',sans-serif;}
+.oxnav-links a:hover{opacity:1;}
+.oxnav-links a.oxnav-active{opacity:1;}
+.oxnav-links a.oxnav-active::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:2px;background:#E8283B;}
+.oxnav-right{display:flex;align-items:center;gap:14px;flex:0 0 auto;}
+.oxnav-social{display:flex;gap:9px;}
+.oxnav-social a{width:27px;height:27px;border-radius:50%;border:1px solid rgba(20,16,15,.15);display:flex;align-items:center;justify-content:center;color:#14100F;transition:all .2s;}
+.oxnav-social a svg{width:12px;height:12px;display:block;}
+.oxnav-social a:hover{background:#14100F;border-color:#14100F;color:#FBF7F1;}
+.oxnav-cta{background:#E8283B;color:#FBF7F1 !important;opacity:1 !important;font-size:.76rem;font-weight:700;letter-spacing:.03em;text-transform:uppercase;padding:9px 18px;border-radius:999px;text-decoration:none;white-space:nowrap;transition:background .2s,transform .2s;}
+.oxnav-cta:hover{background:#14100F;transform:translateY(-1px);}
+.oxnav-cta::after{display:none !important;}
+.oxnav-toggle{display:none;background:none;border:none;cursor:pointer;width:28px;height:18px;flex-direction:column;justify-content:space-between;padding:0;flex:0 0 auto;z-index:2;}
+.oxnav-toggle span{display:block;height:2px;background:#14100F;border-radius:2px;}
+@media (max-width:980px){
+  .oxnav-links{position:absolute;top:100%;left:0;right:0;background:#FBF7F1;flex-direction:column;align-items:flex-start;gap:0;border-bottom:1px solid rgba(20,16,15,.1);max-height:0;overflow:hidden;transition:max-height .3s ease;}
+  .oxnav-links.is-open{max-height:520px;}
+  .oxnav-links a{width:100%;padding:14px clamp(20px,4vw,56px);border-bottom:1px solid rgba(20,16,15,.06);box-sizing:border-box;}
+  .oxnav-links a.oxnav-active::after{display:none;}
+  .oxnav-links a.oxnav-active{color:#E8283B;}
+  .oxnav-right .oxnav-social{display:none;}
+  .oxnav-right .oxnav-cta{display:none;}
+  .oxnav-toggle{display:flex;}
+}
+
+.oxfoot{background:#14100F;color:#FBF7F1;font-family:'Inter',sans-serif;padding:60px clamp(20px,4vw,56px) 26px;}
+.oxfoot-top{display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;max-width:560px;margin:0 auto 46px;}
+.oxfoot-brand{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.oxfoot-mark{width:40px;height:40px;border-radius:50%;border:2px solid #E8283B;display:flex;align-items:center;justify-content:center;color:#E8283B;font-weight:800;font-size:.72rem;font-family:'Inter',sans-serif;}
+.oxfoot-word{font-weight:800;font-size:1.08rem;letter-spacing:.02em;color:#FBF7F1;text-transform:uppercase;font-family:'Inter',sans-serif;}
+.oxfoot-word em{font-style:normal;color:#E8283B;}
+.oxfoot-tag{font-size:.88rem;line-height:1.65;color:rgba(251,247,241,.65);}
+.oxfoot-social{display:flex;gap:12px;}
+.oxfoot-social a{width:34px;height:34px;border-radius:50%;border:1px solid rgba(251,247,241,.25);display:flex;align-items:center;justify-content:center;color:#FBF7F1;transition:all .2s;}
+.oxfoot-social a svg{width:14px;height:14px;display:block;}
+.oxfoot-social a:hover{background:#E8283B;border-color:#E8283B;}
+.oxfoot-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:900px;margin:0 auto;padding-bottom:38px;border-bottom:1px solid rgba(251,247,241,.12);}
+.oxfoot-col{display:flex;flex-direction:column;gap:11px;}
+.oxfoot-h{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#E8283B;margin-bottom:2px;}
+.oxfoot-col a,.oxfoot-col span{font-size:.85rem;color:rgba(251,247,241,.72);text-decoration:none;transition:color .2s;}
+.oxfoot-col a:hover{color:#FBF7F1;}
+.oxfoot-bottom{text-align:center;padding-top:22px;font-size:.76rem;color:rgba(251,247,241,.45);}
+@media(max-width:700px){.oxfoot-grid{grid-template-columns:1fr;text-align:center;}}
+
+</style>
+</head>
+<body>
+
+<div class="signal-wash" aria-hidden="true"></div>
+
+<header class="oxnav">
+  <a href="index.html" class="oxnav-brand">
+    <span class="oxnav-mark">OM<i class="oxnav-dot" aria-hidden="true"></i></span>
+    <span class="oxnav-word">OXYGEN<em>MEDIA</em></span>
+  </a>
+  <div class="oxnav-links" id="oxnavLinks" role="navigation" aria-label="Primary">
+    <a href="index.html">Home</a>
+    <a href="about.html">Who We Are</a>
+    <a href="services.html">Our Services</a>
+    <a href="media-buying.html">Media Buying</a>
+    <a href="us-onboard.html" class="oxnav-active">Us Onboard</a>
+    <a href="brand-portfolio.html">Brand Portfolio</a>
+    <a href="pr-films.html">Pr and Films</a>
+    <a href="contact.html">Contact Us</a>
+  </div>
+  <div class="oxnav-right">
+    <div class="oxnav-social">
+      <a href="#" title="Facebook" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.5 9.95v-7.04H7.9V12h2.6V9.8c0-2.57 1.53-3.99 3.87-3.99 1.12 0 2.3.2 2.3.2v2.53h-1.3c-1.28 0-1.68.8-1.68 1.62V12h2.86l-.46 2.91h-2.4v7.04A10 10 0 0 0 22 12Z"/></svg></a>
+      <a href="#" title="Instagram" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1"/></svg></a>
+      <a href="#" title="Twitter" aria-label="Twitter"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 5.9c-.77.35-1.6.58-2.46.68a4.3 4.3 0 0 0 1.88-2.37 8.6 8.6 0 0 1-2.72 1.04 4.28 4.28 0 0 0-7.29 3.9A12.14 12.14 0 0 1 2.9 4.7a4.28 4.28 0 0 0 1.32 5.71c-.7-.02-1.36-.22-1.94-.53v.05a4.28 4.28 0 0 0 3.43 4.2c-.65.18-1.33.2-1.98.08a4.29 4.29 0 0 0 4 2.98A8.6 8.6 0 0 1 1 18.58a12.13 12.13 0 0 0 6.56 1.92c7.88 0 12.2-6.53 12.2-12.2 0-.19 0-.37-.01-.55A8.7 8.7 0 0 0 22 5.9Z"/></svg></a>
+    </div>
+    <a href="contact.html" class="oxnav-cta">Let's Talk</a>
+  </div>
+  <button class="oxnav-toggle" id="oxnavToggle" aria-label="Toggle menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+<script>
+(function(){
+  var t=document.getElementById('oxnavToggle'), l=document.getElementById('oxnavLinks');
+  if(t&&l){
+    t.addEventListener('click',function(){
+      var open=l.classList.toggle('is-open');
+      t.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    l.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click',function(){ l.classList.remove('is-open'); t.setAttribute('aria-expanded','false'); });
+    });
+  }
+})();
+</script>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-media">
+    <img src="https://images.pexels.com/photos/8069428/pexels-photo-8069428.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="">
+    <div class="hero-scrim"></div>
+  </div>
+
+  <div class="onair-badge" aria-hidden="true">
+    <span class="onair-dot"></span> ON AIR
+  </div>
+
+  <div class="hero-body">
+    <p class="eyebrow"><span class="eyebrow-rule"></span>US ONBOARD</p>
+    <h1 class="hero-title">Reasons why<br>you must have<br><span class="hl">us onboard.</span></h1>
+    <p class="hero-sub">A media desk built like a control room — every booking, rate, and relationship tuned to your signal.</p>
+    <a href="#why-work" class="hero-cta">See why <span>→</span></a>
+  </div>
+
+  <div class="freq-meter" id="freqMeter" aria-hidden="true">
+    <div class="bar" style="--i:0"></div>
+    <div class="bar" style="--i:1"></div>
+    <div class="bar" style="--i:2"></div>
+    <div class="bar" style="--i:3"></div>
+    <div class="bar" style="--i:4"></div>
+    <div class="bar" style="--i:5"></div>
+    <div class="bar" style="--i:6"></div>
+    <div class="bar" style="--i:7"></div>
+    <div class="bar" style="--i:8"></div>
+    <div class="bar" style="--i:9"></div>
+    <div class="bar" style="--i:10"></div>
+    <div class="bar" style="--i:11"></div>
+  </div>
+</section>
+
+<!-- WHY WORK WITH US -->
+<section class="why-work" id="why-work">
+  <header class="section-head">
+    <p class="tag">// 01 — the desk</p>
+    <h2>Why work with us</h2>
+  </header>
+
+  <div class="dial-grid">
+    <article class="dial-card" data-reveal>
+      <div class="dial-photo"><img src="https://images.pexels.com/photos/8069428/pexels-photo-8069428.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Media negotiators discussing a campaign"></div>
+      <h3>Media Negotiators</h3>
+      <p>Experienced media negotiators with a proven industry track record.</p>
+    </article>
+
+    <article class="dial-card" data-reveal>
+      <div class="dial-photo"><img src="https://images.pexels.com/photos/5082579/pexels-photo-5082579.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Working across social media platforms"></div>
+      <h3>Media Platforms</h3>
+      <p>Access to every listed media platform in South Africa — unparalleled reach and coverage.</p>
+    </article>
+
+    <article class="dial-card" data-reveal>
+      <div class="dial-photo"><img src="https://images.pexels.com/photos/8069428/pexels-photo-8069428.jpeg?auto=compress&cs=tinysrgb&w=800" alt="National footprint across South Africa"></div>
+      <h3>National Footprint</h3>
+      <p>A national footprint, allowing us to cater to clients across the country.</p>
+    </article>
+
+    <article class="dial-card dial-rate" data-reveal>
+      <div class="rate-gauge" aria-hidden="true">
+        <svg viewBox="0 0 120 70">
+          <path d="M10 65 A55 55 0 0 1 110 65" class="gauge-track"/>
+          <path d="M10 65 A55 55 0 0 1 110 65" class="gauge-fill"/>
+        </svg>
+        <span class="gauge-label">LOW</span>
+      </div>
+      <h3>Low Rates</h3>
+      <p>Unbeatable advertising rates, negotiated squarely on your behalf.</p>
+    </article>
+  </div>
+</section>
+
+<!-- ROI -->
+<section class="roi" id="roi">
+  <header class="section-head light">
+    <p class="tag">// 02 — the payoff</p>
+    <h2>Maximize your advertising ROI</h2>
+  </header>
+
+  <div class="roi-grid">
+    <article class="roi-card" data-reveal>
+      <div class="roi-icon">📊</div>
+      <h3>Our cutting-edge media buying software is unparalleled in South Africa, featuring:</h3>
+      <ul>
+        <li>Over <strong>6,000</strong> media listings in our directory</li>
+        <li>Effortless bookings within the shortest possible timeframe — no more missed deadlines</li>
+      </ul>
+    </article>
+
+    <article class="roi-card" data-reveal>
+      <div class="roi-icon">🎯</div>
+      <h3>Get started with a free consultation</h3>
+      <p>The first step towards optimising your advertising strategy. Contact us today to schedule your complimentary consultation and experience the Oxygen Media difference.</p>
+      <p>Whatever your advertising needs — we're ready to partner with you.</p>
+    </article>
+
+    <article class="roi-card" data-reveal>
+      <div class="roi-icon">💡</div>
+      <h3>Introducing Oxygen Media's PR &amp; Strategic Communications Division</h3>
+      <p>Today's fast-paced, ever-evolving media landscape makes effective communication key to building and maintaining a strong brand reputation — our PR division brings a cutting-edge approach to elevating your narrative and driving results.</p>
+    </article>
+  </div>
+</section>
+
+<!-- PR PILLARS -->
+<section class="pillars" id="pr-pillars">
+  <div class="pillars-grid">
+    <article class="pillar-card" data-reveal>
+      <span class="pillar-num">01</span>
+      <h3>Expertise</h3>
+      <p>Our team of seasoned PR professionals and strategic communicators possess a deep understanding of the complexities of the South African media environment. We leverage that expertise to craft and execute bespoke PR strategies that:</p>
+      <ul>
+        <li>Build and maintain a positive brand reputation</li>
+        <li>Foster media relationships and secure high-impact coverage</li>
+        <li>Develop and implement crisis communications plans</li>
+        <li>Create and disseminate compelling brand narratives</li>
+        <li>Drive engagement and advocacy through strategic stakeholder management</li>
+      </ul>
+    </article>
+
+    <article class="pillar-card" data-reveal>
+      <span class="pillar-num">02</span>
+      <h3>Cutting-Edge Approach</h3>
+      <p>We combine traditional PR expertise with innovative, data-driven approaches to deliver impactful results. Our cutting-edge approach includes:</p>
+      <ul>
+        <li>Media monitoring and analysis</li>
+        <li>Social media listening and engagement</li>
+        <li>Influencer partnerships and activations</li>
+        <li>Experiential marketing and event management</li>
+        <li>Reputation management and crisis communications</li>
+      </ul>
+    </article>
+
+    <article class="pillar-card" data-reveal>
+      <span class="pillar-num">03</span>
+      <h3>Integrated Solutions</h3>
+      <p>Our PR and Strategic Communications Division works seamlessly with our media buying, planning, and creative teams to deliver integrated solutions that drive business results. By leveraging the full scope of Oxygen Media's capabilities, we help you achieve:</p>
+      <ul>
+        <li>Increased brand awareness and reputation</li>
+        <li>Enhanced media coverage and influencer partnerships</li>
+        <li>Improved stakeholder engagement and advocacy</li>
+        <li>Data-driven insight to inform future communications strategies</li>
+      </ul>
+    </article>
+  </div>
+</section>
+
+<!-- CLOSING STATEMENT -->
+<section class="closing">
+  <p class="closing-kicker">Welcome to Oxygen Media</p>
+  <p class="closing-statement">Oxygen Media is a leading, award-winning advertising agency offering a comprehensive range of services designed to elevate your brand's presence, drive business results, and exceed your marketing goals.</p>
+  <a href="contact.html" class="closing-cta">Start your consultation <span>→</span></a>
+</section>
+
+<footer class="oxfoot">
+  <div class="oxfoot-top">
+    <a href="index.html" class="oxfoot-brand">
+      <span class="oxfoot-mark">OM</span>
+      <span class="oxfoot-word">OXYGEN<em>MEDIA</em></span>
+    </a>
+    <p class="oxfoot-tag">Breathing life into brands across South Africa &mdash; media buying, PR, film and full-service creative, all under one roof.</p>
+    <div class="oxfoot-social">
+      <a href="#" title="Facebook" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.5 9.95v-7.04H7.9V12h2.6V9.8c0-2.57 1.53-3.99 3.87-3.99 1.12 0 2.3.2 2.3.2v2.53h-1.3c-1.28 0-1.68.8-1.68 1.62V12h2.86l-.46 2.91h-2.4v7.04A10 10 0 0 0 22 12Z"/></svg></a>
+      <a href="#" title="Instagram" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1"/></svg></a>
+      <a href="#" title="Twitter" aria-label="Twitter"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 5.9c-.77.35-1.6.58-2.46.68a4.3 4.3 0 0 0 1.88-2.37 8.6 8.6 0 0 1-2.72 1.04 4.28 4.28 0 0 0-7.29 3.9A12.14 12.14 0 0 1 2.9 4.7a4.28 4.28 0 0 0 1.32 5.71c-.7-.02-1.36-.22-1.94-.53v.05a4.28 4.28 0 0 0 3.43 4.2c-.65.18-1.33.2-1.98.08a4.29 4.29 0 0 0 4 2.98A8.6 8.6 0 0 1 1 18.58a12.13 12.13 0 0 0 6.56 1.92c7.88 0 12.2-6.53 12.2-12.2 0-.19 0-.37-.01-.55A8.7 8.7 0 0 0 22 5.9Z"/></svg></a>
+    </div>
+  </div>
+  <div class="oxfoot-grid">
+    <div class="oxfoot-col">
+      <div class="oxfoot-h">Explore</div>
+      <a href="index.html">Home</a>
+      <a href="about.html">Who We Are</a>
+      <a href="services.html">Our Services</a>
+      <a href="media-buying.html">Media Buying</a>
+    </div>
+    <div class="oxfoot-col">
+      <div class="oxfoot-h">Company</div>
+      <a href="us-onboard.html">Us Onboard</a>
+      <a href="brand-portfolio.html">Brand Portfolio</a>
+      <a href="pr-films.html">Pr and Films</a>
+      <a href="contact.html">Contact Us</a>
+    </div>
+    <div class="oxfoot-col">
+      <div class="oxfoot-h">Get In Touch</div>
+      <a href="tel:+27823717340">+27 82 371 7340</a>
+      <a href="mailto:info@oxygenmedia.co.za">info@oxygenmedia.co.za</a>
+      <span>Melville, Johannesburg, South Africa</span>
+    </div>
+  </div>
+  <div class="oxfoot-bottom">&copy; Copyright 2026 Oxygen Media. All rights reserved.</div>
+</footer>
+
+<button id="backToTop" class="back-to-top" aria-label="Back to top">↑</button>
+
+<script>
+// ==========================================================
+// OXYGEN MEDIA — us-onboard interactions
+// ==========================================================
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  /* ---- scroll reveal for cards ---- */
+  const revealEls = document.querySelectorAll('[data-reveal]');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // slight stagger based on position within its own grid row
+          const siblings = Array.from(entry.target.parentElement.children);
+          const idx = siblings.indexOf(entry.target);
+          entry.target.style.transitionDelay = `${idx * 90}ms`;
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.18 });
+    revealEls.forEach(el => io.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('is-visible'));
+  }
+
+  /* ---- back to top button ---- */
+  const backToTop = document.getElementById('backToTop');
+  const toggleBackToTop = () => {
+    if (window.scrollY > 480) {
+      backToTop.classList.add('is-visible');
+    } else {
+      backToTop.classList.remove('is-visible');
+    }
+  };
+  toggleBackToTop();
+  window.addEventListener('scroll', toggleBackToTop, { passive: true });
+
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  /* ---- mobile nav toggle ---- */
+  const navToggle = document.querySelector('.nav-toggle');
+  const mainNav = document.querySelector('.main-nav');
+
+  if (navToggle && mainNav) {
+    navToggle.addEventListener('click', () => {
+      const isOpen = mainNav.classList.toggle('is-open');
+      navToggle.setAttribute('aria-expanded', String(isOpen));
+      mainNav.style.display = isOpen ? 'flex' : '';
+    });
+
+    // Close mobile menu after a link is tapped
+    mainNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mainNav.classList.remove('is-open');
+        mainNav.style.display = '';
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
+  /* ---- pause the frequency meter animation off-screen (perf) ---- */
+  const freqMeter = document.getElementById('freqMeter');
+  if (freqMeter && 'IntersectionObserver' in window) {
+    const meterIO = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        freqMeter.style.animationPlayState = entry.isIntersecting ? 'running' : 'paused';
+        freqMeter.querySelectorAll('.bar').forEach(bar => {
+          bar.style.animationPlayState = entry.isIntersecting ? 'running' : 'paused';
+        });
+      });
+    }, { threshold: 0 });
+    meterIO.observe(freqMeter);
+  }
+
+});
+
+</script>
+</body>
+</html>

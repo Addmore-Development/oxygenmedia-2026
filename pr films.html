@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pr and Films — Oxygen Media</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#14100F; --ink-soft:#1F1A18;
+  --red:#E8283B; --red-deep:#B4152A;
+  --cyan:#00E6C3; --amber:#FFB238;
+  --paper:#FBF7F1; --mute:#8A8378;
+  --line: rgba(20,16,15,0.1); --line-light: rgba(251,247,241,0.16);
+  --display:'Archivo Black',sans-serif; --body:'Inter',sans-serif; --mono:'Space Mono',monospace;
+  --container:1180px;
+}
+*,*::before,*::after{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);-webkit-font-smoothing:antialiased;}
+img{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+ul{margin:0;padding:0;list-style:none;}
+h1,h2,h3{margin:0;font-family:var(--display);line-height:1.05;letter-spacing:-0.01em;}
+p{margin:0;}
+::selection{background:var(--red);color:var(--paper);}
+a:focus-visible,button:focus-visible{outline:3px solid var(--cyan);outline-offset:3px;border-radius:4px;}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease;}
+.reveal.is-visible{opacity:1;transform:translateY(0);}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important;}}
+
+/* ================= HERO ================= */
+.reel-hero{position:relative;min-height:78vh;display:flex;align-items:center;overflow:hidden;background:radial-gradient(ellipse at 75% 30%,#241a1c 0%,var(--ink) 55%,#0a0807 100%);padding:110px clamp(20px,4vw,56px) 70px;}
+.reel-hero::before{
+  content:"";position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.06;
+  background-image:repeating-linear-gradient(0deg,#fff 0 1px,transparent 1px 3px);
+  mix-blend-mode:overlay;
+}
+.reel-glow{position:absolute;border-radius:50%;filter:blur(60px);opacity:.5;pointer-events:none;}
+.reel-glow.g1{width:420px;height:420px;background:var(--red);top:-120px;right:-80px;}
+.reel-glow.g2{width:300px;height:300px;background:var(--cyan);opacity:.14;bottom:-100px;left:10%;}
+
+.rec-badge{position:absolute;top:32px;right:clamp(20px,4vw,56px);z-index:3;display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:.72rem;font-weight:700;letter-spacing:.14em;color:var(--paper);border:1px solid var(--line-light);padding:8px 15px;border-radius:999px;background:rgba(20,16,15,.35);backdrop-filter:blur(6px);}
+.rec-dot{width:8px;height:8px;border-radius:50%;background:var(--red);box-shadow:0 0 0 0 rgba(232,40,59,.7);animation:recpulse 1.4s infinite;}
+@keyframes recpulse{0%{box-shadow:0 0 0 0 rgba(232,40,59,.6);}70%{box-shadow:0 0 0 9px rgba(232,40,59,0);}100%{box-shadow:0 0 0 0 rgba(232,40,59,0);}}
+.rec-time{font-variant-numeric:tabular-nums;color:var(--cyan);}
+
+.reel-grid-layout{position:relative;z-index:2;max-width:var(--container);margin:0 auto;width:100%;display:grid;grid-template-columns:1.1fr 0.9fr;gap:56px;align-items:center;}
+
+.reel-eyebrow{display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:.78rem;letter-spacing:.22em;color:var(--cyan);margin-bottom:22px;font-weight:700;text-transform:uppercase;}
+.reel-eyebrow-rule{width:38px;height:2px;background:var(--cyan);display:inline-block;}
+.reel-title{color:var(--paper);font-size:clamp(2.1rem,5vw,3.6rem);text-transform:uppercase;}
+.reel-title .hl{color:var(--red);}
+.reel-sub{margin-top:24px;max-width:52ch;color:rgba(251,247,241,.78);font-size:1.05rem;line-height:1.65;}
+.reel-actions{display:flex;gap:16px;margin-top:36px;flex-wrap:wrap;}
+.btn-solid{background:var(--red);color:var(--paper);font-family:var(--mono);font-weight:700;font-size:.85rem;letter-spacing:.05em;padding:15px 28px;border-radius:999px;display:inline-flex;align-items:center;gap:10px;transition:transform .25s,background .25s;}
+.btn-solid:hover{background:var(--paper);color:var(--ink);transform:translateY(-2px);}
+.btn-ghost{border:1px solid var(--line-light);color:var(--paper);font-family:var(--mono);font-weight:700;font-size:.85rem;letter-spacing:.05em;padding:15px 26px;border-radius:999px;transition:border-color .25s,color .25s;}
+.btn-ghost:hover{border-color:var(--cyan);color:var(--cyan);}
+
+.projector-wrap{position:relative;display:flex;justify-content:center;align-items:center;height:340px;}
+.reel{position:absolute;border-radius:50%;border:6px solid rgba(251,247,241,.16);}
+.reel::before{content:"";position:absolute;inset:14%;border-radius:50%;border:2px dashed rgba(251,247,241,.22);animation:spin 14s linear infinite;}
+.reel::after{content:"";position:absolute;inset:42%;border-radius:50%;background:var(--ink-soft);border:3px solid rgba(251,247,241,.3);}
+.reel.r1{width:190px;height:190px;top:6px;left:24px;}
+.reel.r2{width:150px;height:150px;bottom:0;right:20px;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.beam{position:absolute;left:210px;top:50%;width:230px;height:120px;transform:translateY(-50%);background:linear-gradient(90deg,rgba(255,178,56,.35),rgba(255,178,56,0));clip-path:polygon(0 35%,0 65%,100% 100%,100% 0%);filter:blur(2px);animation:flicker 3.2s ease-in-out infinite;}
+@keyframes flicker{0%,100%{opacity:.85;}45%{opacity:.55;}60%{opacity:1;}}
+.stat-chip{position:absolute;bottom:-6px;left:8px;background:rgba(20,16,15,.55);backdrop-filter:blur(6px);border:1px solid var(--line-light);border-radius:12px;padding:10px 16px;font-family:var(--mono);color:var(--paper);}
+.stat-chip .n{font-size:1.3rem;font-weight:700;color:var(--amber);}
+.stat-chip .l{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(251,247,241,.7);}
+
+@media (max-width:920px){
+  .reel-grid-layout{grid-template-columns:1fr;}
+  .projector-wrap{height:220px;order:-1;}
+  .reel.r1{width:120px;height:120px;left:0;}
+  .reel.r2{width:96px;height:96px;right:0;}
+  .beam{left:130px;width:150px;height:80px;}
+}
+
+/* ================= STATS STRIP ================= */
+.stats-strip{background:var(--ink);border-top:1px solid var(--line-light);border-bottom:1px solid var(--line-light);padding:34px clamp(20px,4vw,56px);}
+.stats-inner{max-width:var(--container);margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center;}
+.stat{color:var(--paper);}
+.stat .num{font-family:var(--mono);font-weight:700;font-size:clamp(1.6rem,3vw,2.2rem);color:var(--cyan);}
+.stat .lbl{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(251,247,241,.6);margin-top:6px;}
+@media (max-width:700px){.stats-inner{grid-template-columns:repeat(2,1fr);}}
+
+/* ================= INTRO + REEL SHOWCASE ================= */
+.films-intro{max-width:760px;margin:86px auto 10px;padding:0 clamp(20px,4vw,56px);text-align:center;}
+.tag{font-family:var(--mono);font-size:.78rem;letter-spacing:.12em;color:var(--red);font-weight:700;text-transform:uppercase;}
+.films-intro h2{font-size:clamp(1.8rem,3.6vw,2.6rem);text-transform:uppercase;margin-top:14px;}
+.films-intro p{margin-top:20px;color:var(--mute);font-size:1.02rem;line-height:1.7;}
+
+.showcase{max-width:var(--container);margin:56px auto 100px;padding:0 clamp(20px,4vw,56px);}
+.showcase-head{display:flex;align-items:baseline;justify-content:space-between;gap:20px;margin-bottom:30px;flex-wrap:wrap;}
+.showcase-head h3{font-size:clamp(1.3rem,2.4vw,1.7rem);text-transform:uppercase;}
+.reel-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;}
+.reel-card{position:relative;border-radius:14px;overflow:hidden;aspect-ratio:3/4;cursor:pointer;background:var(--ink);}
+.reel-card img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease,filter .6s ease;}
+.reel-card:hover img{transform:scale(1.08);filter:brightness(.55);}
+.reel-scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,16,15,0) 40%,rgba(20,16,15,.9) 100%);}
+.reel-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) scale(.85);width:56px;height:56px;border-radius:50%;background:rgba(251,247,241,.14);border:1.5px solid rgba(251,247,241,.5);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .3s,transform .3s;backdrop-filter:blur(3px);}
+.reel-play svg{width:18px;height:18px;fill:var(--paper);margin-left:3px;}
+.reel-card:hover .reel-play{opacity:1;transform:translate(-50%,-50%) scale(1);}
+.reel-cat{position:absolute;top:12px;left:12px;z-index:2;font-family:var(--mono);font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--paper);background:rgba(20,16,15,.55);padding:5px 10px;border-radius:999px;}
+.reel-name{position:absolute;left:14px;right:14px;bottom:14px;z-index:2;color:var(--paper);font-family:var(--display);font-size:1rem;text-transform:uppercase;line-height:1.15;}
+@media (max-width:980px){.reel-grid{grid-template-columns:repeat(2,1fr);}}
+@media (max-width:560px){.reel-grid{grid-template-columns:1fr;}}
+
+/* ================= END CREDITS TICKER (signature element) ================= */
+.credits-strip{background:var(--ink);overflow:hidden;padding:20px 0;border-top:1px solid var(--line-light);border-bottom:1px solid var(--line-light);}
+.credits-track{display:flex;gap:48px;white-space:nowrap;width:max-content;animation:creditscroll 28s linear infinite;font-family:var(--mono);font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(251,247,241,.55);}
+.credits-track span{display:inline-flex;align-items:center;gap:10px;}
+.credits-track span::before{content:"\2726";color:var(--red);font-size:.7rem;}
+@keyframes creditscroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+.credits-strip:hover .credits-track{animation-play-state:paused;}
+
+/* ================= RED BANNER SECTIONS ================= */
+.band{background:linear-gradient(120deg,var(--red),var(--red-deep));padding:22px clamp(20px,4vw,56px);text-align:center;margin:0 auto;max-width:var(--container);border-radius:16px;}
+.band h2{color:var(--paper);font-size:clamp(1.3rem,2.6vw,1.8rem);text-transform:uppercase;}
+.band-wrap{padding:0 clamp(20px,4vw,56px);margin-top:90px;}
+
+.card-grid{max-width:var(--container);margin:34px auto 100px;padding:0 clamp(20px,4vw,56px);display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
+.svc-card{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;transition:transform .3s,box-shadow .3s;}
+.svc-card:hover{transform:translateY(-6px);box-shadow:0 20px 40px -20px rgba(20,16,15,.25);}
+.svc-card-media{aspect-ratio:16/10;background-size:cover;background-position:center;position:relative;}
+.svc-card-media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,16,15,0) 55%,rgba(20,16,15,.5) 100%);}
+.svc-card-body{padding:24px 24px 28px;}
+.svc-card-body h3{font-size:1.08rem;text-transform:uppercase;color:var(--ink);margin-bottom:14px;}
+.svc-card-body ul li{position:relative;padding-left:18px;font-size:.88rem;color:var(--mute);line-height:1.9;}
+.svc-card-body ul li::before{content:"";position:absolute;left:0;top:11px;width:6px;height:6px;border-radius:50%;background:var(--red);}
+.svc-card-body p{font-size:.9rem;color:var(--mute);line-height:1.75;}
+@media (max-width:980px){.card-grid{grid-template-columns:1fr;}}
+
+/* ================= CTA ================= */
+.reel-cta{max-width:var(--container);margin:20px auto 100px;padding:0 clamp(20px,4vw,56px);}
+.reel-cta-inner{background:var(--ink);border-radius:22px;padding:56px clamp(28px,5vw,64px);display:flex;align-items:center;justify-content:space-between;gap:30px;flex-wrap:wrap;position:relative;overflow:hidden;}
+.reel-cta-inner::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 85% 20%,rgba(0,230,195,.14),transparent 55%);}
+.reel-cta-text{position:relative;z-index:1;}
+.reel-cta-text .tag{color:var(--cyan);}
+.reel-cta-text h2{color:var(--paper);font-size:clamp(1.5rem,3vw,2.1rem);text-transform:uppercase;margin-top:10px;max-width:16ch;}
+.reel-cta a.btn-solid{position:relative;z-index:1;}
+
+
+/* ==== UNIFIED SITE NAV + FOOTER (oxnav / oxfoot) ==== */
+.oxnav{position:sticky;top:0;z-index:999;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:13px clamp(20px,4vw,56px);background:rgba(251,247,241,.95);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid rgba(20,16,15,.1);font-family:'Inter',sans-serif;box-shadow:0 2px 18px rgba(20,16,15,.05);}
+.oxnav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;flex:0 0 auto;}
+.oxnav-mark{position:relative;width:36px;height:36px;border-radius:50%;border:2px solid #14100F;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.68rem;letter-spacing:.02em;color:#E8283B;background:#fff;flex:0 0 auto;font-family:'Inter',sans-serif;}
+.oxnav-dot{position:absolute;top:-2px;right:-2px;width:8px;height:8px;border-radius:50%;background:#00E6C3;box-shadow:0 0 0 2px #FBF7F1;animation:oxpulse 1.8s infinite;}
+@keyframes oxpulse{0%{box-shadow:0 0 0 0 rgba(0,230,195,.6),0 0 0 2px #FBF7F1;}70%{box-shadow:0 0 0 6px rgba(0,230,195,0),0 0 0 2px #FBF7F1;}100%{box-shadow:0 0 0 0 rgba(0,230,195,0),0 0 0 2px #FBF7F1;}}
+.oxnav-word{font-weight:800;font-size:1rem;letter-spacing:.02em;color:#14100F;text-transform:uppercase;white-space:nowrap;font-family:'Inter',sans-serif;}
+.oxnav-word em{font-style:normal;color:#E8283B;}
+.oxnav-links{display:flex;align-items:center;gap:clamp(10px,1.6vw,22px);flex-wrap:nowrap;}
+.oxnav-links a{position:relative;font-size:.79rem;font-weight:600;letter-spacing:.01em;color:#14100F;text-decoration:none;opacity:.7;padding:6px 1px;transition:opacity .2s;white-space:nowrap;font-family:'Inter',sans-serif;}
+.oxnav-links a:hover{opacity:1;}
+.oxnav-links a.oxnav-active{opacity:1;}
+.oxnav-links a.oxnav-active::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:2px;background:#E8283B;}
+.oxnav-right{display:flex;align-items:center;gap:14px;flex:0 0 auto;}
+.oxnav-social{display:flex;gap:9px;}
+.oxnav-social a{width:27px;height:27px;border-radius:50%;border:1px solid rgba(20,16,15,.15);display:flex;align-items:center;justify-content:center;color:#14100F;transition:all .2s;}
+.oxnav-social a svg{width:12px;height:12px;display:block;}
+.oxnav-social a:hover{background:#14100F;border-color:#14100F;color:#FBF7F1;}
+.oxnav-cta{background:#E8283B;color:#FBF7F1 !important;opacity:1 !important;font-size:.76rem;font-weight:700;letter-spacing:.03em;text-transform:uppercase;padding:9px 18px;border-radius:999px;text-decoration:none;white-space:nowrap;transition:background .2s,transform .2s;}
+.oxnav-cta:hover{background:#14100F;transform:translateY(-1px);}
+.oxnav-cta::after{display:none !important;}
+.oxnav-toggle{display:none;background:none;border:none;cursor:pointer;width:28px;height:18px;flex-direction:column;justify-content:space-between;padding:0;flex:0 0 auto;z-index:2;}
+.oxnav-toggle span{display:block;height:2px;background:#14100F;border-radius:2px;}
+@media (max-width:980px){
+  .oxnav-links{position:absolute;top:100%;left:0;right:0;background:#FBF7F1;flex-direction:column;align-items:flex-start;gap:0;border-bottom:1px solid rgba(20,16,15,.1);max-height:0;overflow:hidden;transition:max-height .3s ease;}
+  .oxnav-links.is-open{max-height:520px;}
+  .oxnav-links a{width:100%;padding:14px clamp(20px,4vw,56px);border-bottom:1px solid rgba(20,16,15,.06);box-sizing:border-box;}
+  .oxnav-links a.oxnav-active::after{display:none;}
+  .oxnav-links a.oxnav-active{color:#E8283B;}
+  .oxnav-right .oxnav-social{display:none;}
+  .oxnav-right .oxnav-cta{display:none;}
+  .oxnav-toggle{display:flex;}
+}
+
+.oxfoot{background:#14100F;color:#FBF7F1;font-family:'Inter',sans-serif;padding:60px clamp(20px,4vw,56px) 26px;}
+.oxfoot-top{display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;max-width:560px;margin:0 auto 46px;}
+.oxfoot-brand{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.oxfoot-mark{width:40px;height:40px;border-radius:50%;border:2px solid #E8283B;display:flex;align-items:center;justify-content:center;color:#E8283B;font-weight:800;font-size:.72rem;font-family:'Inter',sans-serif;}
+.oxfoot-word{font-weight:800;font-size:1.08rem;letter-spacing:.02em;color:#FBF7F1;text-transform:uppercase;font-family:'Inter',sans-serif;}
+.oxfoot-word em{font-style:normal;color:#E8283B;}
+.oxfoot-tag{font-size:.88rem;line-height:1.65;color:rgba(251,247,241,.65);}
+.oxfoot-social{display:flex;gap:12px;}
+.oxfoot-social a{width:34px;height:34px;border-radius:50%;border:1px solid rgba(251,247,241,.25);display:flex;align-items:center;justify-content:center;color:#FBF7F1;transition:all .2s;}
+.oxfoot-social a svg{width:14px;height:14px;display:block;}
+.oxfoot-social a:hover{background:#E8283B;border-color:#E8283B;}
+.oxfoot-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:900px;margin:0 auto;padding-bottom:38px;border-bottom:1px solid rgba(251,247,241,.12);}
+.oxfoot-col{display:flex;flex-direction:column;gap:11px;}
+.oxfoot-h{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#E8283B;margin-bottom:2px;}
+.oxfoot-col a,.oxfoot-col span{font-size:.85rem;color:rgba(251,247,241,.72);text-decoration:none;transition:color .2s;}
+.oxfoot-col a:hover{color:#FBF7F1;}
+.oxfoot-bottom{text-align:center;padding-top:22px;font-size:.76rem;color:rgba(251,247,241,.45);}
+@media(max-width:700px){.oxfoot-grid{grid-template-columns:1fr;text-align:center;}}
+
+</style>
+</head>
+<body>
+
+<header class="oxnav">
+  <a href="index.html" class="oxnav-brand">
+    <span class="oxnav-mark">OM<i class="oxnav-dot" aria-hidden="true"></i></span>
+    <span class="oxnav-word">OXYGEN<em>MEDIA</em></span>
+  </a>
+  <div class="oxnav-links" id="oxnavLinks" role="navigation" aria-label="Primary">
+    <a href="index.html">Home</a>
+    <a href="about.html">Who We Are</a>
+    <a href="services.html">Our Services</a>
+    <a href="media-buying.html">Media Buying</a>
+    <a href="us-onboard.html">Us Onboard</a>
+    <a href="brand-portfolio.html">Brand Portfolio</a>
+    <a href="pr-films.html" class="oxnav-active">Pr and Films</a>
+    <a href="contact.html">Contact Us</a>
+  </div>
+  <div class="oxnav-right">
+    <div class="oxnav-social">
+      <a href="#" title="Facebook" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.5 9.95v-7.04H7.9V12h2.6V9.8c0-2.57 1.53-3.99 3.87-3.99 1.12 0 2.3.2 2.3.2v2.53h-1.3c-1.28 0-1.68.8-1.68 1.62V12h2.86l-.46 2.91h-2.4v7.04A10 10 0 0 0 22 12Z"/></svg></a>
+      <a href="#" title="Instagram" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1"/></svg></a>
+      <a href="#" title="Twitter" aria-label="Twitter"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 5.9c-.77.35-1.6.58-2.46.68a4.3 4.3 0 0 0 1.88-2.37 8.6 8.6 0 0 1-2.72 1.04 4.28 4.28 0 0 0-7.29 3.9A12.14 12.14 0 0 1 2.9 4.7a4.28 4.28 0 0 0 1.32 5.71c-.7-.02-1.36-.22-1.94-.53v.05a4.28 4.28 0 0 0 3.43 4.2c-.65.18-1.33.2-1.98.08a4.29 4.29 0 0 0 4 2.98A8.6 8.6 0 0 1 1 18.58a12.13 12.13 0 0 0 6.56 1.92c7.88 0 12.2-6.53 12.2-12.2 0-.19 0-.37-.01-.55A8.7 8.7 0 0 0 22 5.9Z"/></svg></a>
+    </div>
+    <a href="contact.html" class="oxnav-cta">Let's Talk</a>
+  </div>
+  <button class="oxnav-toggle" id="oxnavToggle" aria-label="Toggle menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+<script>
+(function(){
+  var t=document.getElementById('oxnavToggle'), l=document.getElementById('oxnavLinks');
+  if(t&&l){
+    t.addEventListener('click',function(){
+      var open=l.classList.toggle('is-open');
+      t.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    l.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click',function(){ l.classList.remove('is-open'); t.setAttribute('aria-expanded','false'); });
+    });
+  }
+})();
+</script>
+
+<!-- HERO -->
+<section class="reel-hero">
+  <div class="reel-glow g1"></div>
+  <div class="reel-glow g2"></div>
+  <div class="rec-badge" aria-hidden="true"><span class="rec-dot"></span> REC <span class="rec-time" id="recTime">00:00:00</span></div>
+
+  <div class="reel-grid-layout">
+    <div>
+      <p class="reel-eyebrow"><span class="reel-eyebrow-rule"></span>Pr &amp; Films Division</p>
+      <h1 class="reel-title">Oxygen Media<br>Production &amp;<br><span class="hl">Videography.</span></h1>
+      <p class="reel-sub">Scripts, sets and storytelling &mdash; our production arm turns briefs into films, campaigns and content that hold an audience's attention from frame one.</p>
+      <div class="reel-actions">
+        <a href="#showcase" class="btn-solid">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          Watch Our Work
+        </a>
+        <a href="contact.html" class="btn-ghost">Start a Production</a>
+      </div>
+    </div>
+
+    <div class="projector-wrap reveal">
+      <div class="reel r1"></div>
+      <div class="reel r2"></div>
+      <div class="beam" aria-hidden="true"></div>
+      <div class="stat-chip"><div class="n">120+</div><div class="l">Productions Shipped</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats-strip">
+  <div class="stats-inner">
+    <div class="stat reveal"><div class="num" data-count="120">0</div><div class="lbl">Productions Delivered</div></div>
+    <div class="stat reveal"><div class="num" data-count="45">0</div><div class="lbl">Brands Filmed</div></div>
+    <div class="stat reveal"><div class="num" data-count="9">0</div><div class="lbl">Years Behind The Lens</div></div>
+    <div class="stat reveal"><div class="num" data-count="4">0</div><div class="lbl">Native 4K Delivery</div></div>
+  </div>
+</section>
+
+<!-- OXYGEN FILMS INTRO -->
+<section class="films-intro reveal">
+  <p class="tag">Oxygen Films</p>
+  <h2>Stories Told Through The Lens</h2>
+  <p>Our film production and videography team specialises in creating visual content for every industry and application. We focus on producing high-quality video and film content that engages, informs and inspires audiences &mdash; from first storyboard to final grade.</p>
+</section>
+
+<!-- SHOWCASE -->
+<section class="showcase" id="showcase">
+  <div class="showcase-head reveal">
+    <h3>Watch Our Work</h3>
+    <span class="tag">04 Reels</span>
+  </div>
+  <div class="reel-grid">
+    <div class="reel-card reveal">
+      <img src="https://images.pexels.com/photos/19224452/pexels-photo-19224452.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Corporate showreel still">
+      <div class="reel-scrim"></div>
+      <div class="reel-cat">01 &middot; Corporate</div>
+      <div class="reel-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      <div class="reel-name">Corporate Showreel</div>
+    </div>
+    <div class="reel-card reveal" style="transition-delay:.08s">
+      <img src="https://images.pexels.com/photos/2833037/pexels-photo-2833037.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Event highlights still">
+      <div class="reel-scrim"></div>
+      <div class="reel-cat">02 &middot; Events</div>
+      <div class="reel-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      <div class="reel-name">Event Highlights</div>
+    </div>
+    <div class="reel-card reveal" style="transition-delay:.16s">
+      <img src="https://images.pexels.com/photos/8102676/pexels-photo-8102676.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Behind the scenes editing still">
+      <div class="reel-scrim"></div>
+      <div class="reel-cat">03 &middot; BTS</div>
+      <div class="reel-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      <div class="reel-name">Behind The Scenes</div>
+    </div>
+    <div class="reel-card reveal" style="transition-delay:.24s">
+      <img src="https://images.pexels.com/photos/1047443/pexels-photo-1047443.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Brand campaign still">
+      <div class="reel-scrim"></div>
+      <div class="reel-cat">04 &middot; Campaign</div>
+      <div class="reel-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      <div class="reel-name">Brand Campaign</div>
+    </div>
+  </div>
+</section>
+
+<!-- END CREDITS TICKER -->
+<div class="credits-strip" aria-hidden="true">
+  <div class="credits-track">
+    <span>Directed By Oxygen Films</span><span>Cinematography</span><span>Colour Grading</span><span>Sound Design</span><span>Motion Graphics</span><span>Post-Production</span><span>Documentary</span><span>Brand Films</span><span>Live Streaming</span>
+    <span>Directed By Oxygen Films</span><span>Cinematography</span><span>Colour Grading</span><span>Sound Design</span><span>Motion Graphics</span><span>Post-Production</span><span>Documentary</span><span>Brand Films</span><span>Live Streaming</span>
+  </div>
+</div>
+
+<!-- SERVICE OFFERING -->
+<div class="band-wrap reveal">
+  <div class="band"><h2>Service Offering</h2></div>
+</div>
+<div class="card-grid">
+  <div class="svc-card reveal">
+    <div class="svc-card-media" style="background-image:url('https://images.pexels.com/photos/13451104/pexels-photo-13451104.jpeg?auto=compress&cs=tinysrgb&w=700')"></div>
+    <div class="svc-card-body">
+      <h3>Film &amp; Video Production</h3>
+      <ul>
+        <li>Concept development &amp; scriptwriting</li>
+        <li>Pre-production planning &amp; coordination</li>
+        <li>Filming &amp; video production</li>
+        <li>Post-production editing &amp; visual effects</li>
+        <li>Sound design &amp; music composition</li>
+      </ul>
+    </div>
+  </div>
+  <div class="svc-card reveal" style="transition-delay:.08s">
+    <div class="svc-card-media" style="background-image:url('https://images.pexels.com/photos/8102676/pexels-photo-8102676.jpeg?auto=compress&cs=tinysrgb&w=700')"></div>
+    <div class="svc-card-body">
+      <h3>Videography Services</h3>
+      <ul>
+        <li>Corporate video production</li>
+        <li>Event videography (weddings, conferences)</li>
+        <li>Commercial video production</li>
+        <li>Music video production</li>
+        <li>Documentary filmmaking</li>
+        <li>Live streaming &amp; online video</li>
+      </ul>
+    </div>
+  </div>
+  <div class="svc-card reveal" style="transition-delay:.16s">
+    <div class="svc-card-media" style="background-image:url('https://images.pexels.com/photos/17279851/pexels-photo-17279851.jpeg?auto=compress&cs=tinysrgb&w=700')"></div>
+    <div class="svc-card-body">
+      <h3>Brand Positioning</h3>
+      <p>Strategic identity that stands out and drives loyalty. We shape how a brand looks, sounds and feels on screen &mdash; so every frame reinforces the story you're telling.</p>
+    </div>
+  </div>
+</div>
+
+<!-- INDUSTRIES WE SERVE -->
+<div class="band-wrap reveal">
+  <div class="band"><h2>Industries We Serve</h2></div>
+</div>
+<div class="card-grid">
+  <div class="svc-card reveal">
+    <div class="svc-card-media" style="background-image:url('https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=700')"></div>
+    <div class="svc-card-body">
+      <h3>Corporate Sector</h3>
+      <ul>
+        <li>Company profiles &amp; promotional videos</li>
+        <li>Training &amp; educational videos</li>
+        <li>Marketing &amp; advertising campaigns</li>
+      </ul>
+    </div>
+  </div>
+  <div class="svc-card reveal" style="transition-delay:.08s">
+    <div class="svc-card-media" style="background-image:url('https://images.pexels.com/photos/1047443/pexels-photo-1047443.jpeg?auto=compress&cs=tinysrgb&w=700')"></div>
+    <div class="svc-card-body">
+      <h3>Entertainment Industry</h3>
+      <ul>
+        <li>Film &amp; television production</li>
+        <li>Music videos &amp; live performances</li>
+        <li>Commercials &amp; advertising campaigns</li>
+      </ul>
+    </div>
+  </div>
+  <div class="svc-card reveal" style="transition-delay:.16s">
+    <div class="svc-card-media" style="background-image:url('https://images.pexels.com/photos/19224452/pexels-photo-19224452.jpeg?auto=compress&cs=tinysrgb&w=700')"></div>
+    <div class="svc-card-body">
+      <h3>Non-Profit &amp; Education</h3>
+      <ul>
+        <li>Documentary filmmaking &amp; social impact</li>
+        <li>Educational videos &amp; online courses</li>
+        <li>Fundraising &amp; awareness campaigns</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- WHY WORK WITH US -->
+<div class="band-wrap reveal">
+  <div class="band"><h2>Why Work With Oxygen Films?</h2></div>
+</div>
+<div class="card-grid">
+  <div class="svc-card reveal">
+    <div class="svc-card-media" style="background-image:url('https://images.pexels.com/photos/14408918/pexels-photo-14408918.jpeg?auto=compress&cs=tinysrgb&w=700')"></div>
+    <div class="svc-card-body">
+      <h3>High-Quality Content</h3>
+      <ul>
+        <li>Professional equipment &amp; expertise</li>
+        <li>Attention to detail &amp; creative vision</li>
+      </ul>
+    </div>
+  </div>
+  <div class="svc-card reveal" style="transition-delay:.08s">
+    <div class="svc-card-media" style="background-image:url('https://images.pexels.com/photos/27616685/pexels-photo-27616685.jpeg?auto=compress&cs=tinysrgb&w=700')"></div>
+    <div class="svc-card-body">
+      <h3>Engaging Storytelling</h3>
+      <ul>
+        <li>Compelling narratives &amp; storytelling techniques</li>
+        <li>Emotional connection with audiences</li>
+      </ul>
+    </div>
+  </div>
+  <div class="svc-card reveal" style="transition-delay:.16s">
+    <div class="svc-card-media" style="background-image:url('https://images.pexels.com/photos/5082579/pexels-photo-5082579.jpeg?auto=compress&cs=tinysrgb&w=700')"></div>
+    <div class="svc-card-body">
+      <h3>Increased Brand Awareness</h3>
+      <ul>
+        <li>Effective marketing &amp; advertising campaigns</li>
+        <li>Enhanced brand reputation &amp; credibility</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<section class="reel-cta reveal">
+  <div class="reel-cta-inner">
+    <div class="reel-cta-text">
+      <p class="tag">Ready When You Are</p>
+      <h2>Let's Put Your Brand On Camera</h2>
+    </div>
+    <a href="contact.html" class="btn-solid">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      Start A Production
+    </a>
+  </div>
+</section>
+
+<footer class="oxfoot">
+  <div class="oxfoot-top">
+    <a href="index.html" class="oxfoot-brand">
+      <span class="oxfoot-mark">OM</span>
+      <span class="oxfoot-word">OXYGEN<em>MEDIA</em></span>
+    </a>
+    <p class="oxfoot-tag">Breathing life into brands across South Africa &mdash; media buying, PR, film and full-service creative, all under one roof.</p>
+    <div class="oxfoot-social">
+      <a href="#" title="Facebook" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.5 9.95v-7.04H7.9V12h2.6V9.8c0-2.57 1.53-3.99 3.87-3.99 1.12 0 2.3.2 2.3.2v2.53h-1.3c-1.28 0-1.68.8-1.68 1.62V12h2.86l-.46 2.91h-2.4v7.04A10 10 0 0 0 22 12Z"/></svg></a>
+      <a href="#" title="Instagram" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1"/></svg></a>
+      <a href="#" title="Twitter" aria-label="Twitter"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 5.9c-.77.35-1.6.58-2.46.68a4.3 4.3 0 0 0 1.88-2.37 8.6 8.6 0 0 1-2.72 1.04 4.28 4.28 0 0 0-7.29 3.9A12.14 12.14 0 0 1 2.9 4.7a4.28 4.28 0 0 0 1.32 5.71c-.7-.02-1.36-.22-1.94-.53v.05a4.28 4.28 0 0 0 3.43 4.2c-.65.18-1.33.2-1.98.08a4.29 4.29 0 0 0 4 2.98A8.6 8.6 0 0 1 1 18.58a12.13 12.13 0 0 0 6.56 1.92c7.88 0 12.2-6.53 12.2-12.2 0-.19 0-.37-.01-.55A8.7 8.7 0 0 0 22 5.9Z"/></svg></a>
+    </div>
+  </div>
+  <div class="oxfoot-grid">
+    <div class="oxfoot-col">
+      <div class="oxfoot-h">Explore</div>
+      <a href="index.html">Home</a>
+      <a href="about.html">Who We Are</a>
+      <a href="services.html">Our Services</a>
+      <a href="media-buying.html">Media Buying</a>
+    </div>
+    <div class="oxfoot-col">
+      <div class="oxfoot-h">Company</div>
+      <a href="us-onboard.html">Us Onboard</a>
+      <a href="brand-portfolio.html">Brand Portfolio</a>
+      <a href="pr-films.html">Pr and Films</a>
+      <a href="contact.html">Contact Us</a>
+    </div>
+    <div class="oxfoot-col">
+      <div class="oxfoot-h">Get In Touch</div>
+      <a href="tel:+27823717340">+27 82 371 7340</a>
+      <a href="mailto:info@oxygenmedia.co.za">info@oxygenmedia.co.za</a>
+      <span>Melville, Johannesburg, South Africa</span>
+    </div>
+  </div>
+  <div class="oxfoot-bottom">&copy; Copyright 2026 Oxygen Media. All rights reserved.</div>
+</footer>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible','is-visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+
+  const counters = document.querySelectorAll('.stat .num');
+  const cio = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      const target = parseInt(el.getAttribute('data-count'), 10) || 0;
+      const dur = 1400;
+      const start = performance.now();
+      function tick(now){
+        const p = Math.min(1, (now - start) / dur);
+        el.textContent = Math.floor(p * target) + (p === 1 ? '+' : '');
+        if (p < 1) requestAnimationFrame(tick); else el.textContent = target + '+';
+      }
+      requestAnimationFrame(tick);
+      cio.unobserve(el);
+    });
+  }, { threshold: 0.4 });
+  counters.forEach(el => cio.observe(el));
+
+  (function(){
+    const el = document.getElementById('recTime');
+    if (!el) return;
+    let secs = 0;
+    setInterval(() => {
+      secs++;
+      const h = String(Math.floor(secs/3600)).padStart(2,'0');
+      const m = String(Math.floor((secs%3600)/60)).padStart(2,'0');
+      const s = String(secs%60).padStart(2,'0');
+      el.textContent = `${h}:${m}:${s}`;
+    }, 1000);
+  })();
+</script>
+</body>
+</html>
