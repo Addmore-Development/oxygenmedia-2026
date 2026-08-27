@@ -906,10 +906,7 @@
 
 /* ==== UNIFIED SITE NAV + FOOTER (oxnav / oxfoot) ==== */
 .oxnav{position:sticky;top:0;z-index:999;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:13px clamp(20px,4vw,56px);background:rgba(251,247,241,.95);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid rgba(20,16,15,.1);font-family:'Inter',sans-serif;box-shadow:0 2px 18px rgba(20,16,15,.05);}
-.oxnav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;flex:0 0 auto;}
-.oxnav-mark{position:relative;width:36px;height:36px;border-radius:50%;border:2px solid #14100F;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.68rem;letter-spacing:.02em;color:#E8283B;background:#fff;flex:0 0 auto;font-family:'Inter',sans-serif;}
-.oxnav-dot{position:absolute;top:-2px;right:-2px;width:8px;height:8px;border-radius:50%;background:#00E6C3;box-shadow:0 0 0 2px #FBF7F1;animation:oxpulse 1.8s infinite;}
-@keyframes oxpulse{0%{box-shadow:0 0 0 0 rgba(0,230,195,.6),0 0 0 2px #FBF7F1;}70%{box-shadow:0 0 0 6px rgba(0,230,195,0),0 0 0 2px #FBF7F1;}100%{box-shadow:0 0 0 0 rgba(0,230,195,0),0 0 0 2px #FBF7F1;}}
+.oxnav-brand{display:flex;align-items:center;text-decoration:none;flex:0 0 auto;}
 .oxnav-word{font-weight:800;font-size:1rem;letter-spacing:.02em;color:#14100F;text-transform:uppercase;white-space:nowrap;font-family:'Inter',sans-serif;}
 .oxnav-word em{font-style:normal;color:#E8283B;}
 .oxnav-links{display:flex;align-items:center;gap:clamp(10px,1.6vw,22px);flex-wrap:nowrap;}
@@ -922,9 +919,6 @@
 .oxnav-social a{width:27px;height:27px;border-radius:50%;border:1px solid rgba(20,16,15,.15);display:flex;align-items:center;justify-content:center;color:#14100F;transition:all .2s;}
 .oxnav-social a svg{width:12px;height:12px;display:block;}
 .oxnav-social a:hover{background:#14100F;border-color:#14100F;color:#FBF7F1;}
-.oxnav-cta{background:#E8283B;color:#FBF7F1 !important;opacity:1 !important;font-size:.76rem;font-weight:700;letter-spacing:.03em;text-transform:uppercase;padding:9px 18px;border-radius:999px;text-decoration:none;white-space:nowrap;transition:background .2s,transform .2s;}
-.oxnav-cta:hover{background:#14100F;transform:translateY(-1px);}
-.oxnav-cta::after{display:none !important;}
 .oxnav-toggle{display:none;background:none;border:none;cursor:pointer;width:28px;height:18px;flex-direction:column;justify-content:space-between;padding:0;flex:0 0 auto;z-index:2;}
 .oxnav-toggle span{display:block;height:2px;background:#14100F;border-radius:2px;}
 @media (max-width:980px){
@@ -934,28 +928,13 @@
   .oxnav-links a.oxnav-active::after{display:none;}
   .oxnav-links a.oxnav-active{color:#E8283B;}
   .oxnav-right .oxnav-social{display:none;}
-  .oxnav-right .oxnav-cta{display:none;}
   .oxnav-toggle{display:flex;}
 }
 
-.oxfoot{background:#14100F;color:#FBF7F1;font-family:'Inter',sans-serif;padding:60px clamp(20px,4vw,56px) 26px;}
-.oxfoot-top{display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;max-width:560px;margin:0 auto 46px;}
-.oxfoot-brand{display:flex;align-items:center;gap:10px;text-decoration:none;}
-.oxfoot-mark{width:40px;height:40px;border-radius:50%;border:2px solid #E8283B;display:flex;align-items:center;justify-content:center;color:#E8283B;font-weight:800;font-size:.72rem;font-family:'Inter',sans-serif;}
-.oxfoot-word{font-weight:800;font-size:1.08rem;letter-spacing:.02em;color:#FBF7F1;text-transform:uppercase;font-family:'Inter',sans-serif;}
-.oxfoot-word em{font-style:normal;color:#E8283B;}
-.oxfoot-tag{font-size:.88rem;line-height:1.65;color:rgba(251,247,241,.65);}
-.oxfoot-social{display:flex;gap:12px;}
-.oxfoot-social a{width:34px;height:34px;border-radius:50%;border:1px solid rgba(251,247,241,.25);display:flex;align-items:center;justify-content:center;color:#FBF7F1;transition:all .2s;}
-.oxfoot-social a svg{width:14px;height:14px;display:block;}
-.oxfoot-social a:hover{background:#E8283B;border-color:#E8283B;}
-.oxfoot-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:900px;margin:0 auto;padding-bottom:38px;border-bottom:1px solid rgba(251,247,241,.12);}
-.oxfoot-col{display:flex;flex-direction:column;gap:11px;}
-.oxfoot-h{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#E8283B;margin-bottom:2px;}
-.oxfoot-col a,.oxfoot-col span{font-size:.85rem;color:rgba(251,247,241,.72);text-decoration:none;transition:color .2s;}
-.oxfoot-col a:hover{color:#FBF7F1;}
-.oxfoot-bottom{text-align:center;padding-top:22px;font-size:.76rem;color:rgba(251,247,241,.45);}
-@media(max-width:700px){.oxfoot-grid{grid-template-columns:1fr;text-align:center;}}
+.oxfoot{background:#FBF7F1;color:#14100F;font-family:'Inter',sans-serif;padding:26px clamp(20px,4vw,56px);text-align:center;border-top:1px solid rgba(20,16,15,.08);}
+.oxfoot-bottom{font-size:.8rem;color:rgba(20,16,15,.6);}
+.oxfoot-bottom a{color:#E8283B;text-decoration:none;font-weight:600;}
+.oxfoot-bottom a:hover{text-decoration:underline;}
 
 </style>
 </head>
@@ -964,7 +943,6 @@
 <!-- HERO -->
 <header class="oxnav" id="navbar">
   <a href="index.html" class="oxnav-brand">
-    <span class="oxnav-mark">OM<i class="oxnav-dot" aria-hidden="true"></i></span>
     <span class="oxnav-word">OXYGEN<em>MEDIA</em></span>
   </a>
   <div class="oxnav-links" id="oxnavLinks" role="navigation" aria-label="Primary">
@@ -983,7 +961,6 @@
       <a href="#" title="Instagram" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1"/></svg></a>
       <a href="#" title="Twitter" aria-label="Twitter"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 5.9c-.77.35-1.6.58-2.46.68a4.3 4.3 0 0 0 1.88-2.37 8.6 8.6 0 0 1-2.72 1.04 4.28 4.28 0 0 0-7.29 3.9A12.14 12.14 0 0 1 2.9 4.7a4.28 4.28 0 0 0 1.32 5.71c-.7-.02-1.36-.22-1.94-.53v.05a4.28 4.28 0 0 0 3.43 4.2c-.65.18-1.33.2-1.98.08a4.29 4.29 0 0 0 4 2.98A8.6 8.6 0 0 1 1 18.58a12.13 12.13 0 0 0 6.56 1.92c7.88 0 12.2-6.53 12.2-12.2 0-.19 0-.37-.01-.55A8.7 8.7 0 0 0 22 5.9Z"/></svg></a>
     </div>
-    <a href="contact.html" class="oxnav-cta">Let's Talk</a>
   </div>
   <button class="oxnav-toggle" id="oxnavToggle" aria-label="Toggle menu" aria-expanded="false">
     <span></span><span></span><span></span>
@@ -1201,41 +1178,7 @@
 </section>
 
 <footer class="oxfoot">
-  <div class="oxfoot-top">
-    <a href="index.html" class="oxfoot-brand">
-      <span class="oxfoot-mark">OM</span>
-      <span class="oxfoot-word">OXYGEN<em>MEDIA</em></span>
-    </a>
-    <p class="oxfoot-tag">Breathing life into brands across South Africa &mdash; media buying, PR, film and full-service creative, all under one roof.</p>
-    <div class="oxfoot-social">
-      <a href="#" title="Facebook" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.5 9.95v-7.04H7.9V12h2.6V9.8c0-2.57 1.53-3.99 3.87-3.99 1.12 0 2.3.2 2.3.2v2.53h-1.3c-1.28 0-1.68.8-1.68 1.62V12h2.86l-.46 2.91h-2.4v7.04A10 10 0 0 0 22 12Z"/></svg></a>
-      <a href="#" title="Instagram" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1"/></svg></a>
-      <a href="#" title="Twitter" aria-label="Twitter"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 5.9c-.77.35-1.6.58-2.46.68a4.3 4.3 0 0 0 1.88-2.37 8.6 8.6 0 0 1-2.72 1.04 4.28 4.28 0 0 0-7.29 3.9A12.14 12.14 0 0 1 2.9 4.7a4.28 4.28 0 0 0 1.32 5.71c-.7-.02-1.36-.22-1.94-.53v.05a4.28 4.28 0 0 0 3.43 4.2c-.65.18-1.33.2-1.98.08a4.29 4.29 0 0 0 4 2.98A8.6 8.6 0 0 1 1 18.58a12.13 12.13 0 0 0 6.56 1.92c7.88 0 12.2-6.53 12.2-12.2 0-.19 0-.37-.01-.55A8.7 8.7 0 0 0 22 5.9Z"/></svg></a>
-    </div>
-  </div>
-  <div class="oxfoot-grid">
-    <div class="oxfoot-col">
-      <div class="oxfoot-h">Explore</div>
-      <a href="index.html">Home</a>
-      <a href="about.html">Who We Are</a>
-      <a href="services.html">Our Services</a>
-      <a href="media-buying.html">Media Buying</a>
-    </div>
-    <div class="oxfoot-col">
-      <div class="oxfoot-h">Company</div>
-      <a href="us-onboard.html">Us Onboard</a>
-      <a href="brand-portfolio.html">Brand Portfolio</a>
-      <a href="pr-films.html">Pr and Films</a>
-      <a href="contact.html">Contact Us</a>
-    </div>
-    <div class="oxfoot-col">
-      <div class="oxfoot-h">Get In Touch</div>
-      <a href="tel:+27823717340">+27 82 371 7340</a>
-      <a href="mailto:info@oxygenmedia.co.za">info@oxygenmedia.co.za</a>
-      <span>Melville, Johannesburg, South Africa</span>
-    </div>
-  </div>
-  <div class="oxfoot-bottom">&copy; Copyright 2026 Oxygen Media. All rights reserved.</div>
+  <div class="oxfoot-bottom">&copy; Copyright 2023 Oxygen Media. Designed By <a href="https://www.oxygenmedia.co.za/home/www.artboards.co.html" target="_blank" rel="noopener">Artboards</a></div>
 </footer>
 
 <script>

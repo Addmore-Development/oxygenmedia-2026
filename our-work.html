@@ -43,23 +43,19 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--cyan);outline-offse
 .nav-toggle span{display:block;height:2px;background:var(--ink);border-radius:2px;}
 
 /* hero */
-.hero{position:relative;min-height:64vh;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;padding:0 clamp(20px,4vw,56px) 64px;}
-.hero-media{position:absolute;inset:0;z-index:0;}
-.hero-media img{width:100%;height:100%;object-fit:cover;filter:saturate(1.05);}
-.hero-scrim{position:absolute;inset:0;background:linear-gradient(0deg,rgba(20,16,15,.94) 0%,rgba(20,16,15,.7) 45%,rgba(20,16,15,.35) 75%,rgba(232,40,59,.25) 100%);}
-.onair-badge{position:absolute;top:28px;right:clamp(20px,4vw,56px);z-index:2;display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.72rem;font-weight:700;letter-spacing:.14em;color:var(--paper);border:1px solid var(--line-light);padding:7px 14px;border-radius:999px;}
-.onair-dot{width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 0 0 rgba(0,230,195,.7);animation:pulse 1.6s infinite;}
-@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(0,230,195,.55);}70%{box-shadow:0 0 0 10px rgba(0,230,195,0);}100%{box-shadow:0 0 0 0 rgba(0,230,195,0);}}
-.hero-body{position:relative;z-index:2;max-width:760px;}
+.hero{position:relative;min-height:62vh;display:flex;align-items:center;justify-content:flex-end;overflow:hidden;padding:6rem clamp(20px,4vw,56px) 3.5rem;text-align:right;}
+.hero-slides{position:absolute;inset:0;z-index:0;}
+.hero-slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transform:scale(1.08);transition:opacity 1.6s ease, transform 8s ease;}
+.hero-slide.active{opacity:1;transform:scale(1);}
+.hero-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(20,16,15,.5) 0%,rgba(20,16,15,.8) 65%,var(--ink) 100%),radial-gradient(ellipse 60% 60% at 75% 30%,rgba(232,40,59,.18) 0%,transparent 70%);}
+.hero-body{position:relative;z-index:2;max-width:560px;display:flex;flex-direction:column;align-items:flex-end;}
 .eyebrow{display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:.78rem;letter-spacing:.22em;color:var(--cyan);margin-bottom:20px;font-weight:700;}
 .eyebrow-rule{width:38px;height:2px;background:var(--cyan);display:inline-block;}
 .hero-title{color:var(--paper);font-size:clamp(2.2rem,5.6vw,4rem);text-transform:uppercase;}
 .hero-title .hl{color:var(--red);}
-.hero-sub{margin-top:22px;max-width:52ch;color:rgba(251,247,241,.82);font-size:1.02rem;line-height:1.6;}
-.hero-counter{position:absolute;right:clamp(20px,4vw,56px);bottom:64px;z-index:2;text-align:right;}
-.hero-counter .num{font-family:var(--mono);font-size:clamp(2.6rem,6vw,4.2rem);font-weight:700;color:var(--paper);line-height:1;}
-.hero-counter .lbl{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;color:var(--cyan);margin-top:6px;}
-@media (max-width:720px){.hero-counter{display:none;}}
+.hero-dots{position:absolute;bottom:1.75rem;right:2rem;z-index:2;display:flex;gap:.6rem;}
+.hero-dot{width:8px;height:8px;border-radius:50%;background:rgba(251,247,241,.3);transition:background .3s, transform .3s;}
+.hero-dot.active{background:var(--red);transform:scale(1.3);}
 
 /* filter bar */
 .filters{max-width:var(--container);margin:0 auto;padding:54px clamp(20px,4vw,56px) 0;}
@@ -176,22 +172,19 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--cyan);outline-offse
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-media">
-    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=1600&q=80" alt="">
-    <div class="hero-scrim"></div>
+  <div class="hero-slides" id="hero-slides">
+    <div class="hero-slide active" style="background-image:url('https://images.pexels.com/photos/1591056/pexels-photo-1591056.jpeg?auto=compress&cs=tinysrgb&w=1600')"></div>
+    <div class="hero-slide" style="background-image:url('https://images.pexels.com/photos/2263436/pexels-photo-2263436.jpeg?auto=compress&cs=tinysrgb&w=1600')"></div>
+    <div class="hero-slide" style="background-image:url('https://images.pexels.com/photos/8069428/pexels-photo-8069428.jpeg?auto=compress&cs=tinysrgb&w=1600')"></div>
   </div>
-  <div class="onair-badge" aria-hidden="true"><span class="onair-dot"></span> CASE FILES</div>
+  <div class="hero-overlay"></div>
 
   <div class="hero-body">
     <p class="eyebrow"><span class="eyebrow-rule"></span>OUR WORK</p>
-    <h1 class="hero-title">Some of our<br>recent <span class="hl">work.</span></h1>
-    <p class="hero-sub">Thirteen briefs, thirteen very different problems — media strategy, events, editorial, and brand campaigns run across South Africa's biggest platforms.</p>
+    <h1 class="hero-title">Recent <span class="hl">Work.</span></h1>
   </div>
 
-  <div class="hero-counter">
-    <div class="num">13+</div>
-    <div class="lbl">CLIENT PARTNERSHIPS</div>
-  </div>
+  <div class="hero-dots" id="hero-dots"></div>
 </section>
 
 <!-- FILTERS -->
@@ -374,6 +367,28 @@ document.addEventListener('DOMContentLoaded', () => {
         navToggle.setAttribute('aria-expanded', 'false');
       });
     });
+  }
+
+  /* hero background slideshow */
+  const heroSlides = document.querySelectorAll('.hero-slide');
+  const heroDotsWrap = document.getElementById('hero-dots');
+  if (heroSlides.length && heroDotsWrap) {
+    heroSlides.forEach((_, i) => {
+      const dot = document.createElement('div');
+      dot.className = 'hero-dot' + (i === 0 ? ' active' : '');
+      dot.addEventListener('click', () => heroGoTo(i));
+      heroDotsWrap.appendChild(dot);
+    });
+    const heroDots = document.querySelectorAll('.hero-dot');
+    let heroCurrent = 0;
+    function heroGoTo(i) {
+      heroSlides[heroCurrent].classList.remove('active');
+      heroDots[heroCurrent].classList.remove('active');
+      heroCurrent = i;
+      heroSlides[heroCurrent].classList.add('active');
+      heroDots[heroCurrent].classList.add('active');
+    }
+    setInterval(() => { heroGoTo((heroCurrent + 1) % heroSlides.length); }, 5000);
   }
 });
 </script>

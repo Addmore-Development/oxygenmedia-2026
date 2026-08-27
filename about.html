@@ -706,6 +706,26 @@
     });
   }, { threshold: 0.12 });
   revealEls.forEach(el => io.observe(el));
+
+  // Page hero background slideshow
+  const pgSlides = document.querySelectorAll('.page-hero-slide');
+  const pgDotsWrap = document.getElementById('page-hero-dots');
+  pgSlides.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'page-hero-dot' + (i === 0 ? ' active' : '');
+    dot.addEventListener('click', () => pgGoTo(i));
+    pgDotsWrap.appendChild(dot);
+  });
+  const pgDots = document.querySelectorAll('.page-hero-dot');
+  let pgCurrent = 0;
+  function pgGoTo(i) {
+    pgSlides[pgCurrent].classList.remove('active');
+    pgDots[pgCurrent].classList.remove('active');
+    pgCurrent = i;
+    pgSlides[pgCurrent].classList.add('active');
+    pgDots[pgCurrent].classList.add('active');
+  }
+  setInterval(() => { pgGoTo((pgCurrent + 1) % pgSlides.length); }, 5000);
 </script>
 </body>
 </html>
