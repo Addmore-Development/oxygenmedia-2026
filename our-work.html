@@ -1,396 +1,47 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Our Work — Oxygen Media</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-:root{
-  --ink:#14100F; --ink-soft:#1F1A18;
-  --red:#E8283B; --red-deep:#B4152A;
-  --cyan:#00E6C3; --amber:#FFB238;
-  --paper:#FBF7F1; --mute:#8A8378;
-  --line: rgba(20,16,15,0.1); --line-light: rgba(251,247,241,0.16);
-  --display:'Archivo Black',sans-serif; --body:'Inter',sans-serif; --mono:'Space Mono',monospace;
-  --container:1180px; --radius:16px;
-}
-*,*::before,*::after{box-sizing:border-box;}
-html{scroll-behavior:smooth;}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);-webkit-font-smoothing:antialiased;}
-img{max-width:100%;display:block;}
-a{color:inherit;text-decoration:none;}
-ul{margin:0;padding:0;list-style:none;}
-h1,h2,h3{margin:0;font-family:var(--display);line-height:1.05;letter-spacing:-0.01em;}
-p{margin:0;}
-@media (prefers-reduced-motion:reduce){*{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important;}}
-::selection{background:var(--red);color:var(--paper);}
-a:focus-visible,button:focus-visible{outline:3px solid var(--cyan);outline-offset:3px;border-radius:4px;}
-
-/* header */
-.site-header{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:18px clamp(20px,4vw,56px);background:rgba(251,247,241,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
-.logo{font-family:var(--display);font-size:1.1rem;letter-spacing:.02em;color:var(--ink);}
-.logo span{color:var(--red);}
-.main-nav{display:flex;gap:clamp(14px,2vw,28px);font-size:.92rem;font-weight:600;}
-.main-nav a{position:relative;padding:6px 2px;color:var(--ink);opacity:.75;transition:opacity .2s;}
-.main-nav a:hover,.main-nav a.active{opacity:1;}
-.main-nav a.active::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--red);}
-.socials{display:flex;gap:14px;font-family:var(--mono);font-size:.72rem;font-weight:700;}
-.socials a{width:30px;height:30px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;transition:all .2s;}
-.socials a:hover{background:var(--ink);color:var(--paper);border-color:var(--ink);}
-.nav-toggle{display:none;background:none;border:none;cursor:pointer;width:32px;height:22px;flex-direction:column;justify-content:space-between;padding:0;}
-.nav-toggle span{display:block;height:2px;background:var(--ink);border-radius:2px;}
-
-/* hero */
-.hero{position:relative;min-height:62vh;display:flex;align-items:center;justify-content:flex-end;overflow:hidden;padding:6rem clamp(20px,4vw,56px) 3.5rem;text-align:right;}
-.hero-slides{position:absolute;inset:0;z-index:0;}
-.hero-slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transform:scale(1.08);transition:opacity 1.6s ease, transform 8s ease;}
-.hero-slide.active{opacity:1;transform:scale(1);}
-.hero-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(20,16,15,.5) 0%,rgba(20,16,15,.8) 65%,var(--ink) 100%),radial-gradient(ellipse 60% 60% at 75% 30%,rgba(232,40,59,.18) 0%,transparent 70%);}
-.hero-body{position:relative;z-index:2;max-width:560px;display:flex;flex-direction:column;align-items:flex-end;}
-.eyebrow{display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:.78rem;letter-spacing:.22em;color:var(--cyan);margin-bottom:20px;font-weight:700;}
-.eyebrow-rule{width:38px;height:2px;background:var(--cyan);display:inline-block;}
-.hero-title{color:var(--paper);font-size:clamp(2.2rem,5.6vw,4rem);text-transform:uppercase;}
-.hero-title .hl{color:var(--red);}
-.hero-dots{position:absolute;bottom:1.75rem;right:2rem;z-index:2;display:flex;gap:.6rem;}
-.hero-dot{width:8px;height:8px;border-radius:50%;background:rgba(251,247,241,.3);transition:background .3s, transform .3s;}
-.hero-dot.active{background:var(--red);transform:scale(1.3);}
-
-/* filter bar */
-.filters{max-width:var(--container);margin:0 auto;padding:54px clamp(20px,4vw,56px) 0;}
-.filters-head{display:flex;align-items:baseline;gap:22px;margin-bottom:26px;flex-wrap:wrap;}
-.tag{font-family:var(--mono);font-size:.78rem;letter-spacing:.12em;color:var(--red);font-weight:700;white-space:nowrap;}
-.filters-head h2{font-size:clamp(1.6rem,3vw,2.2rem);text-transform:uppercase;}
-.filter-chips{display:flex;flex-wrap:wrap;gap:10px;}
-.chip{font-family:var(--mono);font-size:.78rem;font-weight:700;letter-spacing:.04em;padding:9px 18px;border-radius:999px;border:1px solid var(--line);background:#fff;cursor:pointer;transition:all .2s;color:var(--ink);}
-.chip:hover{border-color:var(--red);}
-.chip.is-active{background:var(--ink);color:var(--paper);border-color:var(--ink);}
-
-/* portfolio grid */
-.portfolio{max-width:var(--container);margin:0 auto;padding:34px clamp(20px,4vw,56px) 110px;}
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
-.case{
-  position:relative;border-radius:var(--radius);overflow:hidden;aspect-ratio:4/5;
-  border:1px solid var(--line);background:#fff;
-  opacity:0;transform:translateY(24px);
-  transition:opacity .55s ease, transform .55s ease, box-shadow .3s ease;
-}
-.case.is-visible{opacity:1;transform:translateY(0);}
-.case:hover{box-shadow:0 20px 44px -20px rgba(20,16,15,.3);}
-.case[hidden]{display:none;}
-.case-media{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:26px;text-align:center;}
-.case-media img{width:100%;height:100%;object-fit:cover;}
-.case-mark{font-family:var(--display);font-size:1.05rem;letter-spacing:.02em;line-height:1.2;color:var(--paper);text-transform:uppercase;}
-.case-cat{
-  position:absolute;top:14px;left:14px;z-index:2;
-  font-family:var(--mono);font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
-  color:var(--paper);background:rgba(20,16,15,.55);backdrop-filter:blur(4px);
-  padding:5px 10px;border-radius:999px;
-}
-.case-info{
-  position:absolute;left:14px;right:14px;bottom:14px;z-index:2;
-  background:var(--paper);border-radius:12px;padding:16px 18px;
-  box-shadow:0 12px 28px -14px rgba(20,16,15,.35);
-}
-.case-client{font-family:var(--mono);font-size:.72rem;font-weight:700;letter-spacing:.05em;color:#1d4ed8;text-transform:uppercase;margin-bottom:6px;}
-.case-project{font-size:1.02rem;font-weight:700;line-height:1.3;}
-
-/* color families for placeholder brand panels (stand-ins for client logos) */
-.bg-forest{background:linear-gradient(155deg,#0F3D33,#0A2620);}
-.bg-blue{background:linear-gradient(155deg,#1B3A6B,#0F1F3C);}
-.bg-editorial{background:#F4EFE6;}
-.bg-editorial .case-mark{color:var(--ink);}
-.bg-navy{background:linear-gradient(155deg,#123C63,#0B2036);}
-.bg-black{background:linear-gradient(155deg,#1a1a1a,#000);}
-.bg-cricket{background:linear-gradient(155deg,#0B3D2E,#062018);}
-.bg-white{background:#fff;border-bottom:1px solid var(--line);}
-.bg-white .case-mark{color:var(--ink);}
-.bg-shield{background:linear-gradient(155deg,var(--red),var(--red-deep));}
-.bg-aids{background:#fff;}
-.bg-aids .case-mark{color:var(--red);}
-.bg-clean{background:#fff;}
-.bg-clean .case-mark{color:var(--ink);}
-.bg-plus{background:#fff;}
-.bg-plus .case-mark{color:#111;}
-.bg-hair{background:linear-gradient(180deg,#DCEFE3,#B9DCC7);}
-.bg-earth{background:linear-gradient(155deg,#6B4A32,#3E2A1C);}
-
-/* closing CTA */
-.closing{max-width:900px;margin:0 auto;padding:20px clamp(20px,4vw,56px) 110px;text-align:center;}
-.closing-kicker{font-family:var(--mono);color:var(--red);font-weight:700;letter-spacing:.14em;font-size:.82rem;margin-bottom:18px;}
-.closing-statement{font-size:clamp(1.1rem,2vw,1.4rem);line-height:1.6;font-weight:500;color:var(--ink);}
-.closing-cta{margin-top:32px;display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-weight:700;font-size:.85rem;letter-spacing:.06em;color:var(--paper);background:var(--ink);padding:15px 26px;border-radius:999px;transition:transform .25s,background .25s;}
-.closing-cta:hover{background:var(--red);transform:translateY(-2px);}
-.closing-cta span{transition:transform .25s;}
-.closing-cta:hover span{transform:translateX(4px);}
-
-/* footer */
-.site-footer{background:var(--ink);color:var(--paper);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;padding:36px clamp(20px,4vw,56px);}
-.site-footer .logo{color:var(--paper);}
-.site-footer p{font-size:.85rem;opacity:.7;}
-.site-footer p span{color:var(--red);}
-.site-footer .socials a{border-color:var(--line-light);color:var(--paper);}
-
-.back-to-top{position:fixed;right:22px;bottom:22px;z-index:60;width:48px;height:48px;border-radius:50%;background:var(--red);color:var(--paper);border:none;cursor:pointer;font-size:1.2rem;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 26px -8px rgba(232,40,59,.6);opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .3s,transform .3s,visibility .3s,background .2s;}
-.back-to-top.is-visible{opacity:1;visibility:visible;transform:translateY(0);}
-.back-to-top:hover{background:#000;}
-
-@media (max-width:980px){.grid{grid-template-columns:repeat(2,1fr);}}
-@media (max-width:760px){
-  .main-nav,.socials{display:none;}
-  .nav-toggle{display:flex;}
-  .grid{grid-template-columns:1fr;}
-  .filters-head{flex-direction:column;gap:8px;}
-  .main-nav.is-open{position:absolute;top:100%;left:0;right:0;background:var(--paper);border-bottom:1px solid var(--line);flex-direction:column;padding:18px clamp(20px,4vw,56px);gap:16px;}
-}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Oxygen Media — media buying, advertising, brand strategy, content, PR, events and communications." />
+  <title>Portfolio — Oxygen Media</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-
 <header class="site-header">
-  <a href="/" class="logo">OXYGEN<span>MEDIA</span></a>
-  <nav class="main-nav">
-    <a href="/">Home</a>
-    <a href="/who-we-are.html">Who We Are</a>
-    <a href="/our-services.html">Our Services</a>
-    <a href="/media-buying.html">Media Buying</a>
-    <a href="/us-onboard.html">Us Onboard</a>
-    <a href="/brand-portfolio.html">Brand Portfolio</a>
-    <a href="/pr-and-films.html">Pr and Films</a>
-    <a href="/contact-us.html">Contact Us</a>
-  </nav>
-  <div class="socials">
-    <a href="#" aria-label="Facebook">FB</a>
-    <a href="#" aria-label="Instagram">IG</a>
-    <a href="#" aria-label="Twitter">X</a>
-  </div>
-  <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
+  <a href="index.html" class="brand" aria-label="Oxygen Media home"><span class="brand-main">OXYGEN</span><span class="brand-sub">MEDIA</span></a>
+  <button class="menu-button" aria-expanded="false" aria-controls="site-nav"><span>Menu</span><span class="menu-line"></span></button>
+  <nav class="site-nav" id="site-nav" aria-label="Main navigation"><a href="about.html" class="">Who we are</a><a href="services.html" class="">Services</a><a href="media-buying.html" class="">Media buying</a><a href="onboard.html" class="">Us onboard</a><a href="portfolio.html" class="active">Portfolio</a><a href="work-done.html" class="">Work Done</a><a href="films.html" class="">PR + Films</a><a href="contact.html" class="">Contact</a></nav>
+  <a class="header-cta" href="contact.html">Start a project</a>
 </header>
-
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-slides" id="hero-slides">
-    <div class="hero-slide active" style="background-image:url('https://images.pexels.com/photos/1591056/pexels-photo-1591056.jpeg?auto=compress&cs=tinysrgb&w=1600')"></div>
-    <div class="hero-slide" style="background-image:url('https://images.pexels.com/photos/2263436/pexels-photo-2263436.jpeg?auto=compress&cs=tinysrgb&w=1600')"></div>
-    <div class="hero-slide" style="background-image:url('https://images.pexels.com/photos/8069428/pexels-photo-8069428.jpeg?auto=compress&cs=tinysrgb&w=1600')"></div>
-  </div>
-  <div class="hero-overlay"></div>
-
-  <div class="hero-body">
-    <p class="eyebrow"><span class="eyebrow-rule"></span>OUR WORK</p>
-    <h1 class="hero-title">Recent <span class="hl">Work.</span></h1>
-  </div>
-
-  <div class="hero-dots" id="hero-dots"></div>
+<main><section class="page-hero"><div class="page-hero-copy"><p class="eyebrow">05 / PORTFOLIO</p><h1>Work in<br><em>motion.</em></h1><p class="lede">A visual view of the environments Oxygen works across — from media and activations to events and production.</p></div><div class="page-hero-visual red-panel"><div class="giant-letter">O</div></div></section>
+<section class="section"><div class="section-index">CAPABILITIES IN ACTION</div><div class="split-section"><h2>Not a wall of logos.<br>A view of the work.</h2><div class="copy"><p class="lead">This portfolio layout is intentionally visual and editorial.</p><p>It uses the imagery already published on Oxygen Media’s current website and avoids inventing client case studies, campaign results or endorsements that are not publicly substantiated.</p></div></div></section>
+<section class="portfolio-grid">
+  <article class="portfolio-card wide tall"><img src="assets/images/webp/brand-activation.webp" alt="Brand activation" /><div class="portfolio-meta"><span>Brand activation</span><strong>Experience</strong></div></article>
+  <article class="portfolio-card narrow tall"><img src="assets/images/webp/video-production.webp" alt="Video production" /><div class="portfolio-meta"><span>Content</span><strong>Production</strong></div></article>
+  <article class="portfolio-card half"><img src="assets/images/webp/event-management.webp" alt="Event management" /><div class="portfolio-meta"><span>Events</span><strong>Live experience</strong></div></article>
+  <article class="portfolio-card half"><img src="assets/images/webp/media-buying.webp" alt="Media buying" /><div class="portfolio-meta"><span>Media</span><strong>Buying + planning</strong></div></article>
+  <article class="portfolio-card third"><img src="assets/images/webp/tv.webp" alt="Television media" /><div class="portfolio-meta"><span>Television</span><strong>Broadcast</strong></div></article>
+  <article class="portfolio-card third"><img src="assets/images/webp/radio.webp" alt="Radio media" /><div class="portfolio-meta"><span>Radio</span><strong>Audio</strong></div></article>
+  <article class="portfolio-card third"><img src="assets/images/webp/billboard.webp" alt="Outdoor media" /><div class="portfolio-meta"><span>Outdoor</span><strong>OOH</strong></div></article>
 </section>
-
-<!-- FILTERS -->
-<section class="filters">
-  <div class="filters-head">
-    <p class="tag">// index</p>
-    <h2>Browse by discipline</h2>
+<section class="manifesto"><div class="manifesto-stamp">OXYGEN / PORTFOLIO</div><p>Ideas need<br><em>air.</em> Work needs<br>discipline.</p></section><section class="cta-section">
+  <div class="section-index invert">LET'S TALK</div>
+  <div class="cta-inner">
+    <div><p class="smallcaps">A BETTER BRIEF STARTS WITH A CONVERSATION.</p><h2>Make your next move<br>more <em style="font-family:Georgia,serif;font-weight:400">visible.</em></h2></div>
+    <div class="cta-box">
+      <div><span>EMAIL</span><a href="mailto:info@oxygenmedia.co.za">info@oxygenmedia.co.za</a></div>
+      <div><span>DIRECT</span><a href="tel:+27823717340">+27 82 371 7340</a></div>
+      <div><span>LOCATION</span><p>Melville, Johannesburg</p></div>
+      <div class="cta-action"><a href="contact.html">Start a project</a><span>↗</span></div>
+    </div>
   </div>
-  <div class="filter-chips" id="filterChips">
-    <button class="chip is-active" data-filter="all">All Work</button>
-    <button class="chip" data-filter="media">Media Buying</button>
-    <button class="chip" data-filter="events">Events</button>
-    <button class="chip" data-filter="content">Content &amp; Editorial</button>
-    <button class="chip" data-filter="brand">Brand &amp; Identity</button>
-  </div>
-</section>
-
-<!-- PORTFOLIO GRID -->
-<section class="portfolio">
-  <div class="grid" id="caseGrid">
-
-    <article class="case bg-forest" data-cat="content" data-reveal>
-      <div class="case-cat">Content</div>
-      <div class="case-media"><span class="case-mark">AUDA‑NEPAD</span></div>
-      <div class="case-info"><p class="case-client">AUDA‑NEPAD</p><p class="case-project">Content Production</p></div>
-    </article>
-
-    <article class="case bg-navy" data-cat="brand" data-reveal>
-      <div class="case-cat">Brand</div>
-      <div class="case-media"><span class="case-mark">DISTELL</span></div>
-      <div class="case-info"><p class="case-client">Distell</p><p class="case-project">QR Code Competition</p></div>
-    </article>
-
-    <article class="case bg-editorial" data-cat="content" data-reveal>
-      <div class="case-cat">Editorial</div>
-      <div class="case-media"><span class="case-mark">BR — BUSINESS REPORT</span></div>
-      <div class="case-info"><p class="case-client">Business Report</p><p class="case-project">Events Management</p></div>
-    </article>
-
-    <article class="case bg-navy" data-cat="media" data-reveal>
-      <div class="case-cat">Media Buying</div>
-      <div class="case-media"><span class="case-mark">AfDB / FAD</span></div>
-      <div class="case-info"><p class="case-client">The African Development Bank</p><p class="case-project">Media Buying Strategy</p></div>
-    </article>
-
-    <article class="case bg-cricket" data-cat="media" data-reveal>
-      <div class="case-cat">Media Buying</div>
-      <div class="case-media"><span class="case-mark">CRICKET · MZANSI SUPER LEAGUE</span></div>
-      <div class="case-info"><p class="case-client">Cricket SA – Mzansi Super League</p><p class="case-project">Print Media Execution</p></div>
-    </article>
-
-    <article class="case bg-white" data-cat="events" data-reveal>
-      <div class="case-cat">Events</div>
-      <div class="case-media"><span class="case-mark">SANEF</span></div>
-      <div class="case-info"><p class="case-client">SA National Editors' Forum</p><p class="case-project">2018 Nat Nakasa Awards</p></div>
-    </article>
-
-    <article class="case bg-shield" data-cat="brand" data-reveal>
-      <div class="case-cat">Brand</div>
-      <div class="case-media"><span class="case-mark">IAJ</span></div>
-      <div class="case-info"><p class="case-client">Institute for the Advancement of Journalism</p><p class="case-project">Re‑design Corporate ID</p></div>
-    </article>
-
-    <article class="case bg-aids" data-cat="media" data-reveal>
-      <div class="case-cat">Media Buying</div>
-      <div class="case-media"><span class="case-mark">SANAC</span></div>
-      <div class="case-info"><p class="case-client">The South African National AIDS Council</p><p class="case-project">Media Buying Strategy</p></div>
-    </article>
-
-    <article class="case bg-clean" data-cat="media" data-reveal>
-      <div class="case-cat">Media Buying</div>
-      <div class="case-media"><span class="case-mark">INDEPENDENT</span></div>
-      <div class="case-info"><p class="case-client">Independent Media</p><p class="case-project">Advertising &amp; Sponsorship Sales</p></div>
-    </article>
-
-    <article class="case bg-black" data-cat="content" data-reveal>
-      <div class="case-cat">Editorial</div>
-      <div class="case-media"><span class="case-mark">ARENA HOLDINGS</span></div>
-      <div class="case-info"><p class="case-client">Tiso Blackstar (currently Arena Holdings)</p><p class="case-project">Editorial Concepts</p></div>
-    </article>
-
-    <article class="case bg-plus" data-cat="events" data-reveal>
-      <div class="case-cat">Events</div>
-      <div class="case-media"><span class="case-mark">PLUS · LGBTI+ Business Network</span></div>
-      <div class="case-info"><p class="case-client">The Other Foundation</p><p class="case-project">Event Management</p></div>
-    </article>
-
-    <article class="case bg-hair" data-cat="brand" data-reveal>
-      <div class="case-cat">Brand</div>
-      <div class="case-media"><span class="case-mark">THE PERFECT HAIR</span></div>
-      <div class="case-info"><p class="case-client">The Perfect Hair</p><p class="case-project">Brand Activation</p></div>
-    </article>
-
-    <article class="case bg-earth" data-cat="media" data-reveal>
-      <div class="case-cat">Media Buying</div>
-      <div class="case-media"><span class="case-mark">RICHARDS BAY MINERALS</span></div>
-      <div class="case-info"><p class="case-client">Richards Bay Minerals</p><p class="case-project">Media Campaign</p></div>
-    </article>
-
-  </div>
-</section>
-
-<!-- CLOSING -->
-<section class="closing">
-  <p class="closing-kicker">Your brief could be next</p>
-  <p class="closing-statement">Every one of these started as a single conversation about a goal — an awareness target, a launch date, a reputation to protect. Let's talk about yours.</p>
-  <a href="/contact-us.html" class="closing-cta">Start a conversation <span>→</span></a>
-</section>
-
-<footer class="site-footer">
-  <a href="/" class="logo">OXYGEN<span>MEDIA</span></a>
-  <p>© Copyright 2026 <span>Oxygen Media.</span></p>
-  <div class="socials">
-    <a href="#" aria-label="Facebook">FB</a>
-    <a href="#" aria-label="Twitter">X</a>
-    <a href="#" aria-label="Instagram">IG</a>
-  </div>
+</section></main>
+<footer>
+  <a href="index.html" class="footer-brand"><strong>OXYGEN</strong><span>MEDIA</span></a>
+  <p>Breathing life into brands.</p>
+  <p>© <span data-year></span> Oxygen Media</p>
 </footer>
-
-<button id="backToTop" class="back-to-top" aria-label="Back to top">↑</button>
-
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-
-  /* scroll reveal */
-  const revealEls = document.querySelectorAll('[data-reveal]');
-  if ('IntersectionObserver' in window) {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const siblings = Array.from(entry.target.parentElement.children).filter(el => !el.hasAttribute('hidden'));
-          const idx = siblings.indexOf(entry.target);
-          entry.target.style.transitionDelay = `${(idx % 4) * 80}ms`;
-          entry.target.classList.add('is-visible');
-          io.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.14 });
-    revealEls.forEach(el => io.observe(el));
-  } else {
-    revealEls.forEach(el => el.classList.add('is-visible'));
-  }
-
-  /* filter chips */
-  const chips = document.querySelectorAll('.chip');
-  const cases = document.querySelectorAll('.case');
-  chips.forEach(chip => {
-    chip.addEventListener('click', () => {
-      chips.forEach(c => c.classList.remove('is-active'));
-      chip.classList.add('is-active');
-      const filter = chip.dataset.filter;
-      cases.forEach(c => {
-        const match = filter === 'all' || c.dataset.cat === filter;
-        c.hidden = !match;
-        if (match && !c.classList.contains('is-visible')) c.classList.add('is-visible');
-      });
-    });
-  });
-
-  /* back to top */
-  const backToTop = document.getElementById('backToTop');
-  const toggleBackToTop = () => backToTop.classList.toggle('is-visible', window.scrollY > 480);
-  toggleBackToTop();
-  window.addEventListener('scroll', toggleBackToTop, { passive: true });
-  backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
-  /* mobile nav */
-  const navToggle = document.querySelector('.nav-toggle');
-  const mainNav = document.querySelector('.main-nav');
-  if (navToggle && mainNav) {
-    navToggle.addEventListener('click', () => {
-      const isOpen = mainNav.classList.toggle('is-open');
-      navToggle.setAttribute('aria-expanded', String(isOpen));
-      mainNav.style.display = isOpen ? 'flex' : '';
-    });
-    mainNav.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        mainNav.classList.remove('is-open');
-        mainNav.style.display = '';
-        navToggle.setAttribute('aria-expanded', 'false');
-      });
-    });
-  }
-
-  /* hero background slideshow */
-  const heroSlides = document.querySelectorAll('.hero-slide');
-  const heroDotsWrap = document.getElementById('hero-dots');
-  if (heroSlides.length && heroDotsWrap) {
-    heroSlides.forEach((_, i) => {
-      const dot = document.createElement('div');
-      dot.className = 'hero-dot' + (i === 0 ? ' active' : '');
-      dot.addEventListener('click', () => heroGoTo(i));
-      heroDotsWrap.appendChild(dot);
-    });
-    const heroDots = document.querySelectorAll('.hero-dot');
-    let heroCurrent = 0;
-    function heroGoTo(i) {
-      heroSlides[heroCurrent].classList.remove('active');
-      heroDots[heroCurrent].classList.remove('active');
-      heroCurrent = i;
-      heroSlides[heroCurrent].classList.add('active');
-      heroDots[heroCurrent].classList.add('active');
-    }
-    setInterval(() => { heroGoTo((heroCurrent + 1) % heroSlides.length); }, 5000);
-  }
-});
-</script>
-</body>
-</html>
+<script src="script.js"></script>
+</body></html>
